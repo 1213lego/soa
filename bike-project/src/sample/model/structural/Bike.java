@@ -1,28 +1,28 @@
 package sample.model.structural;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Bike {
 
-    enum Type { ROAD, MOUNTAIN, GRAVEL }
+    public enum Type { ROAD, MOUNTAIN, GRAVEL }
 
     private String serial;
-    private String brand;
-    private LocalDate purchaseDate;
-    private double totalWeight;
-    private double purchasePrice;
     private Type type;
+    private String brand;
+    private double weight;
+    private double price;
+    private LocalDateTime purchaseDate;
 
     public Bike() {
     }
 
-    public Bike(String serial, String brand, LocalDate purchaseDate, double totalWeight, double purchasePrice) {
+    public Bike(String serial, Type type, String brand, double weight, double price, LocalDateTime purchaseDate) {
         this.serial = serial;
+        this.type = type;
         this.brand = brand;
+        this.weight = weight;
+        this.price = price;
         this.purchaseDate = purchaseDate;
-        this.totalWeight = totalWeight;
-        this.purchasePrice = purchasePrice;
     }
 
     public String getSerial() {
@@ -33,6 +33,14 @@ public class Bike {
         this.serial = serial;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getBrand() {
         return brand;
     }
@@ -41,27 +49,27 @@ public class Bike {
         this.brand = brand;
     }
 
-    public LocalDate getPurchaseDate() {
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
-    }
-
-    public double getTotalWeight() {
-        return totalWeight;
-    }
-
-    public void setTotalWeight(double totalWeight) {
-        this.totalWeight = totalWeight;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
     }
 }
