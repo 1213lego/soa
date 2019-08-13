@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import sample.BikeProjectMain;
 
-public class Controller {
+public class MainController {
     @FXML
     public void onClickAbout(ActionEvent actionEvent)  {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

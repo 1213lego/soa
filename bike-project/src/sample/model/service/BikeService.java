@@ -19,12 +19,7 @@ public class BikeService {
         return bikeService;
     }
 
-    public void addBike(Bike bike) throws Exception {
-        for (Bike currentBike: bikes) {
-            if(currentBike.getSerial().equalsIgnoreCase(bike.getSerial())) {
-                throw new Exception("Error: There is already a bicycle with that serial");
-            }
-        }
+    public void addBike(Bike bike) {
         bikes.add(bike);
     }
 
