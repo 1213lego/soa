@@ -16,6 +16,6 @@ public class Controller {
     }
 
     public void quit(ActionEvent actionEvent) {
-        BikeProjectMain.launchNewWindows("test");
+        System.exit(0);
     }
 }
