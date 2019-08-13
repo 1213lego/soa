@@ -65,7 +65,7 @@ public class BikesController implements Initializable {
     }
 
     @FXML
-    void cerrarVentana(ActionEvent event) {
+    void closeWindows(ActionEvent event) {
 
     }
 }
