@@ -25,21 +25,24 @@ public class BikeProjectMain extends Application {
             e.printStackTrace();
         }
     }
+
     private static Parent loadFXML(String fxml) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(BikeProjectMain.class.getResource("./view/"+fxml+".fxml"));
         return fxmlLoader.load();
     }
-    public static void launchNewWindows(String fxml){
+
+    public static void launchNewWindows(String fxml, String title){
         try {
             Scene scene = new Scene(loadFXML(fxml));
             Stage stage = new Stage();
-            stage.setTitle("New Window");
+            stage.setTitle(title);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         launch();
     }
