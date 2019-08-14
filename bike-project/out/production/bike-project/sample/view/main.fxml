@@ -19,9 +19,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Bikes">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Add bike" onAction="#openWindowSaveBike"/>
-                        <MenuItem mnemonicParsing="false" text="Delete bike" onAction="#openWindowDeleteBike"/>
-                        <MenuItem mnemonicParsing="false" text="Bike list" onAction="#openWindowBikeList"/>
+                        <MenuItem mnemonicParsing="false" onAction="#openWindowSaveBike" text="Add bike" />
+                        <MenuItem mnemonicParsing="false" onAction="#openWindowDeleteBike" text="Delete bike" />
+                        <MenuItem mnemonicParsing="false" onAction="#openWindowBikeList" text="Bike list" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

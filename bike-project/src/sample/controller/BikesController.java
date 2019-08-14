@@ -3,22 +3,25 @@ package sample.controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class BikesController implements Initializable {
-
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
+    @FXML
+    private TextField txtSearchSerial;
 
     @FXML
     private TableView<Bike> tvBikes;
@@ -45,11 +48,14 @@ public class BikesController implements Initializable {
 
     private ObservableList<Bike> observableBikes = FXCollections.observableArrayList();
 
+    private FilteredList<Bike> filteredData;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = BikeService.getBikeService();
         setPropertiesBikesController();
         loadDataBikes();
+        setSettingsSearchBike();
     }
 
     private void setPropertiesBikesController() {
@@ -59,7 +65,7 @@ public class BikesController implements Initializable {
         tcBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        tcPurchaseDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(formatter)));
+        tcPurchaseDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(BikeService.formatter)));
     }
 
     private void loadDataBikes() {
@@ -68,8 +74,31 @@ public class BikesController implements Initializable {
         tvBikes.setItems(observableBikes);
     }
 
+    private void setSettingsSearchBike() {
+        filteredData = new FilteredList<>(observableBikes, usuario -> true);
+        txtSearchSerial.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(bike -> {
+                if(newValue == null || newValue.isEmpty())
+                {
+                    return true;
+                }
+                else if(String.valueOf(bike.getSerial()).toLowerCase().contains(newValue.toLowerCase()))
+                {
+                    return true;
+                }
+
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filteredData);
+        sort.comparatorProperty().bind(tvBikes.comparatorProperty());
+        tvBikes.setItems(sort);
+    }
+
     @FXML
     void closeWindows(ActionEvent event) {
-
+        Stage stage = (Stage) tvBikes.getScene().getWindow();
+        stage.close();
     }
 }

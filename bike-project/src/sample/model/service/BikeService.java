@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BikeService {
+    public final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
+
     private ArrayList<Bike> bikes;
     private static BikeService bikeService;
 
@@ -14,9 +16,15 @@ public class BikeService {
         bikes = new ArrayList<Bike>();
         LocalDateTime asd = LocalDateTime.now();
         DateTimeFormatter iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        Bike bike = new Bike("dsasa", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
+        Bike bike = new Bike("asd", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
+        Bike bike1 = new Bike("pgh", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
+        Bike bike2 = new Bike("asd1", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
+        Bike bike3 = new Bike("ph2", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
         try {
             addBike(bike);
+            addBike(bike1);
+            addBike(bike2);
+            addBike(bike3);
         } catch (Exception e) {
             e.printStackTrace();
         }
