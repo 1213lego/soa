@@ -51,7 +51,7 @@ public class SaveBikeController implements Initializable {
         Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPruchaseDate.getValue().atStartOfDay());
         try {
             bikeService.addBike(bike);
-            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ "has been saved");
+            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
         }
         catch (Exception e){
             MainController.showAlert(Alert.AlertType.ERROR,"Error saving de bike",null,e.getMessage());
@@ -69,7 +69,11 @@ public class SaveBikeController implements Initializable {
         }
     }
     private boolean txtFieldIsEmpty(TextField textField){
-        return textField.getText()==null;
+        if(textField.getText()==null || textField.getText().isEmpty()){
+            return true;
+        }
+        textField.setText(textField.getText().trim());
+        return false;
     }
 
 }

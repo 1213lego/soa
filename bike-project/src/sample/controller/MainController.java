@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import sample.BikeProjectMain;
 
 public class MainController {
-    @FXML
     public void onClickAbout(ActionEvent actionEvent)  {
         showAlert(Alert.AlertType.INFORMATION,"About Bike App",null,"Application developed by Luis Granada and Gabriel Montalvo");
     }
@@ -29,4 +28,5 @@ public class MainController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }
