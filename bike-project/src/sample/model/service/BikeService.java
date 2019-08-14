@@ -19,10 +19,20 @@ public class BikeService {
         return bikeService;
     }
 
-    public void addBike(Bike bike) {
+    public void addBike(Bike bike) throws Exception {
+        if(findBikeBySerial(bike.getSerial())!=null){
+            throw new Exception("Duplicate bike serial");
+        }
         bikes.add(bike);
     }
-
+    public Bike findBikeBySerial(String serial){
+        for (Bike bike: bikes) {
+            if(bike.getSerial().equals(serial)){
+                return bike;
+            }
+        }
+        return null;
+    }
     public ArrayList <Bike> getBikes(){
         return bikes;
     }

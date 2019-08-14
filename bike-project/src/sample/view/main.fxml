@@ -15,8 +15,8 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Bike list" onAction="#openWindowsBikeList" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
+            <MenuItem mnemonicParsing="false" text="Bike list" onAction="#openWindowBikeList" />
+            <MenuItem mnemonicParsing="false" text="Add bike…" onAction="#openWindowSaveBike" />
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
