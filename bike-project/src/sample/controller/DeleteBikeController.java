@@ -4,11 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import sample.model.service.BikeService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DeleteController implements Initializable {
+public class DeleteBikeController implements Initializable {
 
     @FXML
     private TextField txtSearchSerial;
@@ -30,6 +31,8 @@ public class DeleteController implements Initializable {
 
     @FXML
     private TextField txtPurchaseDate;
+
+    private BikeService bikeService;
 
     @FXML
     void closeWindow(ActionEvent event) {

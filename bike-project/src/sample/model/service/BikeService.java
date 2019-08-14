@@ -15,7 +15,11 @@ public class BikeService {
         LocalDateTime asd = LocalDateTime.now();
         DateTimeFormatter iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
         Bike bike = new Bike("dsasa", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
-        addBike(bike);
+        try {
+            addBike(bike);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(asd.format(iso));
     }
 
@@ -26,10 +30,29 @@ public class BikeService {
         return bikeService;
     }
 
-    public void addBike(Bike bike) {
+    public void addBike(Bike bike) throws Exception {
+        if(findBikeBySerial(bike.getSerial())!=null){
+            throw new Exception("Duplicate bike serial");
+        }
         bikes.add(bike);
     }
+    public void deleteBike(String serial) throws Exception {
+        Bike bike = findBikeBySerial(serial);
+        if(bike == null) {
+            throw new Exception("Bike not found with this serial: " + serial);
+        }
 
+        bikes.remove(bike);
+    }
+
+    public Bike findBikeBySerial(String serial){
+        for (Bike bike: bikes) {
+            if(bike.getSerial().equals(serial)){
+                return bike;
+            }
+        }
+        return null;
+    }
     public ArrayList <Bike> getBikes(){
         return bikes;
     }

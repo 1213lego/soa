@@ -72,4 +72,16 @@ public class Bike {
     public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
+
+    @Override
+    public String toString() {
+        return "Bike{" +
+                "serial='" + serial + '\'' +
+                ", type=" + type +
+                ", brand='" + brand + '\'' +
+                ", weight=" + weight +
+                ", price=" + price +
+                ", purchaseDate=" + purchaseDate +
+                '}';
+    }
 }
