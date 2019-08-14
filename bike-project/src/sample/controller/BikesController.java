@@ -1,5 +1,6 @@
 package sample.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,10 +13,12 @@ import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class BikesController implements Initializable {
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
 
     @FXML
     private TableView<Bike> tvBikes;
@@ -36,7 +39,7 @@ public class BikesController implements Initializable {
     private TableColumn<Bike, Double> tcPrice;
 
     @FXML
-    private TableColumn<Bike, LocalDateTime> tcPurchaseDate;
+    private TableColumn<Bike, String> tcPurchaseDate;
 
     private BikeService bikeService;
 
@@ -50,12 +53,13 @@ public class BikesController implements Initializable {
     }
 
     private void setPropertiesBikesController() {
+        tvBikes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tcSerial.setCellValueFactory(new PropertyValueFactory<>("serial"));
         tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
         tcBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        tcPurchaseDate.setCellValueFactory(new PropertyValueFactory<>("purchaseDate"));
+        tcPurchaseDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(formatter)));
     }
 
     private void loadDataBikes() {
@@ -65,7 +69,7 @@ public class BikesController implements Initializable {
     }
 
     @FXML
-    void closeCurrentWindow(ActionEvent event) {
-        System.exit(0);
+    void closeWindows(ActionEvent event) {
+
     }
 }

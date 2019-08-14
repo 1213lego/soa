@@ -15,6 +15,7 @@ public class BikeService {
         LocalDateTime asd = LocalDateTime.now();
         DateTimeFormatter iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
         Bike bike = new Bike("dsasa", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
+        addBike(bike);
         System.out.println(asd.format(iso));
     }
 
