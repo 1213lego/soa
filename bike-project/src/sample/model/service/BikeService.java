@@ -52,7 +52,23 @@ public class BikeService {
 
         bikes.remove(bike);
     }
+    public void update(String serial, Bike bikeUpdate)throws Exception{
+        int bikeIndex = findBikeIndex(serial);
+        if(bikeIndex==-1){
+            throw new Exception("Bike not found with this serial: " + serial);
+        }
+        bikeUpdate.setSerial(serial);
+        bikes.set(bikeIndex,bikeUpdate);
 
+    }
+    private int findBikeIndex(String serial){
+        for(int i=0;i<bikes.size();i++){
+            if(serial.equals(bikes.get(i).getSerial())){
+                return i;
+            }
+        }
+        return -1;
+    }
     public Bike findBikeBySerial(String serial){
         for (Bike bike: bikes) {
             if(bike.getSerial().equals(serial)){

@@ -81,7 +81,7 @@
                   </Label>
                   <TextField fx:id="txtWeight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="txtPrice" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <DatePicker fx:id="dpPruchaseDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="dpPurchaseDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
             <Button layoutX="275.0" layoutY="349.0" mnemonicParsing="false" text="Add" onAction="#saveBike"/>

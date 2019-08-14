@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import sample.BikeProjectMain;
 
 public class MainController {
-    @FXML
+
     public void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
@@ -36,5 +36,9 @@ public class MainController {
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public void openWindowUpdateBike(ActionEvent actionEvent) {
+        BikeProjectMain.launchNewWindows("updateBike","Update Bike");
     }
 }

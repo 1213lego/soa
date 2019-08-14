@@ -8,12 +8,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SaveBikeController implements Initializable {
+public class UpdateBikeController implements Initializable {
+
+    @FXML
+    private TextField txtSearchSerial;
+
     @FXML
     private TextField txtSerial;
 
@@ -31,16 +37,32 @@ public class SaveBikeController implements Initializable {
 
     @FXML
     private DatePicker dpPurchaseDate;
-
     private BikeService bikeService;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
-        bikeService = BikeService.getBikeService();
+    @FXML
+    void closeWindow(ActionEvent event) {
+        Stage stage = (Stage) dpPurchaseDate.getScene().getWindow();
+        // do what you have to do
+        stage.close();
     }
-    public void saveBike(ActionEvent actionEvent) {
-        if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
+
+    @FXML
+    void searchBike(ActionEvent event) {
+        Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
+        if(bike==null){
+            return;
+        }
+        txtSerial.setText(bike.getSerial());
+        cbTypes.valueProperty().setValue(bike.getType());
+        txtBrand.setText(bike.getBrand());
+        txtWeight.setText(String.valueOf(bike.getWeight()));
+        txtPrice.setText(String.valueOf(bike.getPrice()));
+        dpPurchaseDate.valueProperty().setValue(bike.getPurchaseDate().toLocalDate());
+    }
+
+    @FXML
+    void updateBike(ActionEvent event) {
+        if(txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
             return;
@@ -50,13 +72,18 @@ public class SaveBikeController implements Initializable {
         }
         Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
         try {
-            bikeService.addBike(bike);
-            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
+            bikeService.update(txtSerial.getText(),bike);
+            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
         }
         catch (Exception e){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error saving the bike",e.getMessage());
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error updating the bike",e.getMessage());
         }
+    }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        bikeService = BikeService.getBikeService();
+        cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
     }
     private boolean isDouble(String value,String fieldName){
         try{
@@ -75,5 +102,4 @@ public class SaveBikeController implements Initializable {
         textField.setText(textField.getText().trim());
         return false;
     }
-
 }
