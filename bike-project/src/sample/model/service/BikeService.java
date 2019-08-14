@@ -1,5 +1,6 @@
 package sample.model.service;
 
+import sample.IObservable;
 import sample.model.structural.Bike;
 
 import java.time.LocalDateTime;
@@ -10,10 +11,12 @@ public class BikeService {
     public final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
 
     private ArrayList<Bike> bikes;
+    private ArrayList<IObservable> listeners;
     private static BikeService bikeService;
 
     private BikeService(){
-        bikes = new ArrayList<Bike>();
+        bikes = new ArrayList();
+        listeners = new ArrayList();
         LocalDateTime asd = LocalDateTime.now();
         DateTimeFormatter iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
         Bike bike = new Bike("asd", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
@@ -43,6 +46,7 @@ public class BikeService {
             throw new Exception("Duplicate bike serial");
         }
         bikes.add(bike);
+        notifyListeners();
     }
     public void deleteBike(String serial) throws Exception {
         Bike bike = findBikeBySerial(serial);
@@ -51,6 +55,7 @@ public class BikeService {
         }
 
         bikes.remove(bike);
+        notifyListeners();
     }
     public void update(String serial, Bike bikeUpdate)throws Exception{
         int bikeIndex = findBikeIndex(serial);
@@ -59,7 +64,7 @@ public class BikeService {
         }
         bikeUpdate.setSerial(serial);
         bikes.set(bikeIndex,bikeUpdate);
-
+        notifyListeners();
     }
     private int findBikeIndex(String serial){
         for(int i=0;i<bikes.size();i++){
@@ -79,5 +84,13 @@ public class BikeService {
     }
     public ArrayList <Bike> getBikes(){
         return bikes;
+    }
+    public void addListener(IObservable iObservable){
+        listeners.add(iObservable);
+    }
+    private void notifyListeners(){
+        for(IObservable iObservable: listeners){
+            iObservable.onDataChange();
+        }
     }
 }

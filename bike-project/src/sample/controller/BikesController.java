@@ -13,13 +13,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.IObservable;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BikesController implements Initializable {
+public class BikesController implements Initializable, IObservable {
     @FXML
     private TextField txtSearchSerial;
 
@@ -53,6 +54,7 @@ public class BikesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = BikeService.getBikeService();
+        bikeService.addListener(this);
         setPropertiesBikesController();
         loadDataBikes();
         setSettingsSearchBike();
@@ -100,5 +102,10 @@ public class BikesController implements Initializable {
     void closeWindows(ActionEvent event) {
         Stage stage = (Stage) tvBikes.getScene().getWindow();
         stage.close();
+    }
+
+    @Override
+    public void onDataChange() {
+        loadDataBikes();
     }
 }
