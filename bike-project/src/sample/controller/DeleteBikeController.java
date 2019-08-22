@@ -39,7 +39,7 @@ public class DeleteBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeService.getBikeService();
+        bikeService = BikeService.getInstance();
     }
 
     @FXML

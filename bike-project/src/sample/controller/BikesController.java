@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.IObservable;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 
@@ -53,7 +52,7 @@ public class BikesController implements Initializable, IObservable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeService.getBikeService();
+        bikeService = BikeService.getInstance();
         bikeService.addListener(this);
         setPropertiesBikesController();
         loadDataBikes();

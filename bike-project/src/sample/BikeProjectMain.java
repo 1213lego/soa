@@ -15,7 +15,6 @@ public class BikeProjectMain extends Application {
         scene = new Scene(loadFXML("main"));
         primaryStage.setScene(scene);
         primaryStage.show();
-        //primaryStage.setResizable(false);
     }
 
     public static void setRoot(String fxml){

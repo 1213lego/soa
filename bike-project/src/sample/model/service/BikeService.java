@@ -1,6 +1,6 @@
 package sample.model.service;
 
-import sample.IObservable;
+import sample.controller.IObservable;
 import sample.model.structural.Bike;
 
 import java.time.LocalDateTime;
@@ -17,24 +17,9 @@ public class BikeService {
     private BikeService(){
         bikes = new ArrayList();
         listeners = new ArrayList();
-        LocalDateTime asd = LocalDateTime.now();
-        DateTimeFormatter iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        Bike bike = new Bike("asd", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
-        Bike bike1 = new Bike("pgh", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
-        Bike bike2 = new Bike("asd1", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
-        Bike bike3 = new Bike("ph2", Bike.Type.MOUNTAIN, "asdsa", 2343, 234324, asd);
-        try {
-            addBike(bike);
-            addBike(bike1);
-            addBike(bike2);
-            addBike(bike3);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(asd.format(iso));
     }
 
-    public static BikeService getBikeService(){
+    public static BikeService getInstance(){
         if(bikeService == null){
             bikeService = new BikeService();
         }

@@ -37,7 +37,7 @@ public class SaveBikeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
-        bikeService = BikeService.getBikeService();
+        bikeService = BikeService.getInstance();
     }
     public void saveBike(ActionEvent actionEvent) {
         if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
