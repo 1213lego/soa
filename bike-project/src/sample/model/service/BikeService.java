@@ -1,8 +1,10 @@
 package sample.model.service;
 
 import sample.controller.IObservable;
+import sample.model.db.ConnectionDb;
 import sample.model.structural.Bike;
 
+import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,10 +15,35 @@ public class BikeService {
     private ArrayList<Bike> bikes;
     private ArrayList<IObservable> listeners;
     private static BikeService bikeService;
-
+    private ConnectionDb connectionDb;
     private BikeService(){
+        connectionDb = ConnectionDb.getInstance();
         bikes = new ArrayList();
         listeners = new ArrayList();
+        loadBikes();
+    }
+
+    private void loadBikes() {
+        ResultSet rs = connectionDb.executeQueryStatement("select * from bike;");
+        if(rs==null){
+            return;
+        }
+        try{
+            while (rs.next()){
+                Bike bike = new Bike();
+                bike.setSerial(rs.getString(1));
+                bike.setType(Bike.Type.valueOf(rs.getString(2)));
+                bike.setBrand(rs.getString(3));
+                bike.setWeight(Double.parseDouble(rs.getString(4)));
+                bike.setPrice(Double.parseDouble(rs.getString(5)));
+                bike.setPurchaseDate(rs.getDate(6).toLocalDate().atStartOfDay());
+                bikes.add(bike);
+            }
+            bikes.forEach(bike -> System.out.println(bike));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static BikeService getInstance(){

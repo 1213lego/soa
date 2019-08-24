@@ -72,7 +72,6 @@ public class Bike {
     public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-
     @Override
     public String toString() {
         return "Bike{" +

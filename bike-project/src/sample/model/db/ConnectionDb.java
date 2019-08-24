@@ -51,14 +51,15 @@ public class ConnectionDb {
 
         //Metodo que permite ejecutar una consulta y retorna un objeto ResulSet con
         //los resultados.
-        public ResultSet executeQueryStatement(String cad){
+        public ResultSet executeQueryStatement(String sql){
             ResultSet res = null;
             try{
                 stmt = con.createStatement();
-                res = stmt.executeQuery(cad);
+                res = stmt.executeQuery(sql);
                 System.out.println("Consulta realizada...  ");
             }catch(Exception ex){
                 System.out.println("No se pudo efectuar la consulta..." + ex);
+                ex.printStackTrace();
             }
             return res;
         }
