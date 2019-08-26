@@ -50,7 +50,7 @@ public class SaveBikeController implements Initializable {
         }
         Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
         try {
-            bikeService.addBike(bike);
+            bikeService.saveBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
         }
         catch (Exception e){

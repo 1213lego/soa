@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.deploy.security.ValidationState;
 import sample.model.db.ConnectionDb;
 import sample.model.structural.Bike;
 
@@ -8,6 +9,7 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +22,8 @@ public class Prueba {
         ConnectionDb connectionDb = ConnectionDb.getInstance();
         ResultSet rs = connectionDb.executeQueryStatement("select * from bike;");
         List asd = resultSetToListObjects(rs,Bike.class);
+        Bike bike = new Bike("sdd34343", Bike.Type.GRAVEL,"GW",5656,646, LocalDateTime.now());
+        System.out.println(bike.save());
     }
     static List resultSetToListObjects(ResultSet rs,Class typeClass) throws SQLException, IllegalAccessException, InstantiationException, InvocationTargetException {
         List result = new ArrayList();

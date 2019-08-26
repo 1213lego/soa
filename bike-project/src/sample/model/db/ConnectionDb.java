@@ -75,8 +75,9 @@ public class ConnectionDb {
                 //con.commit();
                 stmt.close();
                 return true;
-            }catch(Exception ex){
+            }catch(SQLException ex){
                 System.out.println("No se pudo efectuar la grabacion..." + ex);
+                ex.printStackTrace();
                 return false;
             }
         }

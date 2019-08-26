@@ -72,7 +72,7 @@ public class UpdateBikeController implements Initializable {
         }
         Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
         try {
-            bikeService.update(txtSerial.getText(),bike);
+            bikeService.updateInMemory(txtSerial.getText(),bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
         }
         catch (Exception e){

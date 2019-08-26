@@ -99,6 +99,7 @@ public class BikesController implements Initializable, IObservable {
 
     @FXML
     void closeWindows(ActionEvent event) {
+        bikeService.removeListener(this);
         Stage stage = (Stage) tvBikes.getScene().getWindow();
         stage.close();
     }
