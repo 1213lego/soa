@@ -20,7 +20,7 @@ public class BikeBarChartController implements Initializable , IObservable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = BikeService.getInstance();
-        bikeService.addListener(this::onDataChange);
+        bikeService.addListener(this);
         setUpBarChart();
     }
     private void setUpBarChart(){
@@ -39,9 +39,7 @@ public class BikeBarChartController implements Initializable , IObservable{
             }
         }
         XYChart.Series serie = new XYChart.Series();
-        counts.forEach((k,v)->{
-            serie.getData().add(new XYChart.Data<>(k,v));
-        });
+        counts.forEach((k,v)->serie.getData().add(new XYChart.Data<>(k,v)));
         barChart.getData().add(serie);
     }
 
