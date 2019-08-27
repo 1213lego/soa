@@ -66,7 +66,8 @@ public class BikesController implements Initializable, IObservable {
         tcBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        tcPurchaseDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(BikeService.formatter)));
+        tcPurchaseDate.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(BikeService.formatterDateTime)));
     }
 
     private void loadDataBikes() {

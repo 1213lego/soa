@@ -72,7 +72,7 @@ public class DeleteBikeController implements Initializable {
         txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
-        txtPurchaseDate.setText(bike.getPurchaseDate().format(BikeService.formatter));
+        txtPurchaseDate.setText(bike.getPurchaseDate().format(BikeService.formatterDateTime));
     }
 
     @FXML

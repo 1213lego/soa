@@ -74,9 +74,11 @@ public class Bike {
     public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-    public String save (){
-        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(BikeService.otro)+"');";
+
+    public String save(){
+        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(BikeService.formatterDate)+"');";
     }
+
     @Override
     public String toString() {
         return "Bike{" +

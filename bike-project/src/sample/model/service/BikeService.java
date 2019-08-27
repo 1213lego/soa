@@ -9,12 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BikeService {
-    public final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
-    public final static DateTimeFormatter otro = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
+    public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private ArrayList<Bike> bikes;
     private ArrayList<IObservable> listeners;
     private static BikeService bikeService;
     private ConnectionDb connectionDb;
+
     private BikeService(){
         connectionDb = ConnectionDb.getInstance();
         bikes = new ArrayList();
