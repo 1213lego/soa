@@ -41,4 +41,8 @@ public class MainController {
     public void openWindowUpdateBike(ActionEvent actionEvent) {
         BikeProjectMain.launchNewWindows("updateBike","Update Bike");
     }
+
+    public void openBikeChart(ActionEvent actionEvent) {
+        BikeProjectMain.launchNewWindows("barChart","Bike chart");
+    }
 }

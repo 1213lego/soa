@@ -63,21 +63,38 @@ public class BikeService {
         }
         bikes.add(bike);
     }
-    public void saveBikeInDb(Bike bike)throws Exception {
+    private void saveBikeInDb(Bike bike)throws Exception {
         boolean result = connectionDb.executeUpdateStatement(bike.save());
         if(result==false){
             throw new Exception("Bike not save in db, duplicate serial");
         }
     }
-    public void deleteBikeInMemory(String serial) throws Exception {
+    public void deleteBike(String serial) throws Exception {
+        deleteBikeInMemory(serial);
+        deleteFromDb(serial);
+        notifyListeners();
+    }
+    private void deleteBikeInMemory(String serial) throws Exception {
         Bike bike = findBikeBySerial(serial);
         if(bike == null) {
             throw new Exception("Bike not found with this serial: " + serial);
         }
         bikes.remove(bike);
+    }
+    private void deleteFromDb(String  serial) throws Exception {
+        boolean result = connectionDb.executeUpdateStatement("delete from bike where serial='"+serial+"';");
+        if(result==false){
+            throw new Exception("Bike not save in db, serial not found");
+        }
+    }
+
+    public void updateBike(String serial, Bike bikeUpdate) throws Exception {
+        updateInMemory(serial, bikeUpdate);
+        updateBikeFromDB(serial, bikeUpdate);
         notifyListeners();
     }
-    public void updateInMemory(String serial, Bike bikeUpdate)throws Exception{
+
+    private void updateInMemory(String serial, Bike bikeUpdate)throws Exception{
         int bikeIndex = findBikeIndex(serial);
         if(bikeIndex==-1){
             throw new Exception("Bike not found with this serial: " + serial);
@@ -86,6 +103,14 @@ public class BikeService {
         bikes.set(bikeIndex,bikeUpdate);
         notifyListeners();
     }
+
+    private void updateBikeFromDB(String serial, Bike bikeUpdate) throws Exception {
+        boolean result = connectionDb.executeUpdateStatement(bikeUpdate.update());
+        if(result==false){
+            throw new Exception("Bike not save in db, serial not found");
+        }
+    }
+
     private int findBikeIndex(String serial){
         for(int i=0;i<bikes.size();i++){
             if(serial.equals(bikes.get(i).getSerial())){
@@ -101,6 +126,10 @@ public class BikeService {
             }
         }
         return null;
+    }
+    public Bike findBikeInDb(String serial){
+        return null;
+
     }
     public ArrayList <Bike> getBikes(){
         return bikes;

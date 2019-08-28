@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 import java.net.URL;
@@ -74,6 +75,12 @@ public class SaveBikeController implements Initializable {
         }
         textField.setText(textField.getText().trim());
         return false;
+    }
+
+    @FXML
+    void closeWindow(ActionEvent event) {
+        Stage stage = (Stage) txtSerial.getScene().getWindow();
+        stage.close();
     }
 
 }

@@ -50,6 +50,7 @@ public class UpdateBikeController implements Initializable {
     void searchBike(ActionEvent event) {
         Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
         if(bike==null){
+            MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"The bike doesn't exist.");
             return;
         }
         txtSerial.setText(bike.getSerial());
@@ -72,7 +73,7 @@ public class UpdateBikeController implements Initializable {
         }
         Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
         try {
-            bikeService.updateInMemory(txtSerial.getText(),bike);
+            bikeService.updateBike(txtSerial.getText(),bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
         }
         catch (Exception e){

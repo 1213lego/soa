@@ -79,6 +79,15 @@ public class Bike {
         return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(BikeService.formatterDate)+"');";
     }
 
+    public String update() {
+        return "UPDATE bike SET type = '" + type + "', " +
+                "brand = '" + brand + "', " +
+                "weight = '" + weight + "', " +
+                "price = '" + price + "', " +
+                "purchaseDate = '" + purchaseDate + "' " +
+                "WHERE serial = '" + serial + "';";
+    }
+
     @Override
     public String toString() {
         return "Bike{" +

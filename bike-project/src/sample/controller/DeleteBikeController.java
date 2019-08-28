@@ -83,7 +83,7 @@ public class DeleteBikeController implements Initializable {
         }
 
         try {
-            bikeService.deleteBikeInMemory(txtSerial.getText());
+            bikeService.deleteBike(txtSerial.getText());
             MainController.showAlert(Alert.AlertType.INFORMATION,"Information",null,"The bike has been deleted");
             clearFields();
         } catch (Exception e) {
