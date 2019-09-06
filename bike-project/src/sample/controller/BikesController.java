@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
+import sample.view.IObservable;
 
 import java.net.URL;
 import java.util.ResourceBundle;

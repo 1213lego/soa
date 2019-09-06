@@ -1,6 +1,6 @@
 package sample.model.service;
 
-import sample.controller.IObservable;
+import sample.view.IObservable;
 import sample.model.db.ConnectionDb;
 import sample.model.structural.Bike;
 

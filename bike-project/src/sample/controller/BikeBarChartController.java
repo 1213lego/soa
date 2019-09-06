@@ -6,6 +6,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
+import sample.view.IObservable;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class BikeBarChartController implements Initializable , IObservable{
+public class BikeBarChartController implements Initializable , IObservable {
     private BikeService bikeService;
     @FXML
     private BarChart<String, Number> barChart;

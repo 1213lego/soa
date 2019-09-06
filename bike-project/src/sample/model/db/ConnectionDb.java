@@ -24,7 +24,7 @@ public class ConnectionDb {
     }
 
     private ConnectionDb() {
-        this("root","root");
+        this("postgres","colombia");
     }
 
     //Metodo para conectarce a una base de datos
