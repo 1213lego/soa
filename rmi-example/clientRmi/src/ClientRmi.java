@@ -25,6 +25,7 @@ import java.util.Scanner;
  */
 public class ClientRmi {
     public static final String SERVER_IP= "127.0.0.1";
+
     static class PruebaCliente extends UnicastRemoteObject implements IObservable{
         PruebaCliente() throws RemoteException {
         }

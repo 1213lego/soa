@@ -41,6 +41,7 @@ public class ServerRmi extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException{
+        System.out.println(ServerRmi.class.getResource("./view/"+fxml+".fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(ServerRmi.class.getResource("./view/"+fxml+".fxml"));
         return fxmlLoader.load();
     }

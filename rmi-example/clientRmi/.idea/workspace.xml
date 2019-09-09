@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17099c94-188e-4020-a7e5-3067589d3a58" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="e5c6a9d3-1851-4ab6-b685-bb889d0422ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/clientRmi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/clientRmi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi$PruebaCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi$PruebaCliente.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/META-INF/clientRmi.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/clientRmi/model/IEstudianteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/model/IEstudianteService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/clientRmi/model/IObservable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/model/IObservable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/clientRmi/structure/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/structure/Estudiante.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ClientRmi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientRmi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../serverRmi/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.classpath" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/META-INF/serverRmi.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/ServerRmi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/ServerRmi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/controller/EstudianteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/controller/EstudianteController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/EstudianteServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/EstudianteServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IEstudianteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IEstudianteService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IObservable.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IObservable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/structure/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/structure/Estudiante.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../serverRmi/serverRmi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/serverRmi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../serverRmi/src/ServerRmi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/src/ServerRmi.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,13 +37,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="1QNVUTV1FyiEwl7wmoeUzwHhJvp" />
+  <component name="ProjectId" id="1QbEd36IvQjALsnGX8D3UESiKnT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -55,12 +60,6 @@
     <configuration name="ClientRmi" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ClientRmi" />
       <module name="clientRmi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -76,21 +75,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="17099c94-188e-4020-a7e5-3067589d3a58" name="Default Changelist" comment="" />
-      <created>1567611056662</created>
+      <changelist id="e5c6a9d3-1851-4ab6-b685-bb889d0422ab" name="Default Changelist" comment="" />
+      <created>1568030979962</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1567611056662</updated>
-      <workItem from="1567611057832" duration="626000" />
-      <workItem from="1567612575886" duration="25000" />
-      <workItem from="1567613373515" duration="477000" />
-      <workItem from="1567613886914" duration="20000" />
-      <workItem from="1567614056874" duration="1562000" />
-      <workItem from="1567615721095" duration="742000" />
-      <workItem from="1567962979447" duration="651000" />
-      <workItem from="1567973751086" duration="122000" />
-      <workItem from="1567987694101" duration="1434000" />
-      <workItem from="1567999509596" duration="10000" />
+      <updated>1568030979962</updated>
+      <workItem from="1568030982088" duration="101000" />
     </task>
     <servers />
   </component>
@@ -102,9 +92,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
