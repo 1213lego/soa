@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,23 +25,21 @@ import java.util.Scanner;
  */
 public class ClientRmi {
     public static final String SERVER_IP= "127.0.0.1";
+    static class PruebaCliente extends UnicastRemoteObject implements IObservable{
+        PruebaCliente() throws RemoteException {
+        }
+        @Override
+        public void onChange() throws RemoteException {
+            System.out.println("Cambio");
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
         // TODO code application logic here
         IEstudianteService estudianteService = (IEstudianteService) Naming.lookup("//"+SERVER_IP+"/estudiante");
-        IObservable  iObservable = new IObservable() {
-            @Override
-            public void onChange() {
-                try {
-                    estudianteService.getEstudiantes().forEach((estudiante -> System.out.println(estudiante)));
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        estudianteService.addListener(iObservable);
+        estudianteService.addListener(new PruebaCliente());
         Scanner sc = new Scanner(System.in);
         int input =-1;
         while (input!=0){
