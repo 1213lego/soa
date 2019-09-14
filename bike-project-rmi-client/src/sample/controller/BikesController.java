@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.service.IObservable;
+import sample.model.service.ObservableImpl;
 import sample.model.structural.Bike;
 
 import java.net.URL;
@@ -22,7 +23,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ResourceBundle;
 
-public class BikesController extends UnicastRemoteObject implements Initializable, IObservable {
+public class BikesController implements Initializable, IObservable {
     @FXML
     private TextField txtSearchSerial;
 
@@ -52,16 +53,13 @@ public class BikesController extends UnicastRemoteObject implements Initializabl
     private ObservableList<Bike> observableBikes = FXCollections.observableArrayList();
 
     private FilteredList<Bike> filteredData;
-
-    public BikesController() throws RemoteException {
-        System.out.println("Bikes controller");
-    }
+    private ObservableImpl observable;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             bikeService = BikeService.getInstance();
-            bikeService.addListener(this);
+            observable = new ObservableImpl(this);
             setPropertiesBikesController();
             loadDataBikes();
             setSettingsSearchBike();

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService {
-    public static final String SERVER_IP= "192.168.0.117";
+    public static final String SERVER_IP= "192.168.0.27";
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private List<Bike> bikes;
@@ -65,13 +65,13 @@ public class BikeService {
         return bikes;
     }
 
-    public void addListener(IObservable bikesController) throws Exception {
-        if(bikesController==null) return;
-        iBikeService.addListener(bikesController);
+    public void addListener(IObservable iObservable) throws Exception {
+        if(iObservable==null) return;
+        iBikeService.addListener(iObservable);
     }
 
-    public void removeListener(IObservable bikesController) throws Exception {
-        if(bikesController==null) return;
-        iBikeService.removeListener(bikesController);
+    public void removeListener(IObservable iObservable) throws Exception {
+        if(iObservable==null) return;
+        iBikeService.removeListener(iObservable);
     }
 }
