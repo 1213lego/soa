@@ -15,8 +15,6 @@ import java.util.logging.Logger;
 
 public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService{
     private final static Logger LOGGER = Logger.getLogger(BikeServiceImpl.class.getName());
-    public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
-    public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private ArrayList<Bike> bikes;
     private ArrayList<IObservable> listeners;
     private static BikeServiceImpl bikeService;

@@ -1,14 +1,12 @@
 package sample.model.structural;
-
-import sample.model.service.BikeService;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bike implements Serializable {
-
     public enum Type { ROAD, MOUNTAIN, GRAVEL }
-
+    public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
+    public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private String serial;
     private Type type;
     private String brand;
@@ -77,7 +75,7 @@ public class Bike implements Serializable {
     }
 
     public String save(){
-        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(BikeService.formatterDate)+"');";
+        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(formatterDate)+"');";
     }
 
     public String update() {
