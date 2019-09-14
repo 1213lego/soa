@@ -78,11 +78,15 @@ public class BikeService implements IObservable{
     @Override
     public void onDataChange() throws RemoteException {
         bikes = iBikeService.getBikes();
+        //Observables locales
         for(IObservable listener: listeners){
             listener.onDataChange();
         }
     }
+    //Empieza a esta a la escucha de los cambios remotos
     public void startListening() throws Exception {
-        observable = new ObservableImpl(iBikeService,this);
+        if(observable == null){
+            observable = new ObservableImpl(iBikeService,this);
+        }
     }
 }
