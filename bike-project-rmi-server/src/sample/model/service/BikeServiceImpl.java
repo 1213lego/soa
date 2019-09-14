@@ -131,7 +131,8 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
         return null;
     }
-    public List<Bike> getBikes(){
+    public List<Bike> getBikes()
+    {
         return bikes;
     }
     public void addListener(IObservable iObservable){

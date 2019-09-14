@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService implements IObservable{
-    private static final String SERVER_IP= "192.168.0.27";
+    private static final String SERVER_IP= "192.168.0.117";
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static BikeService instance;
     private List<Bike> bikes;
     private IBikeService iBikeService;
-    //Local Listener
+    //Local Listeners
     private List<IObservable> listeners;
     private ObservableImpl observable;
     private BikeService() throws Exception {
