@@ -33,28 +33,13 @@ public class BikeService implements IObservable{
         return instance;
     }
     public void saveBike(Bike bike) throws Exception {
-        try{
-            iBikeService.saveBike(bike);
-        }
-        catch (Exception e){
-            throw new Exception("No hay conexion con el servidor" ,e);
-        }
+        iBikeService.saveBike(bike);
     }
     public void deleteBike(String serial) throws Exception {
-       try{
-           iBikeService.deleteBike(serial);
-       }
-       catch (Exception e){
-           throw new Exception("No hay conexion con el servidor" ,e);
-       }
+        iBikeService.deleteBike(serial);
     }
     public void updateBike(Bike bikeUpdate) throws Exception {
-        try{
-            iBikeService.updateBike(bikeUpdate);
-        }
-        catch (Exception e){
-            throw new Exception("No hay conexion con el servidor" ,e);
-        }
+        iBikeService.updateBike(bikeUpdate);
     }
     public Bike findBikeBySerial(String serial){
         for (Bike bike: bikes) {

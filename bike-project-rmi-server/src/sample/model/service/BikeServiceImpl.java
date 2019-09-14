@@ -61,7 +61,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     }
     private void addBikeInMemory(Bike bike) throws RemoteException {
         if(findBikeBySerial(bike.getSerial())!=null){
-            throw new RemoteException("Duplicate bike serial");
+            throw new RemoteException("Duplicate bike serial",new Throwable("Duplicate bike serial"));
         }
         bikes.add(bike);
     }
@@ -140,15 +140,13 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         listeners.remove(iObservable);
     }
     private void notifyListeners(){
-        int count = 0 ;
-        for(int i = 0;i<listeners.size();i++){
+        listeners.removeIf((iObservable -> {
             try {
-                listeners.get(i).onDataChange();
-                count++;
-            } catch (RemoteException e) {
-                listeners.remove(i);
+                iObservable.onDataChange();
+                return false;
+            } catch (Exception e) {
+                return true;
             }
-        }
-        System.out.println("Se ha notificado a " + count + " listeners de " +listeners.size());
+        }));
     }
 }
