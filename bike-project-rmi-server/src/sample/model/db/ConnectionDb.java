@@ -6,8 +6,11 @@
 package sample.model.db;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectionDb {
+    private final static Logger LOGGER = Logger.getLogger(ConnectionDb.class.getName());
     private  Connection con;
     private static ConnectionDb connectionDb;
     private String user;
@@ -20,31 +23,38 @@ public class ConnectionDb {
        user = us;
        password = pass;
        nombreBD  = "postgres";
-       conectar();
+       connect();
     }
-
+    public static ConnectionDb getInstance() {
+        if(connectionDb==null){
+            connectionDb = new ConnectionDb();
+        }
+        return connectionDb;
+    }
     private ConnectionDb() {
         this("postgres","colombia");
     }
 
     //Metodo para conectarce a una base de datos
-    private void conectar(){
+    private void connect(){
         try{
 
             Class.forName("org.postgresql.Driver");
+            System.out.println("'connect()': Driver cargado...");
         }
         catch(ClassNotFoundException e){
-            System.err.println("'conectarAccess()' Error al intentar cargar Driver. "+e.getMessage());
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "connect(): Error al intentar cargar Driver", e);
         }
 
         try{
             url = "jdbc:postgresql://localhost:5432/" + nombreBD;
             con = DriverManager.getConnection(url,user,password);
             con.setAutoCommit(true);
-            System.out.println("Conexion exitosa...");
-        }catch(Exception e){
-            System.out.println("Error al conectarce: "+e);
+            System.out.println("'connect()': Conexion exitosa...");
+        }
+        catch(Exception e){
+            LOGGER.log(Level.SEVERE, "connect(): Error al conectar:", e);
+            System.exit(0);
         }
     }
 
@@ -56,10 +66,10 @@ public class ConnectionDb {
         try{
             stmt = con.createStatement();
             res = stmt.executeQuery(sql);
-            System.out.println("Consulta realizada...  ");
-        }catch(Exception ex){
-            System.out.println("No se pudo efectuar la consulta..." + ex);
-            ex.printStackTrace();
+            System.out.println("'executeQueryStatement()': Consulta realizada: " + sql);
+        }
+        catch(Exception ex){
+            LOGGER.log(Level.SEVERE, null, ex);
         }
         return res;
     }
@@ -71,13 +81,13 @@ public class ConnectionDb {
         try{
             stmt = con.createStatement();
             r = stmt.executeUpdate(cad);
-            System.out.println("Actualizacion realizada...  " + r);
+            System.out.println("executeUpdateStatement() Actualizacion realizada...  " + r);
             //con.commit();
             stmt.close();
             return true;
-        }catch(SQLException ex){
-            System.out.println("No se pudo efectuar la grabacion..." + ex);
-            ex.printStackTrace();
+        }
+        catch(SQLException ex){
+            LOGGER.log(Level.SEVERE, null, ex);
             return false;
         }
     }
@@ -87,8 +97,8 @@ public class ConnectionDb {
         try{
             CallableStatement proc =con.prepareCall("{ call " + cadProc + " }");
             proc.execute();
-        }catch (SQLException e)
-        {
+        }
+        catch (SQLException e) {
             System.out.println("Problemas con la invocacion del procedimiento " + cadProc);
         }
     }
@@ -98,15 +108,9 @@ public class ConnectionDb {
             if(con != null){
                 con.close();
             }
-        }catch(SQLException e){
+        }
+        catch(SQLException e){
             System.out.println("Error! " + e);
         }
     }
-    public static ConnectionDb getInstance() {
-        if(connectionDb==null){
-            connectionDb = new ConnectionDb();
-        }
-        return connectionDb;
-    }
-
 }

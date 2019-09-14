@@ -23,7 +23,12 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         listeners = new ArrayList();
         loadBikesFromDb();
     }
-
+    public static BikeServiceImpl getInstance() throws Exception {
+        if(bikeService == null){
+            bikeService = new BikeServiceImpl();
+        }
+        return bikeService;
+    }
     private void loadBikesFromDb() {
         ResultSet rs = connectionDb.executeQueryStatement("select * from bike;");
         if(rs==null){
@@ -45,13 +50,6 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    public static BikeServiceImpl getInstance() throws Exception {
-        if(bikeService == null){
-            bikeService = new BikeServiceImpl();
-        }
-        return bikeService;
     }
     public void saveBike(Bike bike) throws Exception {
         addBikeInMemory(bike);
