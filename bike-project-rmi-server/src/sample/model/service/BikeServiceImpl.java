@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.ResultSet;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService{
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
@@ -87,23 +88,23 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
     }
 
-    public void updateBike(String serial, Bike bikeUpdate) throws Exception {
-        updateInMemory(serial, bikeUpdate);
-        updateBikeFromDB(serial, bikeUpdate);
+    public void updateBike(Bike bikeUpdate) throws Exception {
+        updateInMemory(bikeUpdate);
+        updateBikeFromDB(bikeUpdate);
         notifyListeners();
     }
 
-    private void updateInMemory(String serial, Bike bikeUpdate)throws Exception{
-        int bikeIndex = findBikeIndex(serial);
+    private void updateInMemory(Bike bikeUpdate)throws Exception{
+        int bikeIndex = findBikeIndex(bikeUpdate.getSerial());
         if(bikeIndex==-1){
-            throw new Exception("Bike not found with this serial: " + serial);
+            throw new Exception("Bike not found with this serial: " + bikeUpdate.getSerial());
         }
-        bikeUpdate.setSerial(serial);
+        bikeUpdate.setSerial(bikeUpdate.getSerial());
         bikes.set(bikeIndex,bikeUpdate);
         notifyListeners();
     }
 
-    private void updateBikeFromDB(String serial, Bike bikeUpdate) throws Exception {
+    private void updateBikeFromDB(Bike bikeUpdate) throws Exception {
         boolean result = connectionDb.executeUpdateStatement(bikeUpdate.update());
         if(result==false){
             throw new Exception("Bike not save in db, serial not found");
@@ -126,7 +127,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
         return null;
     }
-    public ArrayList <Bike> getBikes(){
+    public List<Bike> getBikes(){
         return bikes;
     }
     public void addListener(IObservable iObservable){
@@ -137,13 +138,12 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     }
     private void notifyListeners(){
         int count = 0 ;
-        for(IObservable iObservable: listeners){
+        for(int i = 0;i<listeners.size();i++){
             try {
-                iObservable.onDataChange();
+                listeners.get(i).onDataChange();
                 count++;
             } catch (RemoteException e) {
-                e.printStackTrace();
-                listeners.remove(iObservable);
+                listeners.remove(i);
             }
         }
         System.out.println("Se ha notificado a " + count + " listeners de " +listeners.size());

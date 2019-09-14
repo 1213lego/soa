@@ -11,10 +11,7 @@ import sample.model.structural.Bike;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class BikeBarChartController extends UnicastRemoteObject implements Initializable , IObservable {
     private BikeService bikeService;
@@ -35,11 +32,11 @@ public class BikeBarChartController extends UnicastRemoteObject implements Initi
         }
     }
     private void setUpBarChart(){
-        barChart.getData().clear();
+        /*barChart.getData().clear();
         barChart.setTitle("Type summary");
         barChart.getXAxis().setLabel("Type");
         barChart.getYAxis().setLabel("Value");
-        ArrayList<Bike> bikes = bikeService.getBikesFromServer();
+        List<Bike> bikes = bikeService.getBikesFromServer();
         Map<String,Integer> counts = new HashMap<>();
         for (Bike bike: bikes){
             if(!counts.containsKey(bike.getType().toString())){
@@ -51,11 +48,14 @@ public class BikeBarChartController extends UnicastRemoteObject implements Initi
         }
         XYChart.Series serie = new XYChart.Series();
         counts.forEach((k,v)->serie.getData().add(new XYChart.Data<>(k,v)));
-        barChart.getData().add(serie);
+        barChart.getData().add(serie);*/
+
     }
 
     @Override
     public void onDataChange() throws RemoteException{
         setUpBarChart();
+        bikeService.getBikesFromServer();
+        System.out.println("cambio");
     }
 }

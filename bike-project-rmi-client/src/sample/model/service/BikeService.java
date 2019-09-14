@@ -5,12 +5,13 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BikeService {
-    public static final String SERVER_IP= "127.0.0.1";
+    public static final String SERVER_IP= "192.168.0.117";
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private ArrayList<Bike> bikes;
+    private List<Bike> bikes;
     private static BikeService instance;
     private IBikeService iBikeService;
 
@@ -40,8 +41,8 @@ public class BikeService {
     public void deleteBike(String serial) throws Exception {
         iBikeService.deleteBike(serial);
     }
-    public void updateBike(String serial, Bike bikeUpdate) throws Exception {
-        iBikeService.updateBike(serial,bikeUpdate);
+    public void updateBike(Bike bikeUpdate) throws Exception {
+        iBikeService.updateBike(bikeUpdate);
     }
     public Bike findBikeBySerial(String serial){
         for (Bike bike: bikes) {
@@ -51,7 +52,7 @@ public class BikeService {
         }
         return null;
     }
-    public ArrayList <Bike> getBikesFromServer() {
+    public List <Bike> getBikesFromServer() {
         try {
             bikes = iBikeService.getBikes();
         } catch (Exception e) {
@@ -60,7 +61,7 @@ public class BikeService {
         }
         return bikes;
     }
-    public ArrayList<Bike> getLocalBikes(){
+    public List<Bike> getLocalBikes(){
         return bikes;
     }
 
