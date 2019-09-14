@@ -2,6 +2,7 @@ package sample.model.service;
 
 import sample.model.db.ConnectionDb;
 import sample.model.structural.Bike;
+import sample.view.IObservable;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -9,8 +10,11 @@ import java.sql.ResultSet;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService{
+    private final static Logger LOGGER = Logger.getLogger(BikeServiceImpl.class.getName());
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private ArrayList<Bike> bikes;
@@ -49,65 +53,65 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
             bikes.forEach(bike -> System.out.println(bike));
         }
         catch (Exception e){
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "", e);
         }
     }
-    public void saveBike(Bike bike) throws Exception {
+    public void saveBike(Bike bike) throws RemoteException {
         addBikeInMemory(bike);
         saveBikeInDb(bike);
         notifyListeners();
     }
-    private void addBikeInMemory(Bike bike) throws Exception {
+    private void addBikeInMemory(Bike bike) throws RemoteException {
         if(findBikeBySerial(bike.getSerial())!=null){
-            throw new Exception("Duplicate bike serial");
+            throw new RemoteException("Duplicate bike serial");
         }
         bikes.add(bike);
     }
-    private void saveBikeInDb(Bike bike)throws Exception {
+    private void saveBikeInDb(Bike bike)throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement(bike.save());
         if(result==false){
             throw new RemoteException("Bike not save in db, duplicate serial");
         }
     }
-    public void deleteBike(String serial) throws Exception {
+    public void deleteBike(String serial) throws RemoteException {
         deleteBikeInMemory(serial);
         deleteFromDb(serial);
         notifyListeners();
     }
-    private void deleteBikeInMemory(String serial) throws Exception {
+    private void deleteBikeInMemory(String serial) throws RemoteException {
         Bike bike = findBikeBySerial(serial);
         if(bike == null) {
-            throw new Exception("Bike not found with this serial: " + serial);
+            throw new RemoteException("Bike not found with this serial: " + serial);
         }
         bikes.remove(bike);
     }
-    private void deleteFromDb(String  serial) throws Exception {
+    private void deleteFromDb(String  serial) throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement("delete from bike where serial='"+serial+"';");
         if(result==false){
-            throw new Exception("Bike not save in db, serial not found");
+            throw new RemoteException("Bike not save in db, serial not found");
         }
     }
 
-    public void updateBike(Bike bikeUpdate) throws Exception {
+    public void updateBike(Bike bikeUpdate) throws RemoteException {
         updateInMemory(bikeUpdate);
         updateBikeFromDB(bikeUpdate);
         notifyListeners();
     }
 
-    private void updateInMemory(Bike bikeUpdate)throws Exception{
+    private void updateInMemory(Bike bikeUpdate)throws RemoteException{
         int bikeIndex = findBikeIndex(bikeUpdate.getSerial());
         if(bikeIndex==-1){
-            throw new Exception("Bike not found with this serial: " + bikeUpdate.getSerial());
+            throw new RemoteException("Bike not found with this serial: " + bikeUpdate.getSerial());
         }
         bikeUpdate.setSerial(bikeUpdate.getSerial());
         bikes.set(bikeIndex,bikeUpdate);
         notifyListeners();
     }
 
-    private void updateBikeFromDB(Bike bikeUpdate) throws Exception {
+    private void updateBikeFromDB(Bike bikeUpdate) throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement(bikeUpdate.update());
         if(result==false){
-            throw new Exception("Bike not save in db, serial not found");
+            throw new RemoteException("Bike not save in db, serial not found");
         }
     }
 

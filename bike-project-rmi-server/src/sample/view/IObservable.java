@@ -1,4 +1,4 @@
-package sample.model.service;
+package sample.view;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

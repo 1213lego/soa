@@ -52,7 +52,6 @@ public class DeleteBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"The serial field can't be empty.");
             return;
         }
-
         Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
         if(bike == null) {
             MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");

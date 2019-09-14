@@ -8,19 +8,18 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.model.service.BikeService;
-import sample.model.service.IObservable;
-import sample.model.service.ObservableImpl;
+import sample.view.IObservable;
 import sample.model.structural.Bike;
 
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ResourceBundle;
 
 public class BikesController implements Initializable, IObservable {
@@ -53,13 +52,11 @@ public class BikesController implements Initializable, IObservable {
     private ObservableList<Bike> observableBikes = FXCollections.observableArrayList();
 
     private FilteredList<Bike> filteredData;
-    private ObservableImpl observable;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             bikeService = BikeService.getInstance();
-            observable = new ObservableImpl(this);
+            bikeService.addListener(this);
             setPropertiesBikesController();
             loadDataBikes();
             setSettingsSearchBike();
@@ -80,9 +77,15 @@ public class BikesController implements Initializable, IObservable {
     }
 
     private void loadDataBikes() {
-        observableBikes.clear();
-        observableBikes.addAll(bikeService.getBikesFromServer());
-        tvBikes.setItems(observableBikes);
+        try{
+            observableBikes.clear();
+            observableBikes.addAll(bikeService.getBikes());
+            tvBikes.setItems(observableBikes);
+        }
+        catch (Exception e){
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error loading bike from server",e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void setSettingsSearchBike() {
@@ -110,7 +113,7 @@ public class BikesController implements Initializable, IObservable {
     @FXML
     void closeWindows(ActionEvent event) {
         try {
-            bikeService.removeListener(this);
+            bikeService.removeListener(this::onDataChange);
         } catch (Exception e) {
             e.printStackTrace();
         }
