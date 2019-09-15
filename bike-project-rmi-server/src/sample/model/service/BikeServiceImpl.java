@@ -61,14 +61,14 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     }
     private void addBikeInMemory(Bike bike) throws RemoteException {
         if(findBikeBySerial(bike.getSerial())!=null){
-            throw new RemoteException("Duplicate bike serial",new Throwable("Duplicate bike serial"));
+            throw new RemoteException("Duplicate bike serial",new Exception("Duplicate bike serial"));
         }
         bikes.add(bike);
     }
     private void saveBikeInDb(Bike bike)throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement(bike.save());
         if(result==false){
-            throw new RemoteException("Bike not save in db, duplicate serial");
+            throw new RemoteException("Bike not save in db, duplicate serial", new Exception("Bike not save in db, duplicate serial"));
         }
     }
     public void deleteBike(String serial) throws RemoteException {
@@ -79,14 +79,14 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     private void deleteBikeInMemory(String serial) throws RemoteException {
         Bike bike = findBikeBySerial(serial);
         if(bike == null) {
-            throw new RemoteException("Bike not found with this serial: " + serial);
+            throw new RemoteException("Bike not found with this serial: " + serial,new Exception("Bike not found with this serial: " + serial));
         }
         bikes.remove(bike);
     }
     private void deleteFromDb(String  serial) throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement("delete from bike where serial='"+serial+"';");
         if(result==false){
-            throw new RemoteException("Bike not save in db, serial not found");
+            throw new RemoteException("Bike not save in db, serial not found",new Exception("Bike not save in db, serial not found"));
         }
     }
 
@@ -99,7 +99,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     private void updateInMemory(Bike bikeUpdate)throws RemoteException{
         int bikeIndex = findBikeIndex(bikeUpdate.getSerial());
         if(bikeIndex==-1){
-            throw new RemoteException("Bike not found with this serial: " + bikeUpdate.getSerial());
+            throw new RemoteException("Bike not found with this serial: " + bikeUpdate.getSerial(),new Exception("Bike not found with this serial: " + bikeUpdate.getSerial()));
         }
         bikeUpdate.setSerial(bikeUpdate.getSerial());
         bikes.set(bikeIndex,bikeUpdate);
@@ -109,7 +109,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
     private void updateBikeFromDB(Bike bikeUpdate) throws RemoteException {
         boolean result = connectionDb.executeUpdateStatement(bikeUpdate.update());
         if(result==false){
-            throw new RemoteException("Bike not save in db, serial not found");
+            throw new RemoteException("Bike not update in db, serial not found",new Exception("Bike not update in db, serial not found"));
         }
     }
 
@@ -121,7 +121,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
         return -1;
     }
-    public Bike findBikeBySerial(String serial){
+    public Bike findBikeBySerial(String serial)throws RemoteException{
         for (Bike bike: bikes) {
             if(bike.getSerial().equals(serial)){
                 return bike;
@@ -129,14 +129,14 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
         return null;
     }
-    public List<Bike> getBikes()
+    public List<Bike> getBikes()throws RemoteException
     {
         return bikes;
     }
-    public void addListener(IObservable iObservable){
+    public void addListener(IObservable iObservable)throws RemoteException{
         listeners.add(iObservable);
     }
-    public void removeListener(IObservable iObservable){
+    public void removeListener(IObservable iObservable)throws RemoteException{
         listeners.remove(iObservable);
     }
     private void notifyListeners(){

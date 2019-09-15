@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService implements IObservable{
-    private static final String SERVER_IP= "192.168.1.90";
+    private static final String SERVER_IP= "192.168.0.27";
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static BikeService instance;
@@ -49,7 +49,7 @@ public class BikeService implements IObservable{
         }
         return null;
     }
-    public List <Bike> getBikes()throws Exception {
+    public List <Bike> getBikes(){
         return bikes;
     }
     public void addListener(IObservable iObservable) throws Exception {

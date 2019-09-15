@@ -59,8 +59,7 @@ public class SaveBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
         }
         catch (Exception e){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error saving the bike",e.getMessage());
-            System.out.println(e.getMessage());
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error saving the bike",e.getCause().getMessage());
         }
 
     }

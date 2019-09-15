@@ -77,7 +77,7 @@ public class UpdateBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
         }
         catch (Exception e){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error updating the bike",e.getMessage());
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error updating the bike",e.getCause().getMessage());
         }
     }
 

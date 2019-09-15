@@ -51,13 +51,19 @@ public class FindBikeController implements Initializable, IObservable {
 
     @FXML
     void searchBike(ActionEvent event) {
+        if(txtFieldIsEmpty(txtSearchSerial)){
+            clearFieldsBike();
+            return;
+        }
         findBike(txtSearchSerial.getText());
     }
 
     private void findBike(String serial) {
         Bike bike = bikeService.findBikeBySerial(serial);
         if(bike == null) {
-            MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
+            txtSearchSerial.setText("");
+            clearFieldsBike();
+            //MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
         }
         else {
             fillFieldsBike(bike);
@@ -98,7 +104,10 @@ public class FindBikeController implements Initializable, IObservable {
 
     @Override
     public void onDataChange() throws RemoteException {
-        clearFieldsBike();
+        if(txtFieldIsEmpty(txtSearchSerial)){
+            clearFieldsBike();
+            return;
+        }
         findBike(txtSearchSerial.getText());
     }
 }

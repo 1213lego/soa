@@ -90,7 +90,7 @@ public class DeleteBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.INFORMATION,"Information",null,"The bike has been deleted");
             clearFields();
         } catch (Exception e) {
-            MainController.showAlert(Alert.AlertType.ERROR,"Error",null, e.getMessage());
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error deleting bike", e.getCause().getMessage());
         }
     }
 

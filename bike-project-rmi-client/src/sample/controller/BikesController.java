@@ -77,15 +77,9 @@ public class BikesController implements Initializable, IObservable {
     }
 
     private void loadDataBikes() {
-        try{
-            observableBikes.clear();
-            observableBikes.addAll(bikeService.getBikes());
-            tvBikes.setItems(observableBikes);
-        }
-        catch (Exception e){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error loading bike from server",e.getMessage());
-            e.printStackTrace();
-        }
+        observableBikes.clear();
+        observableBikes.addAll(bikeService.getBikes());
+        tvBikes.setItems(observableBikes);
     }
 
     private void setSettingsSearchBike() {

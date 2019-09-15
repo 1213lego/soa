@@ -62,7 +62,7 @@ public class MainController implements Initializable {
             BikeService.getInstance().startListening();
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR,"Error","",e.getMessage());
+            showAlert(Alert.AlertType.ERROR,"Error","No se puede inicar la aplicacion, no hay conexion con el servidor",e.getMessage());
             System.exit(0);
         }
     }

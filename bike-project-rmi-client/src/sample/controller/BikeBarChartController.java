@@ -29,29 +29,23 @@ public class BikeBarChartController implements Initializable , IObservable {
         }
     }
     private void setUpBarChart(){
-        try{
-            barChart.getData().clear();
-            barChart.setTitle("Type summary");
-            barChart.getXAxis().setLabel("Type");
-            barChart.getYAxis().setLabel("Value");
-            List<Bike> bikes = bikeService.getBikes();
-            Map<String,Integer> counts = new HashMap<>();
-            for (Bike bike: bikes){
-                if(!counts.containsKey(bike.getType().toString())){
-                    counts.put(bike.getType().toString(),1);
-                }
-                else {
-                    counts.put(bike.getType().toString(),counts.get(bike.getType().toString())+1);
-                }
+        barChart.getData().clear();
+        barChart.setTitle("Type summary");
+        barChart.getXAxis().setLabel("Type");
+        barChart.getYAxis().setLabel("Value");
+        List<Bike> bikes = bikeService.getBikes();
+        Map<String,Integer> counts = new HashMap<>();
+        for (Bike bike: bikes){
+            if(!counts.containsKey(bike.getType().toString())){
+                counts.put(bike.getType().toString(),1);
             }
-            XYChart.Series serie = new XYChart.Series();
-            counts.forEach((k,v)->serie.getData().add(new XYChart.Data<>(k,v)));
-            barChart.getData().add(serie);
+            else {
+                counts.put(bike.getType().toString(),counts.get(bike.getType().toString())+1);
+            }
         }
-        catch (Exception e){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error","Error loading bike from server",e.getMessage());
-            e.printStackTrace();
-        }
+        XYChart.Series serie = new XYChart.Series();
+        counts.forEach((k,v)->serie.getData().add(new XYChart.Data<>(k,v)));
+        barChart.getData().add(serie);
     }
 
     @Override
