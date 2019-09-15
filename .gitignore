@@ -1,4 +1,6 @@
-./bike-project-rmi-client/out
-./bike-project-rmi-server/out
+.bike-project-rmi-client/out
+.bike-project-rmi-server/out
+.bike-project-rmi-client/out/**
+.bike-project-rmi-server/out/**
 /bike-project-rmi-client/out
 /bike-project-rmi-server/out
