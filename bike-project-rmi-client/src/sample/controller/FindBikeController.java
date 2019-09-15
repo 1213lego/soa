@@ -51,12 +51,7 @@ public class FindBikeController implements Initializable, IObservable {
 
     @FXML
     void searchBike(ActionEvent event) {
-        if(txtFieldIsEmpty(txtSearchSerial)) {
-            MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"The serial field can't be empty.");
-        }
-        else {
-            findBike(txtSearchSerial.getText());
-        }
+        findBike(txtSearchSerial.getText());
     }
 
     private void findBike(String serial) {
