@@ -20,6 +20,7 @@
                 <Menu mnemonicParsing="false" text="Bikes">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#openWindowSaveBike" text="Add bike" />
+                  <MenuItem mnemonicParsing="false" onAction="#openWindowFindBike" text="Find bike" />
                         <MenuItem mnemonicParsing="false" onAction="#openWindowDeleteBike" text="Delete bike" />
                         <MenuItem mnemonicParsing="false" onAction="#openWindowUpdateBike" text="Update bike" />
                         <MenuItem mnemonicParsing="false" onAction="#openWindowBikeList" text="Bike list" />

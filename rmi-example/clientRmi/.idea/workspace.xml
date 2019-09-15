@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5c6a9d3-1851-4ab6-b685-bb889d0422ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clientRmi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/clientRmi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi$PruebaCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi$PruebaCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/ClientRmi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/model/IEstudianteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/model/IEstudianteService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/model/IObservable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/model/IObservable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/clientRmi/structure/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clientRmi/structure/Estudiante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClientRmi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientRmi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/ServerRmi.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/ServerRmi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/controller/EstudianteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/controller/EstudianteController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/EstudianteServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/EstudianteServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IEstudianteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IEstudianteService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IObservable.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/model/IObservable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/structure/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/out/production/serverRmi/structure/Estudiante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/serverRmi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/serverRmi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../serverRmi/src/ServerRmi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../serverRmi/src/ServerRmi.java" afterDir="false" />
-    </list>
+    <list default="true" id="e5c6a9d3-1851-4ab6-b685-bb889d0422ab" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568030979962</updated>
       <workItem from="1568030982088" duration="101000" />
+      <workItem from="1568484427793" duration="31000" />
     </task>
     <servers />
   </component>
@@ -92,7 +67,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

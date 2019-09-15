@@ -21,6 +21,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    void openWindowFindBike(ActionEvent event) {
+        BikeProjectMain.launchNewWindows("findBike", "Find Bike");
+    }
+
+    @FXML
     public void openWindowDeleteBike(ActionEvent event) {
         BikeProjectMain.launchNewWindows("deleteBike", "Delete Bike");
     }
