@@ -61,7 +61,6 @@ public class FindBikeController implements Initializable, IObservable {
     private void findBike(String serial) {
         Bike bike = bikeService.findBikeBySerial(serial);
         if(bike == null) {
-            txtSearchSerial.setText("");
             clearFieldsBike();
             //MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
         }

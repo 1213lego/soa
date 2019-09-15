@@ -14,7 +14,7 @@ public class BikeProjectMain{
         try {
             IBikeService iBikeService = BikeServiceImpl.getInstance();
             LocateRegistry.createRegistry(1099);
-            Naming.rebind("//127.0.0.1/bike",iBikeService);
+            Naming.rebind("//192.168.0.107/bike",iBikeService);
             LOGGER.info("Server OK");
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE,"",e);

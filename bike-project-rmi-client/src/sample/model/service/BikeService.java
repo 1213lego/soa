@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService implements IObservable{
-    private static final String SERVER_IP= "192.168.0.27";
+    private static final String SERVER_IP= "192.168.0.107";
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static BikeService instance;
@@ -62,6 +62,7 @@ public class BikeService implements IObservable{
     }
     @Override
     public void onDataChange() throws RemoteException {
+        System.out.println("dataChange");
         bikes = iBikeService.getBikes();
         //Observables locales
         for(IObservable listener: listeners){
