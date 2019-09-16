@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 
 public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService{
     private final static Logger LOGGER = Logger.getLogger(BikeServiceImpl.class.getName());
-    private ArrayList<Bike> bikes;
-    private ArrayList<IObservable> listeners;
+    private List<Bike> bikes;
+    private List<IObservable> listeners;
     private static BikeServiceImpl bikeService;
     private ConnectionDb connectionDb;
 
@@ -129,8 +129,7 @@ public class BikeServiceImpl extends UnicastRemoteObject implements IBikeService
         }
         return null;
     }
-    public List<Bike> getBikes()throws RemoteException
-    {
+    public List<Bike> getBikes()throws RemoteException {
         return bikes;
     }
     public void addListener(IObservable iObservable)throws RemoteException{
