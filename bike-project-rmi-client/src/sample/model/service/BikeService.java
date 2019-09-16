@@ -10,11 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService implements IObservable{
-<<<<<<< HEAD
+
     private static final String SERVER_IP= "10.30.1.115";
-=======
-    private static final String SERVER_IP= "192.168.0.107";
->>>>>>> c53fd2d9b2f752eea8338ca5b93ca721166bd996
+
     public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
     public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static BikeService instance;
