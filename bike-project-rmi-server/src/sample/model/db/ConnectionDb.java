@@ -32,7 +32,7 @@ public class ConnectionDb {
         return connectionDb;
     }
     private ConnectionDb() {
-        this("postgres","colombia");
+        this("root","root");
     }
 
     //Metodo para conectarce a una base de datos

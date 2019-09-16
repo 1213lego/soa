@@ -25,6 +25,7 @@
                         <MenuItem mnemonicParsing="false" onAction="#openWindowUpdateBike" text="Update bike" />
                         <MenuItem mnemonicParsing="false" onAction="#openWindowBikeList" text="Bike list" />
                         <MenuItem mnemonicParsing="false" onAction="#openBikeChart" text="Bike type chart" />
+                  <MenuItem mnemonicParsing="false" onAction="#openBikePieChart" text="Sustentacion parcial" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

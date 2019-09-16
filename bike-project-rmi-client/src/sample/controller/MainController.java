@@ -16,6 +16,11 @@ public class MainController implements Initializable {
         System.exit(0);
     }
 
+    @FXML
+    void openBikePieChart(ActionEvent event) {
+        BikeProjectMain.launchNewWindows("pieChartBike", "Bike Pie Chart");
+    }
+
     public void openWindowSaveBike(ActionEvent actionEvent) {
         BikeProjectMain.launchNewWindows("addBike", "New Bike");
     }
