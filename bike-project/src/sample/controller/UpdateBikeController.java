@@ -13,6 +13,9 @@ import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class UpdateBikeController implements Initializable {
@@ -58,11 +61,11 @@ public class UpdateBikeController implements Initializable {
         txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
-        dpPurchaseDate.valueProperty().setValue(bike.getPurchaseDate().toLocalDate());
+        dpPurchaseDate.valueProperty().setValue(LocalDate.parse(BikeService.DATE_FORMAT.format(bike.getPurchaseDate()),BikeService.DATE_TIME_FORMATTER));
     }
 
     @FXML
-    void updateBike(ActionEvent event) {
+    void updateBike(ActionEvent event) throws ParseException {
         if(txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
@@ -71,9 +74,10 @@ public class UpdateBikeController implements Initializable {
         if(!isDouble(txtPrice.getText(),"Price") || !isDouble(txtWeight.getText(),"Weight")){
             return;
         }
-        Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
+        Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),
+                Double.parseDouble(txtPrice.getText()),BikeService.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeService.DATE_TIME_FORMATTER)));
         try {
-            bikeService.updateBike(txtSerial.getText(),bike);
+            bikeService.updateBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
         }
         catch (Exception e){

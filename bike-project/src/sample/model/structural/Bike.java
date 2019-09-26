@@ -1,8 +1,7 @@
 package sample.model.structural;
-
 import sample.model.service.BikeService;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Bike {
 
@@ -13,12 +12,12 @@ public class Bike {
     private String brand;
     private double weight;
     private double price;
-    private LocalDateTime purchaseDate;
+    private Date purchaseDate;
 
     public Bike() {
     }
 
-    public Bike(String serial, Type type, String brand, double weight, double price, LocalDateTime purchaseDate) {
+    public Bike(String serial, Type type, String brand, double weight, double price, Date purchaseDate) {
         this.serial = serial;
         this.type = type;
         this.brand = brand;
@@ -67,16 +66,16 @@ public class Bike {
         this.price = price;
     }
 
-    public LocalDateTime getPurchaseDate() {
+    public Date getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
     public String save(){
-        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+purchaseDate.format(BikeService.formatterDate)+"');";
+        return "INSERT INTO bike VALUES ('"+serial+"', '"+type.toString()+"', '"+brand+"'," +weight+","+price+", '"+ BikeService.DATE_FORMAT.format(purchaseDate)+"');";
     }
 
     public String update() {
@@ -100,3 +99,4 @@ public class Bike {
                 '}';
     }
 }
+

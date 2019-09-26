@@ -5,17 +5,16 @@ import bikeproject.db.ConnectionDb;
 import bikeproject.structural.Bike;
 
 import java.sql.ResultSet;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService {
-    public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
-    public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private List<Bike> bikes;
     private static BikeService bikeService;
     private ConnectionDb connectionDb;
-
+    
     private BikeService(){
         connectionDb = ConnectionDb.getInstance();
         bikes = new ArrayList<>();
@@ -35,7 +34,7 @@ public class BikeService {
                 bike.setBrand(rs.getString(3));
                 bike.setWeight(Double.parseDouble(rs.getString(4)));
                 bike.setPrice(Double.parseDouble(rs.getString(5)));
-                bike.setPurchaseDate(rs.getDate(6).toLocalDate().atStartOfDay());
+                bike.setPurchaseDate(rs.getDate(6));
                 bikes.add(bike);
             }
             bikes.forEach(bike -> System.out.println(bike));

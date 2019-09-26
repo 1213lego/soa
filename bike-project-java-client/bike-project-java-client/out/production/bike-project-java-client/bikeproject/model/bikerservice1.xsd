@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xsd:schema xmlns:ns0="http://controller.bikeproject/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://controller.bikeproject/">
+    <xsd:complexType name="deleteBike">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="deleteBikeResponse"/>
+    <xsd:complexType name="Exception">
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="findBikeBySerial">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="findBikeBySerialResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:bike" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="getBikes"/>
+    <xsd:complexType name="getBikesResponse">
+        <xsd:sequence>
+            <xsd:element name="return" type="ns0:bike" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="saveBike">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="ns0:bike" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="saveBikeResponse"/>
+    <xsd:complexType name="updateBike">
+        <xsd:sequence>
+            <xsd:element name="arg0" type="ns0:bike" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="updateBikeResponse"/>
+    <xsd:complexType name="bike">
+        <xsd:sequence>
+            <xsd:element name="brand" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="price" type="xsd:double"/>
+            <xsd:element name="purchaseDate" type="xsd:dateTime" minOccurs="0"/>
+            <xsd:element name="serial" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="type" type="ns0:type" minOccurs="0"/>
+            <xsd:element name="weight" type="xsd:double"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="deleteBike" type="ns0:deleteBike"/>
+    <xsd:element name="deleteBikeResponse" type="ns0:deleteBikeResponse"/>
+    <xsd:element name="Exception" type="ns0:Exception"/>
+    <xsd:element name="findBikeBySerial" type="ns0:findBikeBySerial"/>
+    <xsd:element name="findBikeBySerialResponse" type="ns0:findBikeBySerialResponse"/>
+    <xsd:element name="getBikes" type="ns0:getBikes"/>
+    <xsd:element name="getBikesResponse" type="ns0:getBikesResponse"/>
+    <xsd:element name="saveBike" type="ns0:saveBike"/>
+    <xsd:element name="saveBikeResponse" type="ns0:saveBikeResponse"/>
+    <xsd:element name="updateBike" type="ns0:updateBike"/>
+    <xsd:element name="updateBikeResponse" type="ns0:updateBikeResponse"/>
+    <xsd:simpleType name="type">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ROAD"/>
+            <xsd:enumeration value="MOUNTAIN"/>
+            <xsd:enumeration value="GRAVEL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

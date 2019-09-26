@@ -1,25 +1,24 @@
 package sample.model.service;
 
-import sample.view.IObservable;
 import sample.model.db.ConnectionDb;
 import sample.model.structural.Bike;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BikeService {
-    public final static DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy/MM/dd - hh:mm");
-    public final static DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private ArrayList<Bike> bikes;
-    private ArrayList<IObservable> listeners;
+    public final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
+    public final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private List<Bike> bikes;
     private static BikeService bikeService;
     private ConnectionDb connectionDb;
 
     private BikeService(){
         connectionDb = ConnectionDb.getInstance();
-        bikes = new ArrayList();
-        listeners = new ArrayList();
+        bikes = new ArrayList<>();
         loadBikesFromDb();
     }
 
@@ -36,7 +35,7 @@ public class BikeService {
                 bike.setBrand(rs.getString(3));
                 bike.setWeight(Double.parseDouble(rs.getString(4)));
                 bike.setPrice(Double.parseDouble(rs.getString(5)));
-                bike.setPurchaseDate(rs.getDate(6).toLocalDate().atStartOfDay());
+                bike.setPurchaseDate(rs.getDate(6));
                 bikes.add(bike);
             }
             bikes.forEach(bike -> System.out.println(bike));
@@ -55,7 +54,6 @@ public class BikeService {
     public void saveBike(Bike bike) throws Exception {
         addBikeInMemory(bike);
         saveBikeInDb(bike);
-        notifyListeners();
     }
     private void addBikeInMemory(Bike bike) throws Exception {
         if(findBikeBySerial(bike.getSerial())!=null){
@@ -72,7 +70,6 @@ public class BikeService {
     public void deleteBike(String serial) throws Exception {
         deleteBikeInMemory(serial);
         deleteFromDb(serial);
-        notifyListeners();
     }
     private void deleteBikeInMemory(String serial) throws Exception {
         Bike bike = findBikeBySerial(serial);
@@ -88,23 +85,21 @@ public class BikeService {
         }
     }
 
-    public void updateBike(String serial, Bike bikeUpdate) throws Exception {
-        updateInMemory(serial, bikeUpdate);
-        updateBikeFromDB(serial, bikeUpdate);
-        notifyListeners();
+    public void updateBike(Bike bikeUpdate) throws Exception {
+        updateInMemory(bikeUpdate);
+        updateBikeFromDB(bikeUpdate);
     }
 
-    private void updateInMemory(String serial, Bike bikeUpdate)throws Exception{
-        int bikeIndex = findBikeIndex(serial);
+    private void updateInMemory(Bike bikeUpdate)throws Exception{
+        int bikeIndex = findBikeIndex(bikeUpdate.getSerial());
         if(bikeIndex==-1){
-            throw new Exception("Bike not found with this serial: " + serial);
+            throw new Exception("Bike not found with this serial: " + bikeUpdate.getSerial());
         }
-        bikeUpdate.setSerial(serial);
+        bikeUpdate.setSerial(bikeUpdate.getSerial());
         bikes.set(bikeIndex,bikeUpdate);
-        notifyListeners();
     }
 
-    private void updateBikeFromDB(String serial, Bike bikeUpdate) throws Exception {
+    private void updateBikeFromDB(Bike bikeUpdate) throws Exception {
         boolean result = connectionDb.executeUpdateStatement(bikeUpdate.update());
         if(result==false){
             throw new Exception("Bike not save in db, serial not found");
@@ -127,22 +122,8 @@ public class BikeService {
         }
         return null;
     }
-    public Bike findBikeInDb(String serial){
-        return null;
-
-    }
-    public ArrayList <Bike> getBikes(){
+    public List <Bike> getBikes(){
         return bikes;
     }
-    public void addListener(IObservable iObservable){
-        listeners.add(iObservable);
-    }
-    public void removeListener(IObservable iObservable){
-        listeners.remove(iObservable);
-    }
-    private void notifyListeners(){
-        for(IObservable iObservable: listeners){
-            iObservable.onDataChange();
-        }
-    }
 }
+

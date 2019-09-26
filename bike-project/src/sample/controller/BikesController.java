@@ -20,7 +20,7 @@ import sample.view.IObservable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BikesController implements Initializable, IObservable {
+public class BikesController implements Initializable {
     @FXML
     private TextField txtSearchSerial;
 
@@ -54,7 +54,6 @@ public class BikesController implements Initializable, IObservable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = BikeService.getInstance();
-        bikeService.addListener(this);
         setPropertiesBikesController();
         loadDataBikes();
         setSettingsSearchBike();
@@ -68,7 +67,7 @@ public class BikesController implements Initializable, IObservable {
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tcPurchaseDate.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getPurchaseDate().format(BikeService.formatterDateTime)));
+                new SimpleStringProperty(BikeService.DATE_FORMAT.format(cellData.getValue().getPurchaseDate())));
     }
 
     private void loadDataBikes() {
@@ -101,13 +100,7 @@ public class BikesController implements Initializable, IObservable {
 
     @FXML
     void closeWindows(ActionEvent event) {
-        bikeService.removeListener(this);
         Stage stage = (Stage) tvBikes.getScene().getWindow();
         stage.close();
-    }
-
-    @Override
-    public void onDataChange() {
-        loadDataBikes();
     }
 }

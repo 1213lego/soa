@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
   <servlet>
-    <servlet-name>BikeControllerPort</servlet-name>
+    <servlet-name>bikerservice</servlet-name>
     <servlet-class>bikeproject.controller.BikeController</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>BikeControllerPort</servlet-name>
-    <url-pattern>/BikeControllerPort</url-pattern>
+    <servlet-name>bikerservice</servlet-name>
+    <url-pattern>/bikerservice</url-pattern>
   </servlet-mapping>
 </web-app>

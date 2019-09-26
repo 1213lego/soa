@@ -9,19 +9,15 @@ import sample.model.structural.Bike;
 import sample.view.IObservable;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
-public class BikeBarChartController implements Initializable , IObservable {
+public class BikeBarChartController implements Initializable  {
     private BikeService bikeService;
     @FXML
     private BarChart<String, Number> barChart;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = BikeService.getInstance();
-        bikeService.addListener(this);
         setUpBarChart();
     }
     private void setUpBarChart(){
@@ -29,7 +25,7 @@ public class BikeBarChartController implements Initializable , IObservable {
         barChart.setTitle("Type summary");
         barChart.getXAxis().setLabel("Type");
         barChart.getYAxis().setLabel("Value");
-        ArrayList<Bike> bikes = bikeService.getBikes();
+        List<Bike> bikes = bikeService.getBikes();
         Map<String,Integer> counts = new HashMap<>();
         for (Bike bike: bikes){
             if(!counts.containsKey(bike.getType().toString())){
@@ -42,10 +38,5 @@ public class BikeBarChartController implements Initializable , IObservable {
         XYChart.Series serie = new XYChart.Series();
         counts.forEach((k,v)->serie.getData().add(new XYChart.Data<>(k,v)));
         barChart.getData().add(serie);
-    }
-
-    @Override
-    public void onDataChange() {
-        setUpBarChart();
     }
 }

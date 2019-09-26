@@ -27,6 +27,7 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ResourceBundlesContentSet"/>
    </list>
    <list n="listOfChildren">
+      <hash><url n="URL" path="../bike-project-java-client/bike-project-java-client/bike-project-java-client.jpr"/></hash>
       <hash><url n="URL" path="bike-project-server/bike-project-server.jpr"/></hash>
    </list>
 </jws:workspace>

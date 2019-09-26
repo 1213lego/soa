@@ -51,7 +51,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="List" onAction="#onDataChange">
+            <Button mnemonicParsing="false" text="List" >
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

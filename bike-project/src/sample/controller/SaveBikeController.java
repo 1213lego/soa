@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sample.model.service.BikeService;
 import sample.model.structural.Bike;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class SaveBikeController implements Initializable {
@@ -40,7 +41,7 @@ public class SaveBikeController implements Initializable {
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
         bikeService = BikeService.getInstance();
     }
-    public void saveBike(ActionEvent actionEvent) {
+    public void saveBike(ActionEvent actionEvent) throws ParseException {
         if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
@@ -49,7 +50,8 @@ public class SaveBikeController implements Initializable {
         if(!isDouble(txtPrice.getText(),"Price") || !isDouble(txtWeight.getText(),"Weight")){
             return;
         }
-        Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),Double.parseDouble(txtPrice.getText()),dpPurchaseDate.getValue().atStartOfDay());
+        Bike bike = new Bike(txtSerial.getText(),cbTypes.getValue(),txtBrand.getText(),Double.parseDouble(txtWeight.getText()),
+                Double.parseDouble(txtPrice.getText()),BikeService.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeService.DATE_TIME_FORMATTER)));
         try {
             bikeService.saveBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
