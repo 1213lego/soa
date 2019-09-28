@@ -15,9 +15,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 public class SaveBikeController implements Initializable {
@@ -46,7 +50,7 @@ public class SaveBikeController implements Initializable {
         cbTypes.setItems(FXCollections.observableArrayList(Type.values()));
         bikeService = BikeServiceClient.BIKE_SERVICE;
     }
-    public void saveBike(ActionEvent actionEvent) throws ParseException {
+    public void saveBike(ActionEvent actionEvent) throws ParseException, DatatypeConfigurationException {
         if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
@@ -61,8 +65,11 @@ public class SaveBikeController implements Initializable {
         bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
-        bike.setPurchaseDate(XMLGregorianCalendarImpl.createDate(dpPurchaseDate.getValue().getYear(),dpPurchaseDate.getValue().getMonthValue(),dpPurchaseDate.getValue().getDayOfMonth(),0));
-
+        Date date = BikeServiceClient.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeServiceClient.DATE_TIME_FORMATTER));
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(date);
+        XMLGregorianCalendar xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+        bike.setPurchaseDate(xmlCalendar);
         try {
             bikeService.saveBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");

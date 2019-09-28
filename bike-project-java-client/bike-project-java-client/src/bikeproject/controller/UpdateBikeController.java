@@ -18,7 +18,13 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class UpdateBikeController implements Initializable {
 
@@ -67,7 +73,7 @@ public class UpdateBikeController implements Initializable {
     }
 
     @FXML
-    void updateBike(ActionEvent event) throws ParseException {
+    void updateBike(ActionEvent event) throws ParseException, DatatypeConfigurationException {
         if(txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
@@ -82,7 +88,11 @@ public class UpdateBikeController implements Initializable {
         bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
-        bike.setPurchaseDate(XMLGregorianCalendarImpl.createDate(dpPurchaseDate.getValue().getYear(),dpPurchaseDate.getValue().getMonthValue(),dpPurchaseDate.getValue().getDayOfMonth(),0));
+        Date date = BikeServiceClient.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeServiceClient.DATE_TIME_FORMATTER));
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(date);
+        XMLGregorianCalendar xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+        bike.setPurchaseDate(xmlCalendar);
         try {
             bikeService.updateBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
