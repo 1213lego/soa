@@ -59,6 +59,18 @@
     <Compile Include="GUIAddBike.Designer.cs">
       <DependentUpon>GUIAddBike.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIBike.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIBike.Designer.cs">
+      <DependentUpon>GUIBike.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIDeleteBike.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIDeleteBike.Designer.cs">
+      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +79,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUIAddBike.resx">
+      <DependentUpon>GUIAddBike.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIBike.resx">
+      <DependentUpon>GUIBike.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIDeleteBike.resx">
+      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIMain.resx">
       <DependentUpon>GUIMain.cs</DependentUpon>
     </EmbeddedResource>

@@ -51,7 +51,8 @@ namespace bike_project_net_client
 
         private void menuDeleteBike_Click(object sender, EventArgs e)
         {
-
+            GUIDeleteBike gui = new GUIDeleteBike();
+            gui.Show();
         }
 
         private void menuUpdateBike_Click(object sender, EventArgs e)
@@ -67,6 +68,12 @@ namespace bike_project_net_client
         private void menuBikeTypeChart_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuBike_Click(object sender, EventArgs e)
+        {
+            GUIBike gui = new GUIBike();
+            gui.Show();
         }
     }
 }

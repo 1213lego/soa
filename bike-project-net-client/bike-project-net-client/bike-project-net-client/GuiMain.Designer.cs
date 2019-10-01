@@ -40,6 +40,7 @@
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
+            this.menuBike = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +77,7 @@
             this.menuBikes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuAddBike,
             this.menuDeleteBike,
+            this.menuBike,
             this.menuUpdateBike,
             this.menuBikeList,
             this.menuBikeTypeChart});
@@ -143,7 +145,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // GuiMain
+            // menuBike
+            // 
+            this.menuBike.Name = "menuBike";
+            this.menuBike.Size = new System.Drawing.Size(182, 26);
+            this.menuBike.Text = "Find bike";
+            this.menuBike.Click += new System.EventHandler(this.menuBike_Click);
+            // 
+            // GUIMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -151,7 +160,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "GuiMain";
+            this.Name = "GUIMain";
             this.Text = "Bikes";
             this.Load += new System.EventHandler(this.GuiMain_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -174,6 +183,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuBikeList;
         private System.Windows.Forms.ToolStripMenuItem menuBikeTypeChart;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem menuBike;
     }
 }
 
