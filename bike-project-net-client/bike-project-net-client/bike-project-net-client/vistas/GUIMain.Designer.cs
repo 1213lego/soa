@@ -1,6 +1,6 @@
 ﻿namespace bike_project_net_client
 {
-    partial class GUIMain
+    partial class GuiMain
     {
         /// <summary>
         /// Variable del diseñador necesaria.

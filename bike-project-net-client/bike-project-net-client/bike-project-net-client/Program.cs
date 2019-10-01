@@ -16,7 +16,7 @@ namespace bike_project_net_client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GuiMain());
+            Application.Run(new GUIMain());
         }
     }
 }

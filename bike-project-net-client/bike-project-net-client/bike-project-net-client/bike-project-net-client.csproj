@@ -53,16 +53,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="GuiMain.cs">
+    <Compile Include="GUIAddBike.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GuiMain.Designer.cs">
-      <DependentUpon>GuiMain.cs</DependentUpon>
+    <Compile Include="GUIAddBike.Designer.cs">
+      <DependentUpon>GUIAddBike.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIMain.Designer.cs">
+      <DependentUpon>GUIMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GuiMain.resx">
-      <DependentUpon>GuiMain.cs</DependentUpon>
+    <EmbeddedResource Include="GUIMain.resx">
+      <DependentUpon>GUIMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
