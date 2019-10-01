@@ -37,7 +37,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,25 +59,23 @@
     <Compile Include="GUIAddBike.Designer.cs">
       <DependentUpon>GUIAddBike.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="GUIBike.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUIBike.Designer.cs">
       <DependentUpon>GUIBike.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIDeleteBike.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIDeleteBike.Designer.cs">
-      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
-=======
     <Compile Include="GuiBikeList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GuiBikeList.Designer.cs">
       <DependentUpon>GuiBikeList.cs</DependentUpon>
->>>>>>> c692a9a7c670c94e2be8ddd228fe7857e558ec5a
+    </Compile>
+    <Compile Include="GUIDeleteBike.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIDeleteBike.Designer.cs">
+      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIMain.cs">
       <SubType>Form</SubType>
@@ -86,33 +83,22 @@
     <Compile Include="GUIMain.Designer.cs">
       <DependentUpon>GUIMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GuiPieChart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GuiPieChart.Designer.cs">
-      <DependentUpon>GuiPieChart.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <EmbeddedResource Include="GUIAddBike.resx">
       <DependentUpon>GUIAddBike.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIBike.resx">
       <DependentUpon>GUIBike.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIDeleteBike.resx">
-      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
-=======
     <EmbeddedResource Include="GuiBikeList.resx">
       <DependentUpon>GuiBikeList.cs</DependentUpon>
->>>>>>> c692a9a7c670c94e2be8ddd228fe7857e558ec5a
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIDeleteBike.resx">
+      <DependentUpon>GUIDeleteBike.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIMain.resx">
       <DependentUpon>GUIMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GuiPieChart.resx">
-      <DependentUpon>GuiPieChart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

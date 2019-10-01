@@ -14,7 +14,7 @@ namespace bike_project_net_client
     public partial class GuiPieChart : Form
     {
         BikeSoapService.BikeControllerClient service;
-    
+
         public GuiPieChart()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace bike_project_net_client
             BikeSoapService.bike[] bikes = service.getBikes();
             foreach (BikeSoapService.bike bike in bikes)
             {
-                for(int i = 0; i < types.Length; i++)
+                for (int i = 0; i < types.Length; i++)
                 {
                     if (String.Equals(bike.type.ToString(), types[i]))
                     {

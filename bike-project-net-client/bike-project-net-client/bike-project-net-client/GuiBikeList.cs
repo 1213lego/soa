@@ -28,10 +28,10 @@ namespace bike_project_net_client
         {
             BikeSoapService.bike[] bikes = service.getBikes();
             gridViewBikes.RowCount = 1;
-            for(int i = 0; i < bikes.Length; i++)
+            for (int i = 0; i < bikes.Length; i++)
             {
                 object[] fields = { bikes[i].serial, bikes[i].type,
-                    bikes[i].brand, bikes[i].weight, bikes[i].price, bikes[i].purchaseDate};
+                    bikes[i].brand, bikes[i].weight, bikes[i].price, bikes[i].purchaseDate.ToShortDateString()};
                 gridViewBikes.Rows.Add(fields);
             }
         }
