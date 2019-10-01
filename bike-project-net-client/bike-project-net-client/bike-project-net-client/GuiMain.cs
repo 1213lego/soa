@@ -61,12 +61,14 @@ namespace bike_project_net_client
 
         private void menuBikeList_Click(object sender, EventArgs e)
         {
-
+            GuiBikeList gui = new GuiBikeList();
+            gui.Show();
         }
 
         private void menuBikeTypeChart_Click(object sender, EventArgs e)
         {
-
+            GuiPieChart gui = new GuiPieChart();
+            gui.Show();
         }
     }
 }
