@@ -51,10 +51,18 @@ namespace bike_project_net_client
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
-            String serial = txtSerial.Text;
-            bikeController.deleteBike(serial);
-            clearFields();
+            try
+            {
+                BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
+                String serial = txtSerial.Text;
+                bikeController.deleteBike(serial);
+                clearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            
         }
 
         private void btnQuit_Click(object sender, EventArgs e)

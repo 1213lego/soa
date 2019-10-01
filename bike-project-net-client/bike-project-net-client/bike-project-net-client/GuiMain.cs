@@ -57,7 +57,8 @@ namespace bike_project_net_client
 
         private void menuUpdateBike_Click(object sender, EventArgs e)
         {
-
+            GUIUpdateBike gui = new GUIUpdateBike();
+            gui.Show();
         }
 
         private void menuBikeList_Click(object sender, EventArgs e)
@@ -68,7 +69,8 @@ namespace bike_project_net_client
 
         private void menuBikeTypeChart_Click(object sender, EventArgs e)
         {
-
+            GuiPieChart gui = new GuiPieChart();
+            gui.Show();
         }
 
         private void menuBike_Click(object sender, EventArgs e)

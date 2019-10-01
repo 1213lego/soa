@@ -19,55 +19,52 @@ namespace bike_project_net_client.vistas
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(emptyFields())
+            if(emptyFields() || doubleFieldsValidate())
             {
                 return;
             }
 
             try
             {
-                double weightD = Double.Parse(txtWeight.Text);
-                double priceD = Double.Parse(txtPrice.Text);
+                BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
+
+                String serial = txtSerial.Text;
+                String type = cbType.Text;
+                String brand = txtBrand.Text;
+                double weight = Double.Parse(txtWeight.Text);
+                double price = Double.Parse(txtPrice.Text);
+                DateTime purchaseDate = dtpPurchaseDate.Value;
+
+                BikeSoapService.bike bike = new BikeSoapService.bike();
+                bike.serial = serial;
+                bike.brand = brand;
+                bike.weight = weight;
+                bike.price = price;
+                bike.purchaseDate = purchaseDate;
+
+                if (type.Equals("ROAD"))
+                {
+                    bike.type = BikeSoapService.type.ROAD;
+                }
+                else if (type.Equals("GRAVEL"))
+                {
+                    bike.type = BikeSoapService.type.GRAVEL;
+                }
+                else
+                {
+                    bike.type = BikeSoapService.type.MOUNTAIN;
+                }
+                bike.typeSpecified = true;
+                bike.purchaseDateSpecified = true;
+
+                bikeController.saveBike(bike);
+                MessageBox.Show("Bike added");
+                clearFields();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                MessageBox.Show("The price or weight error: " + ex.Message);
-                return;
+                MessageBox.Show("Error: " + ex.Message);
             }
-
-            BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
-
-            String serial = txtSerial.Text;
-            String type = cbType.Text;
-            String brand = txtBrand.Text;
-            double weight = Double.Parse(txtWeight.Text);
-            double price = Double.Parse(txtPrice.Text);
-            DateTime purchaseDate = dtpPurchaseDate.Value;
-
-            BikeSoapService.bike bike = new BikeSoapService.bike();
-            bike.serial = serial;
-            bike.brand = brand;
-            bike.weight = weight;
-            bike.price = price;
-            bike.purchaseDate = purchaseDate;
-
-            if(type.Equals("ROAD"))
-            {
-                bike.type = BikeSoapService.type.ROAD;
-            }
-            else if (type.Equals("GRAVEL"))
-            {
-                bike.type = BikeSoapService.type.GRAVEL;
-            }
-            else
-            {
-                bike.type = BikeSoapService.type.MOUNTAIN;
-            }
-            bike.typeSpecified = true;
-            bike.purchaseDateSpecified = true;
-
-            bikeController.saveBike(bike);
-            clearFields();
         }
 
         private bool emptyFields()
@@ -79,6 +76,22 @@ namespace bike_project_net_client.vistas
             if(serial.Equals("") || brand.Equals("") || weight.Equals("") || price.Equals(""))
             {
                 MessageBox.Show("Empty Fields");
+                return true;
+            }
+
+            return false;
+        }
+        
+        private bool doubleFieldsValidate()
+        {
+            try
+            {
+                double weightD = Double.Parse(txtWeight.Text);
+                double priceD = Double.Parse(txtPrice.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The price or weight error: " + ex.Message);
                 return true;
             }
 
