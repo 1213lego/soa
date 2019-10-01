@@ -1,5 +1,4 @@
-﻿using bike_project_net_client.vistas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using bike_project_net_client.vistas;
 
 namespace bike_project_net_client
 {
-    public partial class GUIMain : Form
+    public partial class GuiMain : Form
     {
-        public GUIMain()
+        public GuiMain()
         {
             InitializeComponent();
         }
@@ -21,8 +21,8 @@ namespace bike_project_net_client
         private void button1_Click(object sender, EventArgs e)
         {
             BikeSoapService.BikeControllerClient d = new BikeSoapService.BikeControllerClient();
-            BikeSoapService.bike [] bikes = d.getBikes();
-            foreach(BikeSoapService.bike bike in bikes)
+            BikeSoapService.bike[] bikes = d.getBikes();
+            foreach (BikeSoapService.bike bike in bikes)
             {
                 Console.WriteLine(bike.serial, bike.purchaseDate);
             }
@@ -30,7 +30,7 @@ namespace bike_project_net_client
 
         private void GuiMain_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tsMenuQuit_Click(object sender, EventArgs e)
@@ -68,5 +68,7 @@ namespace bike_project_net_client
         {
 
         }
+
+        
     }
 }

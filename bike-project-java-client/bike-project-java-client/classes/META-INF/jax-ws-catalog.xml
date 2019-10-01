@@ -1,4 +1,0 @@
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <system systemId="http://127.0.0.1:7101/bike-project-server-bike-project-server-context-root/bikerservice?WSDL#%7Bhttp%3A%2F%2Fcontroller.bikeproject%2F%7Dbike"
-          uri="../bikeproject/controller/bike.wsdl"/>
-</catalog>

@@ -49,7 +49,7 @@ public class ConnectionDb {
 
            try{
                url = "jdbc:postgresql://localhost:5432/" + nombreBD;
-               con = DriverManager.getConnection(url,"postgres","colombia");
+               con = DriverManager.getConnection(url, user, password);
                con.setAutoCommit(true);
                System.out.println("'connect()': Conexion exitosa...");
            }

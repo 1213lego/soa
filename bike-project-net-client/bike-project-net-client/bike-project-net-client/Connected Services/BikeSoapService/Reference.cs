@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace bike_project_net_client.BikeSoapService {
     
     
@@ -66,7 +68,7 @@ namespace bike_project_net_client.BikeSoapService {
         private bool typeFieldSpecified;
         
         private double weightField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string brand {
