@@ -102,4 +102,8 @@ public class BikesController implements Initializable {
         Stage stage = (Stage) tvBikes.getScene().getWindow();
         stage.close();
     }
+
+    public void updateList(ActionEvent actionEvent) {
+        loadDataBikes();
+    }
 }

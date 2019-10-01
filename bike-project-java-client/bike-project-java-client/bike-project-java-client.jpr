@@ -156,24 +156,24 @@
          <list n="jdkDefinitions">
             <hash>
                <list n="classPath">
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/resources.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/rt.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/sunrsasign.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/jsse.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/jce.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/charsets.jar!/"/>
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/jre/lib/jfr.jar!/"/>
-                  <url protocol="file" path="/opt/jdk1.8.0_221/jre/classes/"/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/resources.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/rt.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/sunrsasign.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/jsse.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/jce.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/charsets.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/lib/jfr.jar" jar-entry=""/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/jre/classes/"/>
                </list>
                <value n="description" v="1.8.0_221"/>
                <list n="docPath">
                   <url protocol="http" host="docs.oracle.com" path="/javase/8/docs/api/"/>
                </list>
                <value n="id" v="1.8.0_221"/>
-               <url n="javaExecutable" protocol="file" path="/opt/jdk1.8.0_221/bin/java"/>
-               <url n="sdkBinDir" protocol="file" path="/opt/jdk1.8.0_221/bin/"/>
+               <url n="javaExecutable" path="../../../../../../Program Files/Java/jdk1.8.0_221/bin/java.exe"/>
+               <url n="sdkBinDir" path="../../../../../../Program Files/Java/jdk1.8.0_221/bin/"/>
                <list n="sourcePath">
-                  <url protocol="jar" path="file:/opt/jdk1.8.0_221/src.zip!/"/>
+                  <url path="../../../../../../Program Files/Java/jdk1.8.0_221/src.zip" jar-entry=""/>
                </list>
                <value n="version" v="1.8.0_221"/>
             </hash>

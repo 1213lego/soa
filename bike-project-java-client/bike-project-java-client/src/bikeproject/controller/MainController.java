@@ -45,4 +45,12 @@ public class MainController {
     public void openBikeChart(ActionEvent actionEvent) {
         BikeProjectMain.launchNewWindows("barChart","Bike chart");
     }
+
+    public void openWindowFindBike(ActionEvent actionEvent) {
+        BikeProjectMain.launchNewWindows("findBike", "Find Bike");
+    }
+
+    public void openBikePieChart(ActionEvent actionEvent) {
+        BikeProjectMain.launchNewWindows("pieChartBike", "Bike Pie Chart");
+    }
 }
