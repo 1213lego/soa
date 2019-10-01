@@ -7,25 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace bike_project_net_client
 {
-    public partial class GuiPieChart : Form
+    public partial class GuiTypeChart : Form
     {
         BikeSoapService.BikeControllerClient service;
-
-        public GuiPieChart()
+        public GuiTypeChart()
         {
             InitializeComponent();
             service = new BikeSoapService.BikeControllerClient();
             loadChart();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            loadChart();
-        }
         private void loadChart()
         {
             string[] types = {BikeSoapService.type.GRAVEL.ToString(),
@@ -43,10 +37,15 @@ namespace bike_project_net_client
                     }
                 }
             }
-            pieChart.Series[0].ChartType = SeriesChartType.Pie;
+            pieChart.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             pieChart.Series[0].Points.DataBindXY(types, values);
             pieChart.Legends[0].Enabled = true;
             pieChart.ChartAreas[0].Area3DStyle.Enable3D = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            loadChart();
         }
     }
 }

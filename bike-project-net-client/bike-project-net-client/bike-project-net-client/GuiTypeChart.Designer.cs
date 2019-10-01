@@ -1,6 +1,6 @@
 ﻿namespace bike_project_net_client
 {
-    partial class GuiPieChart
+    partial class GuiTypeChart
     {
         /// <summary>
         /// Required designer variable.
@@ -42,19 +42,19 @@
             this.pieChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.pieChart.Legends.Add(legend1);
-            this.pieChart.Location = new System.Drawing.Point(37, 26);
+            this.pieChart.Location = new System.Drawing.Point(33, 12);
             this.pieChart.Name = "pieChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.pieChart.Series.Add(series1);
-            this.pieChart.Size = new System.Drawing.Size(751, 403);
+            this.pieChart.Size = new System.Drawing.Size(964, 423);
             this.pieChart.TabIndex = 0;
             this.pieChart.Text = "chart1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(355, 447);
+            this.button1.Location = new System.Drawing.Point(482, 441);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -62,15 +62,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // GuiPieChart
+            // GuiTypeChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 482);
+            this.ClientSize = new System.Drawing.Size(1009, 476);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pieChart);
-            this.Name = "GuiPieChart";
-            this.Text = "GuiPieChart";
+            this.Name = "GuiTypeChart";
+            this.Text = "GuiTypeChart";
             ((System.ComponentModel.ISupportInitialize)(this.pieChart)).EndInit();
             this.ResumeLayout(false);
 
