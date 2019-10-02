@@ -33,11 +33,11 @@ namespace bike_project_net_client
                 txtPrice.Text = Convert.ToString(findBike.price);
                 dtpPurchaseDate.Value = findBike.purchaseDate;
 
-                if (findBike.type.Equals("ROAD"))
+                if (findBike.type.Equals(BikeSoapService.type.ROAD))
                 {
                     cbType.SelectedIndex = 0;
                 }
-                else if (findBike.Equals("MOUNTAIN"))
+                else if (findBike.type.Equals(BikeSoapService.type.MOUNTAIN))
                 {
                     cbType.SelectedIndex = 1;
                 }

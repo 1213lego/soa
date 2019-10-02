@@ -175,7 +175,7 @@ namespace bike_project_net_client
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(107, 476);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(91, 42);
+            this.btnUpdate.Size = new System.Drawing.Size(110, 42);
             this.btnUpdate.TabIndex = 14;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@ namespace bike_project_net_client
             this.btnFindBike.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFindBike.Location = new System.Drawing.Point(481, 36);
             this.btnFindBike.Name = "btnFindBike";
-            this.btnFindBike.Size = new System.Drawing.Size(91, 38);
+            this.btnFindBike.Size = new System.Drawing.Size(113, 38);
             this.btnFindBike.TabIndex = 18;
             this.btnFindBike.Text = "Search";
             this.btnFindBike.UseVisualStyleBackColor = true;

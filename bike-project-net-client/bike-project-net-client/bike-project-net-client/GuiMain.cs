@@ -18,16 +18,6 @@ namespace bike_project_net_client
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            BikeSoapService.BikeControllerClient d = new BikeSoapService.BikeControllerClient();
-            BikeSoapService.bike [] bikes = d.getBikes();
-            foreach(BikeSoapService.bike bike in bikes)
-            {
-                Console.WriteLine(bike.serial, bike.purchaseDate);
-            }
-        }
-
         private void GuiMain_Load(object sender, EventArgs e)
         {
 

@@ -34,14 +34,15 @@
             this.menuBikes = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAddBike = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDeleteBike = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBike = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUpdateBike = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBikeList = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBikeTypeChart = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.menuBike = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,6 +100,13 @@
             this.menuDeleteBike.Text = "Delete bike";
             this.menuDeleteBike.Click += new System.EventHandler(this.menuDeleteBike_Click);
             // 
+            // menuBike
+            // 
+            this.menuBike.Name = "menuBike";
+            this.menuBike.Size = new System.Drawing.Size(182, 26);
+            this.menuBike.Text = "Find bike";
+            this.menuBike.Click += new System.EventHandler(this.menuBike_Click);
+            // 
             // menuUpdateBike
             // 
             this.menuUpdateBike.Name = "menuUpdateBike";
@@ -135,29 +143,22 @@
             this.menuAbout.Text = "About bike app";
             this.menuAbout.Click += new System.EventHandler(this.tsmMenuCreditos_Click);
             // 
-            // button1
+            // pictureBox1
             // 
-            this.button1.Location = new System.Drawing.Point(343, 215);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // menuBike
-            // 
-            this.menuBike.Name = "menuBike";
-            this.menuBike.Size = new System.Drawing.Size(182, 26);
-            this.menuBike.Text = "Find bike";
-            this.menuBike.Click += new System.EventHandler(this.menuBike_Click);
+            this.pictureBox1.Image = global::bike_project_net_client.Properties.Resources.Bike;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 31);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(776, 407);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // GUIMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "GUIMain";
@@ -165,6 +166,7 @@
             this.Load += new System.EventHandler(this.GuiMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,8 +184,8 @@
         private System.Windows.Forms.ToolStripMenuItem menuUpdateBike;
         private System.Windows.Forms.ToolStripMenuItem menuBikeList;
         private System.Windows.Forms.ToolStripMenuItem menuBikeTypeChart;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem menuBike;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

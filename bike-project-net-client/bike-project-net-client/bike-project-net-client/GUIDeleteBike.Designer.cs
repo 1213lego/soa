@@ -123,6 +123,7 @@ namespace bike_project_net_client
             // 
             // txtSerial
             // 
+            this.txtSerial.Enabled = false;
             this.txtSerial.Location = new System.Drawing.Point(286, 212);
             this.txtSerial.Name = "txtSerial";
             this.txtSerial.Size = new System.Drawing.Size(244, 22);
@@ -130,6 +131,7 @@ namespace bike_project_net_client
             // 
             // txtBrand
             // 
+            this.txtBrand.Enabled = false;
             this.txtBrand.Location = new System.Drawing.Point(286, 293);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(244, 22);
@@ -137,6 +139,7 @@ namespace bike_project_net_client
             // 
             // txtWeight
             // 
+            this.txtWeight.Enabled = false;
             this.txtWeight.Location = new System.Drawing.Point(286, 336);
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.Size = new System.Drawing.Size(244, 22);
@@ -144,6 +147,7 @@ namespace bike_project_net_client
             // 
             // txtPrice
             // 
+            this.txtPrice.Enabled = false;
             this.txtPrice.Location = new System.Drawing.Point(286, 379);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(244, 22);
@@ -151,6 +155,7 @@ namespace bike_project_net_client
             // 
             // dtpPurchaseDate
             // 
+            this.dtpPurchaseDate.Enabled = false;
             this.dtpPurchaseDate.Location = new System.Drawing.Point(286, 419);
             this.dtpPurchaseDate.Name = "dtpPurchaseDate";
             this.dtpPurchaseDate.Size = new System.Drawing.Size(286, 22);
@@ -159,6 +164,7 @@ namespace bike_project_net_client
             // cbType
             // 
             this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbType.Enabled = false;
             this.cbType.FormattingEnabled = true;
             this.cbType.Items.AddRange(new object[] {
             "ROAD",
@@ -168,14 +174,13 @@ namespace bike_project_net_client
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(244, 24);
             this.cbType.TabIndex = 0;
-            this.cbType.SelectedIndex = 0;
             // 
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(107, 476);
+            this.btnDelete.Location = new System.Drawing.Point(81, 476);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(91, 42);
+            this.btnDelete.Size = new System.Drawing.Size(117, 42);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -214,7 +219,7 @@ namespace bike_project_net_client
             this.btnFindBike.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFindBike.Location = new System.Drawing.Point(481, 36);
             this.btnFindBike.Name = "btnFindBike";
-            this.btnFindBike.Size = new System.Drawing.Size(91, 38);
+            this.btnFindBike.Size = new System.Drawing.Size(106, 38);
             this.btnFindBike.TabIndex = 18;
             this.btnFindBike.Text = "Search";
             this.btnFindBike.UseVisualStyleBackColor = true;
