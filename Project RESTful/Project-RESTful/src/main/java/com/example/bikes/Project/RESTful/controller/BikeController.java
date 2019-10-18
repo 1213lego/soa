@@ -42,13 +42,9 @@ public class BikeController {
         {
             response.put("message", e.getMessage());
             response.put("specifications", e.getMostSpecificCause().getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        response.put("message", "The bike has been created successfully.");
-        response.put("bike", newBike);
-
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+        return new ResponseEntity(newBike, HttpStatus.CREATED);
     }
 
     @GetMapping("/bikes/{serial}")
@@ -64,16 +60,14 @@ public class BikeController {
         {
             response.put("message", e.getMessage());
             response.put("specifications", e.getMostSpecificCause().getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         if(bike == null)
         {
             response.put("message", "The bike with the serial: " + serial + " doesn't exist in the database.");
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<Bike>(bike, HttpStatus.OK);
+        return new ResponseEntity<>(bike, HttpStatus.OK);
     }
 
     @PutMapping("/bikes/{serial}")
@@ -87,14 +81,12 @@ public class BikeController {
         {
             return anexandoErrores(response, result);
         }
-
-        if(updateBike == null)
+        if(currentBike == null)
         {
             response.put("mensaje", "Error: Could not be edited because the bike with the serial: " +
                     serial + " doesn't exist in the database.");
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-
         try
         {
             currentBike.setType(bike.getType());
@@ -102,7 +94,6 @@ public class BikeController {
             currentBike.setWeight(bike.getWeight());
             currentBike.setPrice(bike.getPrice());
             currentBike.setPurchaseDate(bike.getPurchaseDate());
-
             updateBike = bikeService.save(currentBike);
         }
         catch (DataAccessException e)
@@ -111,10 +102,7 @@ public class BikeController {
             response.put("specifications", e.getMostSpecificCause().getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        response.put("message", "The bike has been updated successfully.");
-        response.put("bike", updateBike);
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(updateBike, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/bikes/{serial}")
@@ -129,11 +117,9 @@ public class BikeController {
         {
             response.put("message", e.getMessage());
             response.put("specifications", e.getMostSpecificCause().getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        response.put("message", "The bike has been deleted successfully.");
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/bikes")
@@ -150,6 +136,6 @@ public class BikeController {
                 .collect(Collectors.toList());
 
         response.put("errores", errores);
-        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
