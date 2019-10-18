@@ -1,0 +1,12 @@
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('gw200616', 'MOUNTAIN', 'gw', 9.2, 1500000, '2019-08-22');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('jkfsdnsd', 'MOUNTAIN', 'sdfnksjd', 3432423, 23432432, '2019-08-16');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('sdfsdfsdf', 'ROAD', 'sdfnksjd', 3432423, 23432432, '2019-08-16');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('sfdsdfsdf', 'GRAVEL', 'sadasd', 345435424, 345345440, '2019-09-06');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('gw2000617', 'MOUNTAIN', 'ccc', 10.00123, 3000000, '2019-08-10');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('456', 'ROAD', '456', 456, 456, '2019-09-14');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('789', 'MOUNTAIN', '789', 789, 789, '2019-09-14');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('prueba1', 'ROAD', 'asd1', 1919, 19.19, '2019-09-19');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('prueba2', 'MOUNTAIN', 'prueba2', 123, 123, '2019-10-02');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('prueba3', 'ROAD', 'asd3', 789, 789, '2019-10-03');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('prueba4', 'GRAVEL', 'asd4', 12398, 3842, '2019-10-04');
+INSERT INTO public.bike (serial, type, brand, weight, price, purchasedate) VALUES ('prueba', 'MOUNTAIN', 'asd1', 123, 123, '2019-09-30');

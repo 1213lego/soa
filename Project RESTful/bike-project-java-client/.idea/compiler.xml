@@ -9,8 +9,5 @@
         <module name="bike-project-java-client" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bike-project-java-client" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
