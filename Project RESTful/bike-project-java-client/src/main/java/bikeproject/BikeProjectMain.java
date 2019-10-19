@@ -1,10 +1,15 @@
 package bikeproject;
 
+import bikeproject.api.ApiClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.BikeList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import retrofit2.Call;
+import retrofit2.Response;
 
 import java.io.IOException;
 

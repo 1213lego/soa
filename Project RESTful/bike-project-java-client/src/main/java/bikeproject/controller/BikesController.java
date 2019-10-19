@@ -1,7 +1,8 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
+import bikeproject.api.ApiClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
 import bikeproject.model.BikeServiceClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -52,7 +53,7 @@ public class BikesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeServiceClient.BIKE_SERVICE;
+        bikeService = new BikeService();
         setPropertiesBikesController();
         loadDataBikes();
         setSettingsSearchBike();
@@ -66,7 +67,7 @@ public class BikesController implements Initializable {
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tcPurchaseDate.setCellValueFactory(cellData ->
-                new SimpleStringProperty(BikeServiceClient.DATE_FORMAT.format(cellData.getValue().getPurchaseDate().toGregorianCalendar().getTime())));
+                new SimpleStringProperty(ApiClient.dateFormat.format(cellData.getValue().getPurchaseDate())));
     }
 
     private void loadDataBikes() {

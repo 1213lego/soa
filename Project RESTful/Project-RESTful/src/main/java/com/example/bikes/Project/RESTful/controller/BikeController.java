@@ -23,7 +23,7 @@ public class BikeController {
     @Autowired
     private IBikeService bikeService;
 
-    @PostMapping("/bikes")
+    @PostMapping("/bike")
     public ResponseEntity<?> create(@Valid @RequestBody Bike bike, BindingResult result)
     {
         Bike newBike = null;
@@ -47,7 +47,7 @@ public class BikeController {
         return new ResponseEntity(newBike, HttpStatus.CREATED);
     }
 
-    @GetMapping("/bikes/{serial}")
+    @GetMapping("/bike/{serial}")
     public ResponseEntity<?> show(@PathVariable String serial)
     {
         Bike bike = null;
@@ -70,7 +70,7 @@ public class BikeController {
         return new ResponseEntity<>(bike, HttpStatus.OK);
     }
 
-    @PutMapping("/bikes/{serial}")
+    @PutMapping("/bike/{serial}")
     public ResponseEntity<?> update(@Valid @RequestBody Bike bike, BindingResult result, @PathVariable String serial)
     {
         Bike currentBike = bikeService.findBikeBySerial(serial);
@@ -105,7 +105,7 @@ public class BikeController {
         return new ResponseEntity<>(updateBike, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/bikes/{serial}")
+    @DeleteMapping("/bike/{serial}")
     public ResponseEntity<?> delete(@PathVariable String serial)
     {
         Map<String, Object> response = new HashMap<>();
@@ -122,7 +122,7 @@ public class BikeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/bikes")
+    @GetMapping("/bike")
     public List<Bike> index()
     {
         return bikeService.findAllBikes();
