@@ -84,7 +84,7 @@ public class BikeController {
         }
         if(currentBike == null)
         {
-            response.put("mensaje", "Error: Could not be edited because the bike with the serial: " +
+            response.put("message", "Error: Could not be edited because the bike with the serial: " +
                     serial + " doesn't exist in the database.");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }

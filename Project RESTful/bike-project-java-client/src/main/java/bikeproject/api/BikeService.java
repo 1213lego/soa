@@ -41,11 +41,12 @@ public class BikeService {
         BikeResponse bikeResponse = null;
         try{
 
-            Call<BikeResponse> call = bikeServiceRetrofit.saveBike(new Bike("ssss", Bike.Type.GRAVEL,"sdd",233,0,new Date()));
+            Call<BikeResponse> call = bikeServiceRetrofit.saveBike(new Bike("ssss", Bike.Type.GRAVEL,"sdd",233,4,new Date()));
             Response<BikeResponse> response = call.execute();
             if (response.isSuccessful()){
                 bikeResponse = response.body();
                 System.out.println(bikeResponse.getItem());
+                System.out.println(bikeResponse.getMessage());
             }
             else {
                 System.out.println("Error body");

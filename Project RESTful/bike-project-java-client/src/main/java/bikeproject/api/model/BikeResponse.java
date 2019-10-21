@@ -5,7 +5,7 @@ import org.simpleframework.xml.Root;
 
 @Root(name = "HashMap")
 public class BikeResponse {
-    @Element
+    @Element(required = false)
     private Bike item;
     @Element
     private String message;
