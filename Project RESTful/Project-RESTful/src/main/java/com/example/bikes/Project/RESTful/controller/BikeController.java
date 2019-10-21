@@ -33,7 +33,6 @@ public class BikeController {
         {
             return anexandoErrores(response, result);
         }
-
         try
         {
             newBike = bikeService.save(bike);

@@ -2,6 +2,7 @@ package bikeproject;
 
 import bikeproject.api.ApiClient;
 import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,8 @@ public class BikeProjectMain extends Application {
     }
 
     public static void main(String[] args) {
+        new BikeService().saveBike(null);
+        System.exit(0);
         launch();
     }
 }
