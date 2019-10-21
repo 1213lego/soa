@@ -1,9 +1,9 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
-import bikeproject.model.Type;
+import bikeproject.api.ApiClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
+import bikeproject.api.model.BikeResponse;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +28,7 @@ public class SaveBikeController implements Initializable {
     private TextField txtSerial;
 
     @FXML
-    private ComboBox<Type> cbTypes;
+    private ComboBox<Bike.Type> cbTypes;
 
     @FXML
     private TextField txtBrand;
@@ -46,8 +46,8 @@ public class SaveBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cbTypes.setItems(FXCollections.observableArrayList(Type.values()));
-        bikeService = BikeServiceClient.BIKE_SERVICE;
+        cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
+        bikeService = new BikeService();
     }
     public void saveBike(ActionEvent actionEvent) throws ParseException, DatatypeConfigurationException {
         if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
@@ -64,14 +64,11 @@ public class SaveBikeController implements Initializable {
         bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
-        Date date = BikeServiceClient.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeServiceClient.DATE_TIME_FORMATTER));
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(date);
-        XMLGregorianCalendar xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
-        bike.setPurchaseDate(xmlCalendar);
+        Date date = ApiClient.dateFormat.parse(dpPurchaseDate.getValue().format(ApiClient.dateTimeFormatter));
+        bike.setPurchaseDate(date);
         try {
-            bikeService.saveBike(bike);
-            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been saved");
+            BikeResponse bikeResponse = bikeService.saveBike(bike);
+            MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,bikeResponse.getMessage());
         }
         catch (Exception e){
             MainController.showAlert(Alert.AlertType.ERROR,"Error","Error saving the bike",e.getMessage());

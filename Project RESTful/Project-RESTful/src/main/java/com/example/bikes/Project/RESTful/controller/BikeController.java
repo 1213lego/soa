@@ -44,7 +44,9 @@ public class BikeController {
             response.put("specifications", e.getMostSpecificCause().getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity(newBike, HttpStatus.CREATED);
+        response.put("message","The bike with serial " + newBike.getSerial()+ " has been saved");
+        response.put("item",newBike);
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/bike/{serial}")

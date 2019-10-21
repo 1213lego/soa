@@ -2,10 +2,10 @@ package bikeproject.api;
 
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
+import bikeproject.api.model.BikeResponse;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +25,20 @@ public class BikeService {
             System.out.println("No hay conexion con el servidor: getBikes()");
         }
         return bikeList;
+    }
+    public BikeResponse saveBike(Bike bike){
+        BikeResponse bikeResponse = null;
+        try{
+            Call<BikeResponse> call = bikeServiceRetrofit.saveBike(bike);
+            Response<BikeResponse> response = call.execute();
+            if (response.isSuccessful()){
+                bikeResponse = response.body();
+                System.out.println(bikeResponse.getItem());
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return bikeResponse;
     }
 }

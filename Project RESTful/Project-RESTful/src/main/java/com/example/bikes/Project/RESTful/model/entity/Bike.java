@@ -8,6 +8,7 @@ import lombok.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -38,5 +39,5 @@ public class Bike implements Serializable {
 
     @NotNull
     @Column(name = "purchasedate", nullable = false)
-    private LocalDateTime purchaseDate;
+    private LocalDate purchaseDate;
 }
