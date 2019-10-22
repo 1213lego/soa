@@ -1,19 +1,15 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
-import javafx.application.Platform;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 
 import java.net.URL;
-import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +26,7 @@ public class BikePieChartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            bikeService = BikeServiceClient.BIKE_SERVICE;
+            bikeService = new BikeService();
             setUpBarChart();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,8 +1,7 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +20,7 @@ public class BikeBarChartController implements Initializable  {
     private BarChart<String, Number> barChart;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeServiceClient.BIKE_SERVICE;
+        bikeService = new BikeService();
         setUpBarChart();
     }
     private void setUpBarChart(){

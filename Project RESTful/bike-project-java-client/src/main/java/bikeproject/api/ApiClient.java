@@ -12,14 +12,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import retrofit2.http.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class ApiClient {
-    public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    public final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final String API_URL = "http://localhost:8080/api/";
     private static BikeServiceRetrofit bikeService;
     interface BikeServiceRetrofit {
@@ -48,7 +43,7 @@ public class ApiClient {
     public static BikeServiceRetrofit getBikeService(){
         if(bikeService==null){
             RegistryMatcher matcher = new RegistryMatcher();
-            matcher.bind(Date.class,new DateFormatTransformer(dateFormat));
+            matcher.bind(Date.class,new DateFormatTransformer(BikeService.dateFormat));
             Serializer serializer = new Persister(matcher);
             Retrofit retrofit = new Retrofit
                     .Builder()

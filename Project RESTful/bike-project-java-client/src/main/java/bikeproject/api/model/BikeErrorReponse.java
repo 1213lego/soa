@@ -6,7 +6,7 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 @Root(name = "HashMap")
-public class BikerErrorReponse {
+public class BikeErrorReponse {
     @ElementList(entry = "errores",inline = true)
     List<String> errores;
 

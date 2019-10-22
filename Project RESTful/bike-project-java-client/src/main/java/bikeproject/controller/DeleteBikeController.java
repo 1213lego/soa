@@ -1,6 +1,5 @@
 package bikeproject.controller;
 
-import bikeproject.api.ApiClient;
 import bikeproject.api.BikeService;
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeResponse;
@@ -79,7 +78,7 @@ public class DeleteBikeController implements Initializable {
         txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
-        txtPurchaseDate.setText(ApiClient.dateFormat.format(bike.getPurchaseDate()));
+        txtPurchaseDate.setText(BikeService.dateFormat.format(bike.getPurchaseDate()));
     }
 
     @FXML

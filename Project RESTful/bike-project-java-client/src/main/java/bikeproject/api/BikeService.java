@@ -3,7 +3,7 @@ package bikeproject.api;
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
 import bikeproject.api.model.BikeResponse;
-import bikeproject.api.model.BikerErrorReponse;
+import bikeproject.api.model.BikeErrorReponse;
 import com.sun.deploy.util.StringUtils;
 import okhttp3.Request;
 import okio.Buffer;
@@ -13,11 +13,16 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService {
-   private ApiClient.BikeServiceRetrofit bikeServiceRetrofit;
+    public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private ApiClient.BikeServiceRetrofit bikeServiceRetrofit;
     public BikeService(){
         bikeServiceRetrofit = ApiClient.getBikeService();
     }
@@ -44,8 +49,8 @@ public class BikeService {
         }
         else {
             Serializer serializer = new Persister();
-            BikerErrorReponse bikerErrorReponse = serializer.read(BikerErrorReponse.class,response.errorBody().byteStream());
-            String errorMessages = StringUtils.join(bikerErrorReponse.getErrores(),"\n");
+            BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
+            String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
             throw new Exception(errorMessages);
         }
         return bikeResponse;
