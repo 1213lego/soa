@@ -1,6 +1,5 @@
 package bikeproject.controller;
 
-import bikeproject.api.ApiClient;
 import bikeproject.api.BikeService;
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeResponse;
@@ -15,12 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 public class SaveBikeController implements Initializable {
@@ -64,7 +60,7 @@ public class SaveBikeController implements Initializable {
         bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
-        Date date = ApiClient.dateFormat.parse(dpPurchaseDate.getValue().format(ApiClient.dateTimeFormatter));
+        Date date = BikeService.dateFormat.parse(dpPurchaseDate.getValue().format(BikeService.dateTimeFormatter));
         bike.setPurchaseDate(date);
         try {
             BikeResponse bikeResponse = bikeService.saveBike(bike);

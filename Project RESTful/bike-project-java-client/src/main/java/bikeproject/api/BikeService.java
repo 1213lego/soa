@@ -3,21 +3,29 @@ package bikeproject.api;
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
 import bikeproject.api.model.BikeResponse;
-import bikeproject.api.model.BikerErrorReponse;
+import bikeproject.api.model.BikeErrorReponse;
 import com.sun.deploy.util.StringUtils;
+import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okio.Buffer;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.HTTP;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BikeService {
-   private ApiClient.BikeServiceRetrofit bikeServiceRetrofit;
+    public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private ApiClient.BikeServiceRetrofit bikeServiceRetrofit;
     public BikeService(){
         bikeServiceRetrofit = ApiClient.getBikeService();
     }
@@ -44,8 +52,8 @@ public class BikeService {
         }
         else {
             Serializer serializer = new Persister();
-            BikerErrorReponse bikerErrorReponse = serializer.read(BikerErrorReponse.class,response.errorBody().byteStream());
-            String errorMessages = StringUtils.join(bikerErrorReponse.getErrores(),"\n");
+            BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
+            String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
             throw new Exception(errorMessages);
         }
         return bikeResponse;
@@ -70,6 +78,21 @@ public class BikeService {
         Serializer serializer = new Persister();
         BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
         return bikeResponse;
+    }
+    public void updateBike(Bike bike) throws Exception {
+        Call<Bike> call = bikeServiceRetrofit.updateBike(bike.getSerial(),bike);
+        Response<Bike> response = call.execute();
+        if(response.isSuccessful()) return;
+        Serializer serializer = new Persister();
+        if(response.code() == HttpURLConnection.HTTP_BAD_REQUEST){
+            BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
+            String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
+            throw new Exception(errorMessages);
+        }
+        else {
+            BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+            throw new Exception(bikeResponse.getMessage());
+        }
     }
     private void testPrintBodyRequest(final Request request) throws IOException {
         final Request copy = request.newBuilder().build();

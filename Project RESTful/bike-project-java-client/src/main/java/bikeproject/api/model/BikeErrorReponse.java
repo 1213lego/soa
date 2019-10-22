@@ -6,14 +6,12 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 @Root(name = "HashMap")
-public class BikerErrorReponse {
+public class BikeErrorReponse {
     @ElementList(entry = "errores",inline = true)
     List<String> errores;
-
     public List<String> getErrores() {
         return errores;
     }
-
     public void setErrores(List<String> errores) {
         this.errores = errores;
     }

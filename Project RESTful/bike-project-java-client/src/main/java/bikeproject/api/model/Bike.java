@@ -21,7 +21,6 @@ public class Bike {
     private Date purchaseDate;
     public Bike(){
     }
-
     public Bike(String serial, Type type, String brand, double weight, double price, Date purchaseDate) {
         this.serial = serial;
         this.type = type;

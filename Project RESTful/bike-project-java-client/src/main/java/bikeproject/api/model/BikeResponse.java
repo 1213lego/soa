@@ -9,19 +9,15 @@ public class BikeResponse {
     private Bike item;
     @Element
     private String message;
-
     public Bike getItem() {
         return item;
     }
-
     public void setItem(Bike item) {
         this.item = item;
     }
-
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }
