@@ -10,10 +10,7 @@ import org.simpleframework.xml.transform.RegistryMatcher;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,6 +34,11 @@ public class ApiClient {
         })
         @POST("bike")
         Call<BikeResponse> saveBike(@Body Bike bike);
+        @Headers({
+                "Accept: application/xml"
+        })
+        @GET("bike/{serial}")
+        Call<Bike> findBikeBySerial(@Path("serial")String code);
     }
     public static BikeServiceRetrofit getBikeService(){
         if(bikeService==null){

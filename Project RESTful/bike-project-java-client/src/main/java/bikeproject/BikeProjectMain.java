@@ -50,8 +50,6 @@ public class BikeProjectMain extends Application {
     }
 
     public static void main(String[] args) {
-        new BikeService().saveBike(null);
-        System.exit(0);
         launch();
     }
 }

@@ -4,17 +4,16 @@ import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
 import bikeproject.api.model.BikeResponse;
 import bikeproject.api.model.BikerErrorReponse;
-import okhttp3.ResponseBody;
+import com.sun.deploy.util.StringUtils;
+import okhttp3.Request;
+import okio.Buffer;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BikeService {
@@ -30,36 +29,43 @@ public class BikeService {
             if(bikeListResponse.isSuccessful()){
                 bikeList = bikeListResponse.body().getBikeList();
             }
-
         }
         catch (Exception e){
-            System.out.println("No hay conexion con el servidor: getBikes()");
+            System.out.println("No hay conexion con el servidor: BikeService.getBikes()");
         }
         return bikeList;
     }
-    public BikeResponse saveBike(Bike bike){
+    public BikeResponse saveBike(Bike bike) throws Exception {
         BikeResponse bikeResponse = null;
-        try{
-
-            Call<BikeResponse> call = bikeServiceRetrofit.saveBike(new Bike("ssss", Bike.Type.GRAVEL,"sdd",233,4,new Date()));
-            Response<BikeResponse> response = call.execute();
-            if (response.isSuccessful()){
-                bikeResponse = response.body();
-                System.out.println(bikeResponse.getItem());
-                System.out.println(bikeResponse.getMessage());
-            }
-            else {
-                System.out.println("Error body");
-                /*Serializer serializer = new Persister();
-                BikerErrorReponse bikerErrorReponse = serializer.read(BikerErrorReponse.class,response.errorBody().byteStream());*/
-                ResponseBody errorrResponse = response.errorBody();
-                BufferedReader bf = new BufferedReader(new InputStreamReader(errorrResponse.byteStream()));
-                bf.lines().forEach((s -> System.out.println(s)));
-            }
+        Call<BikeResponse> call = bikeServiceRetrofit.saveBike(bike);
+        Response<BikeResponse> response = call.execute();
+        if (response.isSuccessful()){
+            bikeResponse = response.body();;
         }
-        catch (Exception e){
-            e.printStackTrace();
+        else {
+            Serializer serializer = new Persister();
+            BikerErrorReponse bikerErrorReponse = serializer.read(BikerErrorReponse.class,response.errorBody().byteStream());
+            String errorMessages = StringUtils.join(bikerErrorReponse.getErrores(),"\n");
+            throw new Exception(errorMessages);
         }
         return bikeResponse;
+    }
+    public Bike findBikeById(String serial) throws Exception {
+        Call<Bike> call = bikeServiceRetrofit.findBikeBySerial(serial);
+        Response<Bike> response = call.execute();
+        if(response.isSuccessful()){
+            return response.body();
+        }
+        /*Serializer serializer = new Persister();
+        BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+        throw new Exception(bikeResponse.getMessage());*/
+        return null;
+    }
+    private void testPrintBodyRequest(final Request request) throws IOException {
+        final Request copy = request.newBuilder().build();
+        final Buffer buffer = new Buffer();
+        copy.body().writeTo(buffer);
+        System.out.println("Body request");
+        System.out.println(buffer.readUtf8());
     }
 }
