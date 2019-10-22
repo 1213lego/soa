@@ -4,6 +4,7 @@ import bikeproject.api.ApiClient;
 import bikeproject.api.BikeService;
 import bikeproject.api.model.Bike;
 import bikeproject.api.model.BikeList;
+import bikeproject.api.model.BikeResponse;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

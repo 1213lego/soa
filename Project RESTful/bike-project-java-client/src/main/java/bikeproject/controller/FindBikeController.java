@@ -57,7 +57,7 @@ public class FindBikeController implements Initializable {
 
     private void findBike(String serial) {
         try {
-            Bike bike = bikeService.findBikeById(serial);
+            Bike bike = bikeService.findBikeBySerial(serial);
             if(bike == null) {
                 clearFieldsBike();
                 //MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");

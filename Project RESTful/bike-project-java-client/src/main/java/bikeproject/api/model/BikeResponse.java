@@ -3,7 +3,7 @@ package bikeproject.api.model;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-@Root(name = "HashMap")
+@Root(name = "HashMap",strict = false)
 public class BikeResponse {
     @Element(required = false)
     private Bike item;

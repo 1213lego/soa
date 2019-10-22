@@ -38,7 +38,12 @@ public class ApiClient {
                 "Accept: application/xml"
         })
         @GET("bike/{serial}")
-        Call<Bike> findBikeBySerial(@Path("serial")String code);
+        Call<Bike> findBikeBySerial(@Path("serial")String serial);
+        @Headers({
+                "Accept: application/xml"
+        })
+        @DELETE("bike/{serial}")
+        Call<BikeResponse> deleteBikeBySerial(@Path("serial")String serial);
     }
     public static BikeServiceRetrofit getBikeService(){
         if(bikeService==null){

@@ -120,7 +120,8 @@ public class BikeController {
             response.put("specifications", e.getMostSpecificCause().getMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        response.put("message","The bike has been deleted");
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @GetMapping("/bike")

@@ -50,7 +50,7 @@ public class BikeService {
         }
         return bikeResponse;
     }
-    public Bike findBikeById(String serial) throws Exception {
+    public Bike findBikeBySerial(String serial) throws Exception {
         Call<Bike> call = bikeServiceRetrofit.findBikeBySerial(serial);
         Response<Bike> response = call.execute();
         if(response.isSuccessful()){
@@ -60,6 +60,16 @@ public class BikeService {
         BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
         throw new Exception(bikeResponse.getMessage());*/
         return null;
+    }
+    public BikeResponse deleteBikeBySerial(String serial) throws Exception {
+        Call<BikeResponse> call = bikeServiceRetrofit.deleteBikeBySerial(serial);
+        Response<BikeResponse> response = call.execute();
+        if(response.isSuccessful()){
+            return response.body();
+        }
+        Serializer serializer = new Persister();
+        BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+        return bikeResponse;
     }
     private void testPrintBodyRequest(final Request request) throws IOException {
         final Request copy = request.newBuilder().build();
