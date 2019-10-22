@@ -1,11 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace bike_project_net_client
 {
@@ -59,7 +54,7 @@ namespace bike_project_net_client
             }
         }
 
-        public System.DateTime purchaseDate
+        public DateTime purchaseDate
         {
             get
             {

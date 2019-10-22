@@ -1,11 +1,12 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
+import bikeproject.api.ApiClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.net.URL;
@@ -39,7 +40,7 @@ public class FindBikeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            bikeService = BikeServiceClient.BIKE_SERVICE;
+            bikeService = new BikeService();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,13 +56,19 @@ public class FindBikeController implements Initializable {
     }
 
     private void findBike(String serial) {
-        Bike bike = bikeService.findBikeBySerial(serial);
-        if(bike == null) {
-            clearFieldsBike();
-            //MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
+        try {
+            Bike bike = bikeService.findBikeBySerial(serial);
+            if(bike == null) {
+                clearFieldsBike();
+                //MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
+            }
+            else {
+                fillFieldsBike(bike);
+            }
         }
-        else {
-            fillFieldsBike(bike);
+        catch (Exception e){
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","",e.getMessage());
+            clearFieldsBike();
         }
     }
 
@@ -79,7 +86,7 @@ public class FindBikeController implements Initializable {
         txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
-        txtPurchaseDate.setText(BikeServiceClient.DATE_FORMAT.format(bike.getPurchaseDate().toGregorianCalendar().getTime()));
+        txtPurchaseDate.setText(ApiClient.dateFormat.format(bike.getPurchaseDate()));
     }
 
     private void clearFieldsBike() {

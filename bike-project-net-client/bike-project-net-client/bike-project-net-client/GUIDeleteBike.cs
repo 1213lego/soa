@@ -25,6 +25,12 @@ namespace bike_project_net_client
 
         private void btnFindBike_Click(object sender, EventArgs e)
         {
+            if (txtFindSerial.Text == "")
+            {
+                MessageBox.Show("The serial can't be empty.");
+                return;
+            }
+
             try
             {
                 string response = request.DownloadString("http://localhost:8080/api/bike/" + txtFindSerial.Text);
@@ -35,11 +41,11 @@ namespace bike_project_net_client
                 txtPrice.Text = Convert.ToString(findBike.price);
                 dtpPurchaseDate.Value = findBike.purchaseDate;
 
-                if (findBike.type.Equals(BikeSoapService.type.ROAD))
+                if (findBike.type.Equals(Bike.types.ROAD))
                 {
                     cbType.SelectedIndex = 0;
                 }
-                else if (findBike.type.Equals(BikeSoapService.type.MOUNTAIN))
+                else if (findBike.type.Equals(Bike.types.MOUNTAIN))
                 {
                     cbType.SelectedIndex = 1;
                 }
@@ -64,7 +70,7 @@ namespace bike_project_net_client
                 {
                     String message = hash["message"];
                     String specifications = hash["specifications"];
-                    MessageBox.Show(message + "/n" + specifications);
+                    MessageBox.Show(message + Environment.NewLine + specifications);
                 }
             }
         }

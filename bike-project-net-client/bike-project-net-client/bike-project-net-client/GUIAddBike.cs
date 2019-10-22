@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,12 @@ namespace bike_project_net_client.vistas
 {
     public partial class GUIAddBike : Form
     {
+        WebClient webCliente;
         public GUIAddBike()
         {
             InitializeComponent();
+            webCliente = new WebClient();
+            webCliente.Headers.Add(HttpRequestHeader.ContentType, "application/json");
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -25,15 +29,16 @@ namespace bike_project_net_client.vistas
             Bike bike = getBike();
             if(bike != null)
             {
-                var request = (HttpWebRequest) WebRequest.Create("http://localhost:8080/api/bike/");
-                request.Accept = "application/json";
-                request.ContentType = "application/json";
+                HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://localhost:8080/api/bike/");
+                request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
 
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string json = JsonConvert.SerializeObject(bike);
+                    var json = JsonConvert.SerializeObject(bike, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd" });
                     streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
                 HttpWebResponse response = null;
@@ -41,28 +46,48 @@ namespace bike_project_net_client.vistas
                 try
                 {
                     response = (HttpWebResponse)request.GetResponse();
-                    if (response.StatusCode == HttpStatusCode.Created)
+                    using (var streamReader = new StreamReader(response.GetResponseStream()))
                     {
-                        MessageBox.Show("Bike has been deleted.");
-                        clearFields();
+                        var content = streamReader.ReadToEnd();
+                        if (response.StatusCode == HttpStatusCode.Created)
+                        {
+                            Dictionary<String, Object> hash = JsonConvert.DeserializeObject<Dictionary<String, Object>>(content);
+                            String message = (String)hash["message"];
+                            MessageBox.Show(message);
+                            streamReader.Close();
+                        }
                     }
+
                 }
                 catch (WebException we)
                 {
                     HttpWebResponse webResp = (HttpWebResponse)we.Response;
-                    var stream = we.Response.GetResponseStream();
-                    var sr = new StreamReader(stream);
-                    var content = sr.ReadToEnd();
-                    Dictionary<String, String> hash = JsonConvert.DeserializeObject<Dictionary<String, String>>(content);
-                    if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.InternalServerError)
+                    using (var streamReader = new StreamReader(webResp.GetResponseStream()))
                     {
-                        String message = hash["message"];
-                        String specifications = hash["specifications"];
-                        MessageBox.Show(message + "/n" + specifications);
+                        var content = streamReader.ReadToEnd();
+                        if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.InternalServerError)
+                        {
+                            Dictionary<String, Object> hash = JsonConvert.DeserializeObject<Dictionary<String, Object>>(content);
+                            String message = (String) hash["message"];
+                            String specifications = (String) hash["specifications"];
+                            MessageBox.Show(message + Environment.NewLine + specifications);
+                        }
+                        else if(((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.BadRequest)
+                        {
+                            JObject result = JObject.Parse(content);
+                            var clientarray = result["errores"].Value<JArray>();
+                            List<String> errores = clientarray.ToObject<List<String>>();
+                            String message = "";
+                            foreach(String error in errores)
+                            {
+                                message += (error + Environment.NewLine);
+                            }
+                            MessageBox.Show(message);
+
+                        }
+                        streamReader.Close();
                     }
                 }
-
-                
             }
         }
 
@@ -81,11 +106,6 @@ namespace bike_project_net_client.vistas
             DateTime purchaseDate = dtpPurchaseDate.Value;
 
             Bike bike = new Bike(serial, brand, weight, price, purchaseDate);
-            bike.serial = serial;
-            bike.brand = brand;
-            bike.weight = weight;
-            bike.price = price;
-            bike.purchaseDate = purchaseDate;
 
             if (type.Equals("ROAD"))
             {

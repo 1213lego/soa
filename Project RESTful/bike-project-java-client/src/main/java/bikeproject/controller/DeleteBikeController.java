@@ -1,8 +1,9 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
+import bikeproject.api.ApiClient;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
+import bikeproject.api.model.BikeResponse;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,7 +40,7 @@ public class DeleteBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeServiceClient.BIKE_SERVICE;
+        bikeService = new BikeService();
     }
 
     @FXML
@@ -48,13 +49,19 @@ public class DeleteBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"The serial field can't be empty.");
             return;
         }
-
-        Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
-        if(bike == null) {
-            MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
+        try{
+            Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
+            if(bike == null) {
+                MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"Bike not found");
+                clearFields();
+            }
+            else {
+                fillFieldsBike(bike);
+            }
         }
-        else {
-            fillFieldsBike(bike);
+        catch (Exception e){
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","",e.getMessage());
+            clearFields();
         }
     }
 
@@ -72,7 +79,7 @@ public class DeleteBikeController implements Initializable {
         txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
-        txtPurchaseDate.setText(BikeServiceClient.DATE_FORMAT.format(bike.getPurchaseDate().toGregorianCalendar().getTime()));
+        txtPurchaseDate.setText(ApiClient.dateFormat.format(bike.getPurchaseDate()));
     }
 
     @FXML
@@ -81,10 +88,9 @@ public class DeleteBikeController implements Initializable {
             MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"The serial field can't be empty.");
             return;
         }
-
         try {
-            bikeService.deleteBike(txtSerial.getText());
-            MainController.showAlert(Alert.AlertType.INFORMATION,"Information",null,"The bike has been deleted");
+            BikeResponse bikeResponse = bikeService.deleteBikeBySerial(txtSerial.getText());
+            MainController.showAlert(Alert.AlertType.INFORMATION,"Information",null,bikeResponse.getMessage());
             clearFields();
         } catch (Exception e) {
             MainController.showAlert(Alert.AlertType.ERROR,"Error",null, e.getMessage());
