@@ -9,9 +9,11 @@ namespace bike_project_net_client
 {
     public partial class GUIBike : Form
     {
+        WebClient request;
         public GUIBike()
         {
             InitializeComponent();
+            request = new WebClient();
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -21,8 +23,6 @@ namespace bike_project_net_client
 
         private void btnFindBike_Click(object sender, EventArgs e)
         {
-            WebClient request = new WebClient();
-
             try
             {
                 string response = request.DownloadString("http://localhost:8080/api/bike/" + txtFindSerial.Text);

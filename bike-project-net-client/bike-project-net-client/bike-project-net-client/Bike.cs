@@ -1,26 +1,40 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace bike_project_net_client
 {
-    public enum type
+    public class Bike
     {
-        ROAD,
-        MOUNTAIN,
-        GRAVEL,
-    }
-    class Bike
-    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum types
+        {
+            ROAD,
+            MOUNTAIN,
+            GRAVEL,
+        }
+
         private string serialField;
-        private type typeField;
+        private types typeField;
         private string brandField;
         private double priceField;
         private double weightField;
         private DateTime purchaseDateField;
-        
+
+        public Bike(string serialField, string brandField, double priceField, double weightField, DateTime purchaseDateField)
+        {
+            this.serialField = serialField;
+            this.brandField = brandField;
+            this.priceField = priceField;
+            this.weightField = weightField;
+            this.purchaseDateField = purchaseDateField;
+        }
+
         public string brand
         {
             get
@@ -69,7 +83,7 @@ namespace bike_project_net_client
             }
         }
 
-        public type type
+        public types type
         {
             get
             {

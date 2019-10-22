@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,22 +14,26 @@ namespace bike_project_net_client
 {
     public partial class GuiTypeChart : Form
     {
-        BikeSoapService.BikeControllerClient service;
+        WebClient webCliente;
         public GuiTypeChart()
         {
             InitializeComponent();
-            service = new BikeSoapService.BikeControllerClient();
+            webCliente = new WebClient();
             loadChart();
         }
 
         private void loadChart()
         {
-            string[] types = {BikeSoapService.type.GRAVEL.ToString(),
-                BikeSoapService.type.MOUNTAIN.ToString(),
-                BikeSoapService.type.ROAD.ToString()};
+            String uri = "http://localhost:8080/api/bike";
+            String content = webCliente.DownloadString(uri);
+            List<Bike> bikes = JsonConvert.DeserializeObject<List<Bike>>(content);
+
+            string[] types = {Bike.types.GRAVEL.ToString(),
+                Bike.types.MOUNTAIN.ToString(),
+                Bike.types.ROAD.ToString()};
             int[] values = new int[types.Length];
-            BikeSoapService.bike[] bikes = service.getBikes();
-            foreach (BikeSoapService.bike bike in bikes)
+
+            foreach (Bike bike in bikes)
             {
                 for (int i = 0; i < types.Length; i++)
                 {

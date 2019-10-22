@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,52 +22,86 @@ namespace bike_project_net_client.vistas
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(emptyFields() || doubleFieldsValidate())
+            Bike bike = getBike();
+            if(bike != null)
             {
-                return;
+                var request = (HttpWebRequest) WebRequest.Create("http://localhost:8080/api/bike/");
+                request.Accept = "application/json";
+                request.ContentType = "application/json";
+                request.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(bike);
+                    streamWriter.Write(json);
+                }
+
+                HttpWebResponse response = null;
+
+                try
+                {
+                    response = (HttpWebResponse)request.GetResponse();
+                    if (response.StatusCode == HttpStatusCode.Created)
+                    {
+                        MessageBox.Show("Bike has been deleted.");
+                        clearFields();
+                    }
+                }
+                catch (WebException we)
+                {
+                    HttpWebResponse webResp = (HttpWebResponse)we.Response;
+                    var stream = we.Response.GetResponseStream();
+                    var sr = new StreamReader(stream);
+                    var content = sr.ReadToEnd();
+                    Dictionary<String, String> hash = JsonConvert.DeserializeObject<Dictionary<String, String>>(content);
+                    if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.InternalServerError)
+                    {
+                        String message = hash["message"];
+                        String specifications = hash["specifications"];
+                        MessageBox.Show(message + "/n" + specifications);
+                    }
+                }
+
+                
+            }
+        }
+
+        private Bike getBike()
+        {
+            if (emptyFields() || doubleFieldsValidate())
+            {
+                return null;
             }
 
-            try
+            String serial = txtSerial.Text;
+            String type = cbType.Text;
+            String brand = txtBrand.Text;
+            double weight = Double.Parse(txtWeight.Text);
+            double price = Double.Parse(txtPrice.Text);
+            DateTime purchaseDate = dtpPurchaseDate.Value;
+
+            Bike bike = new Bike(serial, brand, weight, price, purchaseDate);
+            bike.serial = serial;
+            bike.brand = brand;
+            bike.weight = weight;
+            bike.price = price;
+            bike.purchaseDate = purchaseDate;
+
+            if (type.Equals("ROAD"))
             {
-                BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
-
-                String serial = txtSerial.Text;
-                String type = cbType.Text;
-                String brand = txtBrand.Text;
-                double weight = Double.Parse(txtWeight.Text);
-                double price = Double.Parse(txtPrice.Text);
-                DateTime purchaseDate = dtpPurchaseDate.Value;
-
-                BikeSoapService.bike bike = new BikeSoapService.bike();
-                bike.serial = serial;
-                bike.brand = brand;
-                bike.weight = weight;
-                bike.price = price;
-                bike.purchaseDate = purchaseDate;
-
-                if (type.Equals("ROAD"))
-                {
-                    bike.type = BikeSoapService.type.ROAD;
-                }
-                else if (type.Equals("GRAVEL"))
-                {
-                    bike.type = BikeSoapService.type.GRAVEL;
-                }
-                else
-                {
-                    bike.type = BikeSoapService.type.MOUNTAIN;
-                }
-                bike.typeSpecified = true;
-                bike.purchaseDateSpecified = true;
-
-                bikeController.saveBike(bike);
-                MessageBox.Show("Bike added");
-                clearFields();
+                bike.type = Bike.types.ROAD;
             }
-            catch(Exception ex)
+            else if (type.Equals("GRAVEL"))
             {
-                MessageBox.Show("Error: " + ex.Message);
+                bike.type = Bike.types.GRAVEL;
             }
+            else
+            {
+                bike.type = Bike.types.MOUNTAIN;
+            }
+
+            return bike;
+
         }
 
         private bool emptyFields()

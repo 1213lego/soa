@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,18 +15,20 @@ namespace bike_project_net_client
 {
     public partial class GUIDeleteBike : Form
     {
+        WebClient request;
+
         public GUIDeleteBike()
         {
             InitializeComponent();
+            request = new WebClient();
         }
 
         private void btnFindBike_Click(object sender, EventArgs e)
         {
-            BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
-            BikeSoapService.bike findBike = bikeController.findBikeBySerial(txtFindSerial.Text);
-
-            if(findBike != null)
+            try
             {
+                string response = request.DownloadString("http://localhost:8080/api/bike/" + txtFindSerial.Text);
+                Bike findBike = JsonConvert.DeserializeObject<Bike>(response);
                 txtSerial.Text = findBike.serial;
                 txtBrand.Text = findBike.brand;
                 txtWeight.Text = Convert.ToString(findBike.weight);
@@ -43,24 +48,54 @@ namespace bike_project_net_client
                     cbType.SelectedIndex = 2;
                 }
             }
-            else
+            catch (WebException we)
             {
-                MessageBox.Show("Bike not found");
+                HttpWebResponse webResp = (HttpWebResponse)we.Response;
+                var stream = we.Response.GetResponseStream();
+                var sr = new StreamReader(stream);
+                var content = sr.ReadToEnd();
+                Dictionary<String, String> hash = JsonConvert.DeserializeObject<Dictionary<String, String>>(content);
+                if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.NotFound)
+                {
+                    String message = hash["message"];
+                    MessageBox.Show(message);
+                }
+                else if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    String message = hash["message"];
+                    String specifications = hash["specifications"];
+                    MessageBox.Show(message + "/n" + specifications);
+                }
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            WebRequest request = WebRequest.Create("http://localhost:8080/api/bike/" + txtFindSerial.Text);
+            request.Method = "DELETE";
+            HttpWebResponse response = null;
             try
             {
-                BikeSoapService.BikeControllerClient bikeController = new BikeSoapService.BikeControllerClient();
-                String serial = txtSerial.Text;
-                bikeController.deleteBike(serial);
-                clearFields();
+                response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    MessageBox.Show("Bike has been deleted.");
+                    clearFields();
+                }
             }
-            catch (Exception ex)
+            catch (WebException we)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                HttpWebResponse webResp = (HttpWebResponse)we.Response;
+                var stream = we.Response.GetResponseStream();
+                var sr = new StreamReader(stream);
+                var content = sr.ReadToEnd();
+                Dictionary<String, String> hash = JsonConvert.DeserializeObject<Dictionary<String, String>>(content);
+                if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.InternalServerError)
+                {
+                    String message = hash["message"];
+                    String specifications = hash["specifications"];
+                    MessageBox.Show(message + "/n" + specifications);
+                }
             }
             
         }
