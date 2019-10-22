@@ -1,9 +1,8 @@
 package bikeproject.controller;
 
-import bikeproject.model.Bike;
-import bikeproject.model.BikeService;
-import bikeproject.model.BikeServiceClient;
-import bikeproject.model.Type;
+import bikeproject.api.BikeService;
+import bikeproject.api.model.Bike;
+import bikeproject.api.model.BikeResponse;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +33,7 @@ public class UpdateBikeController implements Initializable {
     private TextField txtSerial;
 
     @FXML
-    private ComboBox<Type> cbTypes;
+    private ComboBox<Bike.Type> cbTypes;
 
     @FXML
     private TextField txtBrand;
@@ -58,17 +57,22 @@ public class UpdateBikeController implements Initializable {
 
     @FXML
     void searchBike(ActionEvent event) {
-        Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
-        if(bike==null){
-            MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"The bike doesn't exist.");
-            return;
+        try{
+            Bike bike = bikeService.findBikeBySerial(txtSearchSerial.getText());
+            if(bike==null){
+                MainController.showAlert(Alert.AlertType.ERROR,"Error",null,"The bike doesn't exist.");
+                return;
+            }
+            txtSerial.setText(bike.getSerial());
+            cbTypes.valueProperty().setValue(bike.getType());
+            txtBrand.setText(bike.getBrand());
+            txtWeight.setText(String.valueOf(bike.getWeight()));
+            txtPrice.setText(String.valueOf(bike.getPrice()));
+            dpPurchaseDate.valueProperty().setValue(LocalDate.parse(BikeService.dateFormat.format(bike.getPurchaseDate()), BikeService.dateTimeFormatter));
         }
-        txtSerial.setText(bike.getSerial());
-        cbTypes.valueProperty().setValue(bike.getType());
-        txtBrand.setText(bike.getBrand());
-        txtWeight.setText(String.valueOf(bike.getWeight()));
-        txtPrice.setText(String.valueOf(bike.getPrice()));
-        dpPurchaseDate.valueProperty().setValue(LocalDate.parse(BikeServiceClient.DATE_FORMAT.format(bike.getPurchaseDate().toGregorianCalendar().getTime()),BikeServiceClient.DATE_TIME_FORMATTER));
+        catch (Exception e){
+            MainController.showAlert(Alert.AlertType.ERROR,"Error","",e.getMessage());
+        }
     }
 
     @FXML
@@ -87,11 +91,7 @@ public class UpdateBikeController implements Initializable {
         bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
-        Date date = BikeServiceClient.DATE_FORMAT.parse(dpPurchaseDate.getValue().format(BikeServiceClient.DATE_TIME_FORMATTER));
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(date);
-        XMLGregorianCalendar xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
-        bike.setPurchaseDate(xmlCalendar);
+        bike.setPurchaseDate(BikeService.dateFormat.parse(BikeService.dateTimeFormatter.format(dpPurchaseDate.getValue())));
         try {
             bikeService.updateBike(bike);
             MainController.showAlert(Alert.AlertType.INFORMATION,"successful",null,"The bike with serial " + bike.getSerial()+ " has been updated");
@@ -103,8 +103,8 @@ public class UpdateBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bikeService = BikeServiceClient.BIKE_SERVICE;
-        cbTypes.setItems(FXCollections.observableArrayList(Type.values()));
+        bikeService = new BikeService();
+        cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
     }
     private boolean isDouble(String value,String fieldName){
         try{

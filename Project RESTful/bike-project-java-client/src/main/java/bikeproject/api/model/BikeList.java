@@ -16,7 +16,6 @@ public class BikeList {
     public List<Bike> getBikeList() {
         return bikeList;
     }
-
     public void setBikeList(List<Bike> bikeList) {
         this.bikeList = bikeList;
     }

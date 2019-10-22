@@ -9,11 +9,9 @@ import java.util.List;
 public class BikeErrorReponse {
     @ElementList(entry = "errores",inline = true)
     List<String> errores;
-
     public List<String> getErrores() {
         return errores;
     }
-
     public void setErrores(List<String> errores) {
         this.errores = errores;
     }

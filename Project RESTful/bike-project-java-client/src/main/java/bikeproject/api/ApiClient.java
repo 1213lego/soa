@@ -39,6 +39,12 @@ public class ApiClient {
         })
         @DELETE("bike/{serial}")
         Call<BikeResponse> deleteBikeBySerial(@Path("serial")String serial);
+
+        @Headers({
+                "Accept: application/xml"
+        })
+        @PUT("bike/{serial}")
+        Call<Bike> updateBike(@Path("serial")String serial,@Body Bike bike);
     }
     public static BikeServiceRetrofit getBikeService(){
         if(bikeService==null){

@@ -101,7 +101,7 @@ public class BikeController {
         {
             response.put("message", e.getMessage());
             response.put("specifications", e.getMostSpecificCause().getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(updateBike, HttpStatus.CREATED);
     }

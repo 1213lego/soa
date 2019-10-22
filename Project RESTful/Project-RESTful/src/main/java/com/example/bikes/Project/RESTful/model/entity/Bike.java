@@ -24,8 +24,8 @@ public class Bike implements Serializable {
     @NotNull
     @Column (nullable = false)
     private Type type;
-    @NotBlank(message = "no puede estar vacio ni contener espacios en blanco.")
-    @Size(min = 1, max = 20,  message = "tiene que contener entre 1 y 20 carácteres.")
+    @NotBlank
+    @Size(min = 1, max = 20)
     @Column (nullable = false)
     private String brand;
     @NotNull
