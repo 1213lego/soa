@@ -5,14 +5,12 @@ import bikeproject.api.model.BikeList;
 import bikeproject.api.model.BikeResponse;
 import bikeproject.api.model.BikeErrorReponse;
 import com.sun.deploy.util.StringUtils;
-import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okio.Buffer;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.http.HTTP;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -26,7 +24,9 @@ public class BikeService {
     public static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private ApiClient.BikeServiceRetrofit bikeServiceRetrofit;
+    private Serializer serializer;
     public BikeService(){
+        serializer = new Persister();
         bikeServiceRetrofit = ApiClient.getBikeService();
     }
     public List<Bike> getBikes() {
@@ -51,14 +51,12 @@ public class BikeService {
             bikeResponse = response.body();;
         }
         else if(response.code()==HttpURLConnection.HTTP_BAD_REQUEST){
-            Serializer serializer = new Persister();
-            BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
+            BikeErrorReponse bikeErrorReponse = readXmlInputStream(BikeErrorReponse.class,response.errorBody().byteStream());
             String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
             throw new Exception(errorMessages);
         }
         else if(response.code() == HttpURLConnection.HTTP_CONFLICT){
-            Serializer serializer = new Persister();
-            bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+            bikeResponse = readXmlInputStream(BikeResponse.class,response.errorBody().byteStream());
             throw new Exception(bikeResponse.getMessage());
         }
         else{
@@ -72,8 +70,8 @@ public class BikeService {
         if(response.isSuccessful()){
             return response.body();
         }
-        /*Serializer serializer = new Persister();
-        BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+        /*
+        BikeResponse bikeResponse = readXmlInputStream(BikeResponse.class,response.errorBody().byteStream());
         throw new Exception(bikeResponse.getMessage());*/
         return null;
     }
@@ -83,24 +81,25 @@ public class BikeService {
         if(response.isSuccessful()){
             return response.body();
         }
-        Serializer serializer = new Persister();
-        BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+        BikeResponse bikeResponse = readXmlInputStream(BikeResponse.class,response.errorBody().byteStream());
         return bikeResponse;
     }
     public void updateBike(Bike bike) throws Exception {
         Call<Bike> call = bikeServiceRetrofit.updateBike(bike.getSerial(),bike);
         Response<Bike> response = call.execute();
         if(response.isSuccessful()) return;
-        Serializer serializer = new Persister();
         if(response.code() == HttpURLConnection.HTTP_BAD_REQUEST){
-            BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
+            BikeErrorReponse bikeErrorReponse = readXmlInputStream(BikeErrorReponse.class,response.errorBody().byteStream());
             String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
             throw new Exception(errorMessages);
         }
         else {
-            BikeResponse bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+            BikeResponse bikeResponse = readXmlInputStream(BikeResponse.class,response.errorBody().byteStream());
             throw new Exception(bikeResponse.getMessage());
         }
+    }
+    private <T> T readXmlInputStream(Class<? extends T> someClass, InputStream inputStream ) throws Exception {
+        return serializer.read(someClass,inputStream);
     }
     private void testPrintBodyRequest(final Request request) throws IOException {
         final Request copy = request.newBuilder().build();

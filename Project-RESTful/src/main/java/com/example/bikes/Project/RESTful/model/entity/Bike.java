@@ -23,10 +23,6 @@ public class Bike implements Serializable {
     @NotNull
     @Column (nullable = false)
     private Type type;
-    @NotBlank
-    @Size(min = 1, max = 20)
-    @Column (nullable = false)
-    private String brand;
     @NotNull
     @Positive
     @Column (nullable = false)

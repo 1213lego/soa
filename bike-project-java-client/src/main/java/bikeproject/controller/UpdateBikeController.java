@@ -2,7 +2,6 @@ package bikeproject.controller;
 
 import bikeproject.api.BikeService;
 import bikeproject.api.model.Bike;
-import bikeproject.api.model.BikeResponse;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,14 +15,9 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 public class UpdateBikeController implements Initializable {
 
     @FXML
@@ -65,7 +59,6 @@ public class UpdateBikeController implements Initializable {
             }
             txtSerial.setText(bike.getSerial());
             cbTypes.valueProperty().setValue(bike.getType());
-            txtBrand.setText(bike.getBrand());
             txtWeight.setText(String.valueOf(bike.getWeight()));
             txtPrice.setText(String.valueOf(bike.getPrice()));
             dpPurchaseDate.valueProperty().setValue(LocalDate.parse(BikeService.dateFormat.format(bike.getPurchaseDate()), BikeService.dateTimeFormatter));
@@ -77,7 +70,7 @@ public class UpdateBikeController implements Initializable {
 
     @FXML
     void updateBike(ActionEvent event) throws ParseException, DatatypeConfigurationException {
-        if(txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
+        if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
             return;
@@ -88,7 +81,6 @@ public class UpdateBikeController implements Initializable {
         Bike bike = new Bike();
         bike.setSerial(txtSerial.getText());
         bike.setType(cbTypes.getValue());
-        bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
         bike.setPurchaseDate(BikeService.dateFormat.parse(BikeService.dateTimeFormatter.format(dpPurchaseDate.getValue())));
@@ -105,6 +97,7 @@ public class UpdateBikeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = new BikeService();
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
+        txtBrand.setEditable(false);
     }
     private boolean isDouble(String value,String fieldName){
         try{
