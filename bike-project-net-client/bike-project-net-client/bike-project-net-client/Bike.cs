@@ -6,7 +6,7 @@ namespace bike_project_net_client
 {
     public class Bike
     {
-        public const String API_BIKE = "http://localhost:8080/api/bike/";
+        public const String API_BIKE = "http://10.30.8.33:8080/api/bike/";
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum types

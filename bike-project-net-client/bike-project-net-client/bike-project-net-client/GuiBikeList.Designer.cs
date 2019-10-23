@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchaseDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBikes)).BeginInit();
@@ -62,7 +62,7 @@
             this.gridViewBikes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.serial,
             this.type,
-            this.brand,
+            this.weight,
             this.price,
             this.purchaseDate});
             this.gridViewBikes.Location = new System.Drawing.Point(12, 112);
@@ -99,10 +99,10 @@
             this.type.HeaderText = "Type";
             this.type.Name = "type";
             // 
-            // brand
+            // weight
             // 
-            this.brand.HeaderText = "Brand";
-            this.brand.Name = "brand";
+            this.weight.HeaderText = "Weight";
+            this.weight.Name = "weight";
             // 
             // price
             // 
@@ -140,7 +140,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn weight;
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseDate;
     }
