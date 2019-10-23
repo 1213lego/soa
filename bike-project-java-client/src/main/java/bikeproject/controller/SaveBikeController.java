@@ -44,7 +44,6 @@ public class SaveBikeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
         bikeService = new BikeService();
-        txtBrand.setEditable(false);
     }
     public void saveBike(ActionEvent actionEvent) throws ParseException, DatatypeConfigurationException {
         if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)

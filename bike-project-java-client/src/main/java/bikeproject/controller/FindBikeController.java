@@ -38,7 +38,6 @@ public class FindBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txtBrand.setEditable(false);
         try {
             bikeService = new BikeService();
         } catch (Exception e) {

@@ -97,7 +97,6 @@ public class UpdateBikeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         bikeService = new BikeService();
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
-        txtBrand.setEditable(false);
     }
     private boolean isDouble(String value,String fieldName){
         try{

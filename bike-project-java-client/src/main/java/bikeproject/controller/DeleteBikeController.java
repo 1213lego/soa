@@ -39,7 +39,6 @@ public class DeleteBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txtBrand.setEditable(false);
         bikeService = new BikeService();
     }
 
