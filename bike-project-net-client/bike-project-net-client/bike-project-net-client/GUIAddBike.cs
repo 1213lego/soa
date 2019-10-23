@@ -85,6 +85,12 @@ namespace bike_project_net_client.vistas
                             MessageBox.Show(message);
 
                         }
+                        else if (((HttpWebResponse)we.Response).StatusCode == HttpStatusCode.Conflict)
+                        {
+                            Dictionary<String, String> hash = JsonConvert.DeserializeObject<Dictionary<String, String>>(content);
+                            String message = hash["message"];
+                            MessageBox.Show(message);
+                        }
                         streamReader.Close();
                     }
                 }
