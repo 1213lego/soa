@@ -16,8 +16,16 @@ public class BikeServiceImpl implements IBikeService {
     private BikeRepository bikeRepository;
 
     @Override
+    public Bike saveBike(Bike bike) throws ResourceAlreadyExistsException {
+        if(findBikeBySerial(bike.getSerial())==null){
+            return bikeRepository.save(bike);
+        }
+        throw new ResourceAlreadyExistsException(bike.getSerial());
+    }
+
+    @Override
     @Transactional
-    public Bike save(Bike bike) {
+    public Bike updateBike(Bike bike) {
         return bikeRepository.save(bike);
     }
 

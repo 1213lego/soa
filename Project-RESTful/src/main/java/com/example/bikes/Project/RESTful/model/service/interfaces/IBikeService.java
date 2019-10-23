@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface IBikeService {
 
-    public Bike save(Bike bike);
+    public Bike saveBike(Bike bike)throws Exception;
+    public Bike updateBike(Bike bike);
     public Bike findBikeBySerial(String serial);
     public void delete(String serial);
     public List<Bike> findAllBikes();

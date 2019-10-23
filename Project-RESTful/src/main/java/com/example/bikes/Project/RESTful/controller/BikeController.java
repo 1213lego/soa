@@ -1,6 +1,7 @@
 package com.example.bikes.Project.RESTful.controller;
 
 import com.example.bikes.Project.RESTful.model.entity.Bike;
+import com.example.bikes.Project.RESTful.model.service.ResourceAlreadyExistsException;
 import com.example.bikes.Project.RESTful.model.service.interfaces.IBikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,18 +25,16 @@ public class BikeController {
     private IBikeService bikeService;
 
     @PostMapping("/bike")
-    public ResponseEntity<?> create(@Valid @RequestBody Bike bike, BindingResult result)
-    {
+    public ResponseEntity<?> create(@Valid @RequestBody Bike bike, BindingResult result) throws Exception {
         Bike newBike = null;
         Map<String, Object> response = new HashMap<>();
-
         if(result.hasErrors())
         {
             return anexandoErrores(response, result);
         }
         try
         {
-            newBike = bikeService.save(bike);
+            newBike = bikeService.saveBike(bike);
         }
         catch (DataAccessException e)
         {
@@ -95,7 +94,7 @@ public class BikeController {
             currentBike.setWeight(bike.getWeight());
             currentBike.setPrice(bike.getPrice());
             currentBike.setPurchaseDate(bike.getPurchaseDate());
-            updateBike = bikeService.save(currentBike);
+            updateBike = bikeService.updateBike(currentBike);
         }
         catch (DataAccessException e)
         {

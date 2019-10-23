@@ -50,11 +50,19 @@ public class BikeService {
         if (response.isSuccessful()){
             bikeResponse = response.body();;
         }
-        else {
+        else if(response.code()==HttpURLConnection.HTTP_BAD_REQUEST){
             Serializer serializer = new Persister();
             BikeErrorReponse bikeErrorReponse = serializer.read(BikeErrorReponse.class,response.errorBody().byteStream());
             String errorMessages = StringUtils.join(bikeErrorReponse.getErrores(),"\n");
             throw new Exception(errorMessages);
+        }
+        else if(response.code() == HttpURLConnection.HTTP_CONFLICT){
+            Serializer serializer = new Persister();
+            bikeResponse = serializer.read(BikeResponse.class,response.errorBody().byteStream());
+            throw new Exception(bikeResponse.getMessage());
+        }
+        else{
+            throw new Exception("message: " +response.message() + "Code: " + response.code());
         }
         return bikeResponse;
     }
