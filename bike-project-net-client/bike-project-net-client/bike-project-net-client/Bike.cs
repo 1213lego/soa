@@ -6,7 +6,7 @@ namespace bike_project_net_client
 {
     public class Bike
     {
-        public const String API_BIKE = "http://localhost:8080/api/bike/";
+        public const String API_BIKE = "http://10.30.8.33:8080/api/bike/";
 
         [JsonConverter(typeof(StringEnumConverter))]
         public enum types
@@ -18,30 +18,16 @@ namespace bike_project_net_client
 
         private string serialField;
         private types typeField;
-        private string brandField;
         private double priceField;
         private double weightField;
         private DateTime purchaseDateField;
 
-        public Bike(string serialField, string brandField, double priceField, double weightField, DateTime purchaseDateField)
+        public Bike(string serialField, double priceField, double weightField, DateTime purchaseDateField)
         {
             this.serialField = serialField;
-            this.brandField = brandField;
             this.priceField = priceField;
             this.weightField = weightField;
             this.purchaseDateField = purchaseDateField;
-        }
-
-        public string brand
-        {
-            get
-            {
-                return this.brandField;
-            }
-            set
-            {
-                this.brandField = value;
-            }
         }
 
        public double price

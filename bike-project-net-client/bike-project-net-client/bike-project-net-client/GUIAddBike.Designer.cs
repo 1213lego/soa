@@ -136,6 +136,7 @@ namespace bike_project_net_client.vistas
             // 
             // txtBrand
             // 
+            this.txtBrand.Enabled = false;
             this.txtBrand.Location = new System.Drawing.Point(286, 225);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(244, 22);
@@ -174,7 +175,6 @@ namespace bike_project_net_client.vistas
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(244, 24);
             this.cbType.TabIndex = 0;
-            this.cbType.SelectedIndex = 0;
             // 
             // btnAdd
             // 

@@ -131,6 +131,7 @@ namespace bike_project_net_client
             // 
             // txtBrand
             // 
+            this.txtBrand.Enabled = false;
             this.txtBrand.Location = new System.Drawing.Point(286, 293);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Size = new System.Drawing.Size(244, 22);

@@ -34,7 +34,6 @@ namespace bike_project_net_client
                 string response = request.DownloadString(Bike.API_BIKE + txtFindSerial.Text);
                 Bike findBike = JsonConvert.DeserializeObject<Bike>(response);
                 txtSerial.Text = findBike.serial;
-                txtBrand.Text = findBike.brand;
                 txtWeight.Text = Convert.ToString(findBike.weight);
                 txtPrice.Text = Convert.ToString(findBike.price);
                 dtpPurchaseDate.Value = findBike.purchaseDate;
@@ -82,7 +81,6 @@ namespace bike_project_net_client
         {
             txtSerial.Clear();
             cbType.SelectedIndex = 0;
-            txtBrand.Clear();
             txtWeight.Clear();
             txtPrice.Clear();
             dtpPurchaseDate.Value = DateTime.Today;
