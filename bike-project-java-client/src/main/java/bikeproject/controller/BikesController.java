@@ -61,7 +61,6 @@ public class BikesController implements Initializable {
         tvBikes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tcSerial.setCellValueFactory(new PropertyValueFactory<>("serial"));
         tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tcBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tcWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         tcPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         tcPurchaseDate.setCellValueFactory(cellData ->

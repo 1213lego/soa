@@ -90,7 +90,6 @@ public class BikeController {
         try
         {
             currentBike.setType(bike.getType());
-            currentBike.setBrand(bike.getBrand());
             currentBike.setWeight(bike.getWeight());
             currentBike.setPrice(bike.getPrice());
             currentBike.setPurchaseDate(bike.getPurchaseDate());

@@ -12,8 +12,6 @@ public class Bike {
     @Element
     private Type type;
     @Element
-    private String brand;
-    @Element
     private double weight;
     @Element
     private double price;
@@ -21,10 +19,9 @@ public class Bike {
     private Date purchaseDate;
     public Bike(){
     }
-    public Bike(String serial, Type type, String brand, double weight, double price, Date purchaseDate) {
+    public Bike(String serial, Type type,double weight, double price, Date purchaseDate) {
         this.serial = serial;
         this.type = type;
-        this.brand = brand;
         this.weight = weight;
         this.price = price;
         this.purchaseDate = purchaseDate;
@@ -44,14 +41,6 @@ public class Bike {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public double getWeight() {
@@ -83,7 +72,6 @@ public class Bike {
         return "Bike{" +
                 "serial='" + serial + '\'' +
                 ", type=" + type +
-                ", brand='" + brand + '\'' +
                 ", weight=" + weight +
                 ", price=" + price +
                 ", purchaseDate=" + purchaseDate +

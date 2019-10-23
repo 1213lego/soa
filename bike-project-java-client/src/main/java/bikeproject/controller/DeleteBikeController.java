@@ -39,6 +39,7 @@ public class DeleteBikeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txtBrand.setEditable(false);
         bikeService = new BikeService();
     }
 
@@ -75,7 +76,6 @@ public class DeleteBikeController implements Initializable {
     private void fillFieldsBike(Bike bike) {
         txtSerial.setText(bike.getSerial());
         txtType.setText(bike.getType().toString());
-        txtBrand.setText(bike.getBrand());
         txtWeight.setText(String.valueOf(bike.getWeight()));
         txtPrice.setText(String.valueOf(bike.getPrice()));
         txtPurchaseDate.setText(BikeService.dateFormat.format(bike.getPurchaseDate()));

@@ -44,9 +44,10 @@ public class SaveBikeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cbTypes.setItems(FXCollections.observableArrayList(Bike.Type.values()));
         bikeService = new BikeService();
+        txtBrand.setEditable(false);
     }
     public void saveBike(ActionEvent actionEvent) throws ParseException, DatatypeConfigurationException {
-        if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtBrand) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
+        if(txtFieldIsEmpty(txtSerial) || txtFieldIsEmpty(txtWeight) || txtFieldIsEmpty(txtPrice)
                 || cbTypes.getValue()==null || dpPurchaseDate.getValue()==null){
             MainController.showAlert(Alert.AlertType.WARNING,"Information",null,"You should fill all fields");
             return;
@@ -57,7 +58,6 @@ public class SaveBikeController implements Initializable {
         Bike bike = new Bike();
         bike.setSerial(txtSerial.getText());
         bike.setType(cbTypes.getValue());
-        bike.setBrand(txtBrand.getText());
         bike.setWeight(Double.parseDouble(txtWeight.getText()));
         bike.setPrice(Double.parseDouble(txtPrice.getText()));
         Date date = BikeService.dateFormat.parse(dpPurchaseDate.getValue().format(BikeService.dateTimeFormatter));
