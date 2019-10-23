@@ -33,7 +33,7 @@ namespace bike_project_net_client
 
             try
             {
-                string response = request.DownloadString("http://localhost:8080/api/bike/" + txtFindSerial.Text);
+                string response = request.DownloadString(Bike.API_BIKE + txtFindSerial.Text);
                 Bike findBike = JsonConvert.DeserializeObject<Bike>(response);
                 txtSerial.Text = findBike.serial;
                 txtBrand.Text = findBike.brand;
@@ -77,7 +77,7 @@ namespace bike_project_net_client
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            WebRequest request = WebRequest.Create("http://localhost:8080/api/bike/" + txtFindSerial.Text);
+            WebRequest request = WebRequest.Create(Bike.API_BIKE + txtFindSerial.Text);
             request.Method = "DELETE";
             HttpWebResponse response = null;
             try

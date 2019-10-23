@@ -22,8 +22,7 @@ namespace bike_project_net_client
         }
         private void loadBikes()
         {
-            String uri = "http://localhost:8080/api/bike";
-            String content = webCliente.DownloadString(uri);
+            String content = webCliente.DownloadString(Bike.API_BIKE);
             List<Bike> bikes = JsonConvert.DeserializeObject<List<Bike>>(content);
 
             gridViewBikes.RowCount = 1;

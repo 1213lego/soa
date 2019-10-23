@@ -31,7 +31,7 @@ namespace bike_project_net_client
 
             try
             {
-                string response = request.DownloadString("http://localhost:8080/api/bike/" + txtFindSerial.Text);
+                string response = request.DownloadString(Bike.API_BIKE + txtFindSerial.Text);
                 Bike findBike = JsonConvert.DeserializeObject<Bike>(response);
                 txtSerial.Text = findBike.serial;
                 txtBrand.Text = findBike.brand;

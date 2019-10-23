@@ -29,7 +29,7 @@ namespace bike_project_net_client.vistas
             Bike bike = getBike();
             if(bike != null)
             {
-                HttpWebRequest request = (HttpWebRequest) WebRequest.Create("http://localhost:8080/api/bike/");
+                HttpWebRequest request = (HttpWebRequest) WebRequest.Create(Bike.API_BIKE);
                 request.ContentType = "application/json; charset=utf-8";
                 request.Method = "POST";
 
