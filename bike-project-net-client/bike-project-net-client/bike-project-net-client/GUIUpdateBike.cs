@@ -38,7 +38,6 @@ namespace bike_project_net_client
                 string response = request.DownloadString(Bike.API_BIKE + txtFindSerial.Text);
                 Bike findBike = JsonConvert.DeserializeObject<Bike>(response);
                 txtSerial.Text = findBike.serial;
-                txtBrand.Text = findBike.brand;
                 txtWeight.Text = Convert.ToString(findBike.weight);
                 txtPrice.Text = Convert.ToString(findBike.price);
                 dtpPurchaseDate.Value = findBike.purchaseDate;
@@ -159,7 +158,7 @@ namespace bike_project_net_client
             double price = Double.Parse(txtPrice.Text);
             DateTime purchaseDate = dtpPurchaseDate.Value;
 
-            Bike bike = new Bike(serial, brand, weight, price, purchaseDate);
+            Bike bike = new Bike(serial, weight, price, purchaseDate);
 
             if (type.Equals("ROAD"))
             {
@@ -181,10 +180,9 @@ namespace bike_project_net_client
         private bool emptyFields()
         {
             String serial = txtSerial.Text;
-            String brand = txtBrand.Text;
             String weight = txtWeight.Text;
             String price = txtPrice.Text;
-            if (serial.Equals("") || brand.Equals("") || weight.Equals("") || price.Equals(""))
+            if (serial.Equals("") || weight.Equals("") || price.Equals(""))
             {
                 MessageBox.Show("Empty Fields");
                 return true;
@@ -218,7 +216,6 @@ namespace bike_project_net_client
         {
             txtSerial.Clear();
             cbType.SelectedIndex = 0;
-            txtBrand.Clear();
             txtWeight.Clear();
             txtPrice.Clear();
             dtpPurchaseDate.Value = DateTime.Today;

@@ -28,8 +28,7 @@ namespace bike_project_net_client
             gridViewBikes.RowCount = 1;
             foreach(Bike bike in bikes)
             {
-                object[] fields = { bike.serial, bike.type,
-                    bike.brand, bike.weight, bike.price, bike.purchaseDate.ToShortDateString()};
+                object[] fields = { bike.serial, bike.type, bike.weight, bike.price, bike.purchaseDate.ToShortDateString()};
                 gridViewBikes.Rows.Add(fields);
             }
         }

@@ -18,30 +18,16 @@ namespace bike_project_net_client
 
         private string serialField;
         private types typeField;
-        private string brandField;
         private double priceField;
         private double weightField;
         private DateTime purchaseDateField;
 
-        public Bike(string serialField, string brandField, double priceField, double weightField, DateTime purchaseDateField)
+        public Bike(string serialField, double priceField, double weightField, DateTime purchaseDateField)
         {
             this.serialField = serialField;
-            this.brandField = brandField;
             this.priceField = priceField;
             this.weightField = weightField;
             this.purchaseDateField = purchaseDateField;
-        }
-
-        public string brand
-        {
-            get
-            {
-                return this.brandField;
-            }
-            set
-            {
-                this.brandField = value;
-            }
         }
 
        public double price

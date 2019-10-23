@@ -111,7 +111,7 @@ namespace bike_project_net_client.vistas
             double price = Double.Parse(txtPrice.Text);
             DateTime purchaseDate = dtpPurchaseDate.Value;
 
-            Bike bike = new Bike(serial, brand, weight, price, purchaseDate);
+            Bike bike = new Bike(serial, weight, price, purchaseDate);
 
             if (type.Equals("ROAD"))
             {
@@ -136,7 +136,7 @@ namespace bike_project_net_client.vistas
             String brand = txtBrand.Text;
             String weight = txtWeight.Text;
             String price = txtPrice.Text;
-            if(serial.Equals("") || brand.Equals("") || weight.Equals("") || price.Equals(""))
+            if(serial.Equals("") || weight.Equals("") || price.Equals(""))
             {
                 MessageBox.Show("Empty Fields");
                 return true;
@@ -165,7 +165,6 @@ namespace bike_project_net_client.vistas
         {
             txtSerial.Clear();
             cbType.SelectedIndex = 0;
-            txtBrand.Clear();
             txtWeight.Clear();
             txtPrice.Clear();
             dtpPurchaseDate.Value = DateTime.Today;
