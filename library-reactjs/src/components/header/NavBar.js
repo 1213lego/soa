@@ -14,9 +14,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { MenuList, MenuItem } from '@material-ui/core';
-
-const drawerWidth = 240;
+import { List, ListItem } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,14 +44,12 @@ const useStyles = makeStyles((theme) => ({
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing(3)
-	},
-	nested: {
-		paddingLeft: theme.spacing.unit * 4
 	}
 }));
 
 function ResponsiveDrawer(props) {
 	const { container, children } = props;
+	const { pathname } = props.location;
 	const classes = useStyles();
 	const theme = useTheme();
 	const [ mobileOpen, setMobileOpen ] = React.useState(false);
@@ -64,20 +62,23 @@ function ResponsiveDrawer(props) {
 		<div>
 			<div className={classes.toolbar} />
 			<Divider />
-			<MenuList>
-				<MenuItem component={Link} to="/">
+			<List>
+				<ListItem component={Link} to="/" selected={'/' === pathname}>
+					<ListItemIcon>
+						<HomeIcon />
+					</ListItemIcon>
 					<ListItemText primary="Home" />
-				</MenuItem>
-			</MenuList>
+				</ListItem>
+			</List>
 			<Divider />
-			<MenuList>
-				<MenuItem button>
+			<List>
+				<ListItem component={Link} to="/about" selected={'/about' === pathname}>
 					<ListItemIcon>
 						<InboxIcon />
 					</ListItemIcon>
 					<ListItemText primary="About" />
-				</MenuItem>
-			</MenuList>
+				</ListItem>
+			</List>
 		</div>
 	);
 

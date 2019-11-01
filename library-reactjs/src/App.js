@@ -6,18 +6,18 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ResponsiveDrawer from './components/header/NavBar';
 function App() {
 	return (
-			<Router>
+		<Router>
+			<Switch>
 				<ResponsiveDrawer>
-					<Switch>
-						<Route path="/about">
-							<About />
-						</Route>
-						<Route path="/">
-							<Home />
-						</Route>
-					</Switch>
+					<Route path="/about">
+						<About />
+					</Route>
+					<Route exact path="/">
+						<Home />
+					</Route>
 				</ResponsiveDrawer>
-			</Router>
+			</Switch>
+		</Router>
 	);
 }
 export default App;
