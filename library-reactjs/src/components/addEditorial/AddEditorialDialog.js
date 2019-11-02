@@ -2,15 +2,15 @@ import "date-fns";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    withStyles,
-    Fab,
-    Tooltip,
-    TextField
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  withStyles,
+  Fab,
+  Tooltip,
+  TextField
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import DateFnsUtils from "@date-io/date-fns";
@@ -28,13 +28,12 @@ class AddEditorialDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        result: null,
-        editorial: {
-            country: "",
-            foundationDate: new Date(),
-            name: "",
-            phone: "",
-            nit: null
+      editorial: {
+        country: "",
+        foundationDate: new Date(),
+        name: "",
+        phone: "",
+        nit: null
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -43,7 +42,7 @@ class AddEditorialDialog extends Component {
   }
   handleChange(e) {
     this.setState({
-      editorial : {
+      editorial: {
         ...this.state.editorial,
         [e.target.name]: e.target.value
       }
@@ -57,32 +56,31 @@ class AddEditorialDialog extends Component {
       }
     });
   };
-  async saveEditorial(e){
+  async saveEditorial(e) {
     e.preventDefault();
     try {
       await Firestore.saveEditorial(this.state.editorial);
       this.props.onClose();
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e);
     }
   }
   render() {
     const { classes, open, onClose } = this.props;
     return (
-      <Dialog   maxWidth="md" open={open} onClose={onClose}>
+      <Dialog maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle>Add Editorial</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           <DialogContentText>Please fill out the from below</DialogContentText>
           <form>
             <TextField
-                label="Nit"
-                name="nit"
-                value={this.state.name}
-                onChange={this.handleChange}
-                fullWidth
-                autoFocus
-                margin="dense"
+              label="Nit"
+              name="nit"
+              value={this.state.name}
+              onChange={this.handleChange}
+              fullWidth
+              autoFocus
+              margin="dense"
             />
             <br />
             <TextField
@@ -115,7 +113,7 @@ class AddEditorialDialog extends Component {
             <br />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                  margin="dense"
+                margin="dense"
                 id="date-picker-dialog"
                 label="Date picker dialog"
                 format="MM/dd/yyyy"
