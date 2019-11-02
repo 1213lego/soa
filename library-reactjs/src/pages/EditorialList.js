@@ -12,8 +12,8 @@ import {
   withStyles,
   Typography
 } from "@material-ui/core";
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import AddEditorialDialog from "../components/addEditorial/AddEditorialDialog";
 import Firestore from "../api/FirestoreDb";
 const styles = theme => ({
@@ -45,8 +45,8 @@ class EditorialList extends Component {
       const querySnapshot = await Firestore.getEditorials();
       let editorials = [];
       querySnapshot.forEach(function(doc) {
-		editorials.push(doc.data());
-		console.log(doc.data().foundationDate)
+        editorials.push(doc.data());
+        console.log(doc.data().foundationDate);
       });
       this.setState({ editorials: [...editorials] });
     } catch (e) {
@@ -87,12 +87,12 @@ class EditorialList extends Component {
                 <TableCell align="right">
                   {editorial.foundationDate.toDate().toDateString()}
                 </TableCell>
-				<TableCell align="right">
-					<EditIcon/>
-				</TableCell>
-				<TableCell align="right">
-					<DeleteIcon/>
-				</TableCell>
+                <TableCell align="right">
+                  <EditIcon />
+                </TableCell>
+                <TableCell align="right">
+                  <DeleteIcon />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
