@@ -28,7 +28,6 @@ class AddEditorialDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        result: null,
         editorial: {
             country: "",
             foundationDate: new Date(),
