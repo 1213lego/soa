@@ -1,21 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {
+	MoveToInbox as InboxIcon,
+	Menu as MenuIcon,
+	Home as HomeIcon,
+	LocalLibrary,
+	LibraryAdd
+} from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { List, ListItem } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
+import {
+	List,
+	ListItem,
+	Typography,
+	AppBar,
+	CssBaseline,
+	Divider,
+	Drawer,
+	Hidden,
+	IconButton,
+	ListItemIcon,
+	ListItemText,
+	Toolbar
+} from '@material-ui/core';
+
 const drawerWidth = 230;
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +59,7 @@ function ResponsiveDrawer(props) {
 	const { pathname } = props.location;
 	const classes = useStyles();
 	const theme = useTheme();
-	const [ mobileOpen, setMobileOpen ] = React.useState(false);
+	const [ mobileOpen, setMobileOpen ] = useState(false);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
@@ -68,6 +75,18 @@ function ResponsiveDrawer(props) {
 						<HomeIcon />
 					</ListItemIcon>
 					<ListItemText primary="Home" />
+				</ListItem>
+				<ListItem component={Link} to="/editorials" selected={'/editorials' === pathname}>
+					<ListItemIcon>
+						<LocalLibrary />
+					</ListItemIcon>
+					<ListItemText primary="Editorials" />
+				</ListItem>
+				<ListItem component={Link} to="/add-editorial" selected={'/add-editorial' === pathname}>
+					<ListItemIcon>
+						<LibraryAdd />
+					</ListItemIcon>
+					<ListItemText primary="Add Editorial" />
 				</ListItem>
 			</List>
 			<Divider />
@@ -141,13 +160,4 @@ function ResponsiveDrawer(props) {
 		</Fragment>
 	);
 }
-
-ResponsiveDrawer.propTypes = {
-	/**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-	container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element)
-};
-
 export default ResponsiveDrawer;
