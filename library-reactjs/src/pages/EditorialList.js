@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-import {withStyles} from "@material-ui/core";
+import { withStyles} from "@material-ui/core";
 import AddEditorialDialog from "../components/addEditorial/AddEditorialDialog";
 import Firestore from "../api/FirestoreDb";
-
 const styles  = theme => ({
 	fab: {
 		margin: theme.spacing(2),
@@ -22,6 +21,8 @@ class EditorialList extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+			result:'',
+			message: '',
 			open: false
 		}
 		this.handleClick = this.handleClick.bind(this);
@@ -30,7 +31,7 @@ class EditorialList extends Component{
 		try {
 			const querySnapshot = await Firestore.getEditorials();
 			querySnapshot.forEach(function(doc) {
-				console.log(doc.id, " => ", doc.data());
+				//console.log(doc.id, " => ", doc.data());
 			});
 
 		}

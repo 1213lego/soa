@@ -2,15 +2,15 @@ import "date-fns";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  withStyles,
-  Fab,
-  Tooltip,
-  TextField
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    withStyles,
+    Fab,
+    Tooltip,
+    TextField
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import DateFnsUtils from "@date-io/date-fns";
@@ -28,12 +28,13 @@ class AddEditorialDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorial: {
-        country: "",
-        foundationDate: new Date(),
-        name: "",
-        phone: "",
-        nit: null
+        result: null,
+        editorial: {
+            country: "",
+            foundationDate: new Date(),
+            name: "",
+            phone: "",
+            nit: null
       }
     };
     this.handleChange = this.handleChange.bind(this);
@@ -59,8 +60,7 @@ class AddEditorialDialog extends Component {
   async saveEditorial(e){
     e.preventDefault();
     try {
-      const result = await Firestore.saveEditorial(this.state.editorial);
-      console.log(result);
+      await Firestore.saveEditorial(this.state.editorial);
       this.props.onClose();
     }
     catch (e) {
@@ -70,7 +70,7 @@ class AddEditorialDialog extends Component {
   render() {
     const { classes, open, onClose } = this.props;
     return (
-      <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
+      <Dialog   maxWidth="md" open={open} onClose={onClose}>
         <DialogTitle>Add Editorial</DialogTitle>
         <DialogContent className={classes.dialogContent}>
           <DialogContentText>Please fill out the from below</DialogContentText>
@@ -81,7 +81,8 @@ class AddEditorialDialog extends Component {
                 value={this.state.name}
                 onChange={this.handleChange}
                 fullWidth
-                margin="normal"
+                autoFocus
+                margin="dense"
             />
             <br />
             <TextField
@@ -90,6 +91,7 @@ class AddEditorialDialog extends Component {
               value={this.state.name}
               onChange={this.handleChange}
               fullWidth
+              margin="dense"
             />
             <br />
             <TextField
@@ -98,7 +100,7 @@ class AddEditorialDialog extends Component {
               value={this.state.country}
               onChange={this.handleChange}
               fullWidth
-              margin="normal"
+              margin="dense"
             />
             <br />
             <TextField
@@ -113,7 +115,7 @@ class AddEditorialDialog extends Component {
             <br />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                margin="normal"
+                  margin="dense"
                 id="date-picker-dialog"
                 label="Date picker dialog"
                 format="MM/dd/yyyy"
