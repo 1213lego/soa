@@ -9,4 +9,21 @@ const firebaseConfig = {
 	appId: '1:506684659427:web:806e7029642c61c5e497d6'
 };
 firebase.initializeApp(firebaseConfig);
-export default firebase.firestore();
+class Firestore {
+	constructor(){
+		this._db = firebase.firestore();
+	}
+	saveEditorial(editorial){
+		return this._db.collection("editorials")
+			.doc(editorial.nit)
+			.set(editorial);
+	}
+	getEditorials(){
+		return this._db.collection("editorials")
+			.get()
+	}
+	get db() {
+		return this._db;
+	}
+}
+export default new Firestore();
