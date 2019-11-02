@@ -5,7 +5,8 @@ import {
 	Menu as MenuIcon,
 	Home as HomeIcon,
 	LocalLibrary,
-	LibraryAdd
+	LibraryAdd,
+	Book as BookIcon
 } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
@@ -81,6 +82,12 @@ function ResponsiveDrawer(props) {
 						<LocalLibrary />
 					</ListItemIcon>
 					<ListItemText primary="Editorials" />
+				</ListItem>
+				<ListItem component={Link} to="/books" selected={'/books' === pathname}>
+					<ListItemIcon>
+						<BookIcon />
+					</ListItemIcon>
+					<ListItemText primary="Books" />
 				</ListItem>
 				<ListItem component={Link} to="/add-editorial" selected={'/add-editorial' === pathname}>
 					<ListItemIcon>
