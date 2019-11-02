@@ -15,8 +15,11 @@ function App() {
 		<Router>
 			<Switch>
 				<ResponsiveDrawer>
-					<Route path="/about">
-						<About />
+					<Route exact path="/">
+							<Home />
+					</Route>
+					<Route path="/editorials">
+						<EditorialList/>
 					</Route>
 					<Route path="/books">
 						<Books/>
@@ -24,11 +27,8 @@ function App() {
 					<Route path="/add-editorial">
 						<AddEditorial/>
 					</Route>
-					<Route path="/editorials">
-						<EditorialList/>
-					</Route>
-					<Route exact path="/">
-						<Home />
+					<Route path="/about">
+						<About />
 					</Route>
 				</ResponsiveDrawer>
 			</Switch>
