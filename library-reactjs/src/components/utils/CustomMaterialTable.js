@@ -8,8 +8,9 @@ export default function CustomMaterialTable(props) {
 			columns={columns}
 			data={data}
 			editable={{
-				onRowAdd: addRow && (
-					(newData) =>
+				onRowAdd:
+					addRow &&
+					((newData) =>
 						new Promise(async (resolve, reject) => {
 							try {
 								await addRow(newData);
@@ -17,27 +18,26 @@ export default function CustomMaterialTable(props) {
 							} catch (error) {
 								reject(error);
 							}
-						})
-				),
+						})),
 				onRowUpdate: (newData, oldData) =>
-				new Promise(async(resolve,reject)=>{
-					try {
-						await updateRow(newData);
-						resolve();
-					} catch (error) {
-						reject(error);
-					}
-				}),
-				onRowDelete: (oldData) => 
-				new Promise(async(resolve,reject)=>{
-					try {
-						await deleteRow(oldData);
-						resolve()
-					} catch (error) {
-						console.log(error)
-						reject(error)
-					}
-				})
+					new Promise(async (resolve, reject) => {
+						try {
+							await updateRow(newData);
+							resolve();
+						} catch (error) {
+							reject(error);
+						}
+					}),
+				onRowDelete: (oldData) =>
+					new Promise(async (resolve, reject) => {
+						try {
+							await deleteRow(oldData);
+							resolve();
+						} catch (error) {
+							console.log(error);
+							reject(error);
+						}
+					})
 			}}
 		/>
 	);
