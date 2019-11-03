@@ -14,9 +14,16 @@ class Firestore {
 		this._db = firebase.firestore();
 	}
 	saveEditorial(editorial){
-		return this._db.collection("editorials")
+		return firebase.firestore()
+		.collection("editorials")
 			.doc(editorial.nit)
 			.set(editorial);
+	}
+	deleteEditorial(editorial){
+		return firebase.firestore()
+		.collection("editorials")
+		.doc(editorial.nit)
+		.delete();
 	}
 	getEditorials(){
 		return this._db.collection("editorials")
