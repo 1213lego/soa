@@ -20,7 +20,20 @@ class Firestore {
 	}
 	getEditorials(){
 		return this._db.collection("editorials")
-			.get()
+			.get();
+	}
+	saveBookFromPublisher(publisher, newBook){
+		return this._db.collection("editorials")
+			.doc(publisher.nit)
+			.collection("books")
+			.doc(newBook.ISBN)
+			.set(newBook);
+	}
+	getBooksFromPublisher(publisher) {
+		return this._db.collection("editorials")
+			.doc(publisher.nit)
+			.collection("books")
+			.get();
 	}
 	get db() {
 		return this._db;
