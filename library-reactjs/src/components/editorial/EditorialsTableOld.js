@@ -22,7 +22,7 @@ class EditorialList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			editorials: [],
+			editorials: []
 		};
 		this.handleClick = this.handleClick.bind(this);
 	}
