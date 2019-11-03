@@ -11,10 +11,10 @@ class Books extends Component {
 	  books: [],
 	  currentPublisher: {},
 	  columns: [
-		{ title: 'ISBN', field: 'ISBN' },
-		{ title: 'Name', field: 'name' },
+		{ title: 'ISBN', field: 'ISBN', sorting: false, editable: 'onAdd' },
+		{ title: 'Name', field: 'name',  },
 		{ title: 'Author', field: 'author' },
-		{ title: 'Pages', field: 'pages', type: 'numeric' },
+		{ title: 'Pages', field: 'pages', type: 'numeric', sorting: false },
 	  ]
     };
   }
@@ -56,10 +56,10 @@ class Books extends Component {
 			editable={{
 				onRowAdd: newBook =>
 					new Promise((resolve, reject) => {
+						this.addBook(newBook);
 						const books = this.state.books;
                         books.push(newBook);
 						this.setState({ books }, () => resolve());
-						this.addBook(newBook);
 				}),
 				onRowUpdate: (newBook, oldBook) =>
 					new Promise((resolve, reject) => {
