@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 
 import Home from './pages/Home';
-import EditorialList from './pages/EditorialList';
-import AddEditorial from './pages/AddEditorial';
+import EditorialList from './pages/Publishers';
 import Books from './pages/Books';
 import About from './pages/About';
 
@@ -18,14 +17,11 @@ function App() {
 					<Route exact path="/">
 							<Home />
 					</Route>
-					<Route path="/editorials">
+					<Route path="/publishers">
 						<EditorialList/>
 					</Route>
 					<Route path="/books">
 						<Books/>
-					</Route>
-					<Route path="/add-editorial">
-						<AddEditorial/>
 					</Route>
 					<Route path="/about">
 						<About />

@@ -46,7 +46,6 @@ class AddEditorialDialog extends Component {
 		});
 	}
 	handleDateChange = (date) => {
-		console.log(date);
 		this.setState({
 			editorial: {
 				...this.state.editorial,

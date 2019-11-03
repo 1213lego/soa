@@ -8,17 +8,15 @@ export default function CustomMaterialTable(props) {
 			columns={columns}
 			data={data}
 			editable={{
-				onRowAdd:
-					addRow &&
-					((newData) =>
-						new Promise(async (resolve, reject) => {
-							try {
-								await addRow(newData);
-								resolve();
-							} catch (error) {
-								reject(error);
-							}
-						})),
+				onRowAdd: (newData) =>
+					new Promise(async (resolve, reject) => {
+						try {
+							await addRow(newData);
+							resolve();
+						} catch (error) {
+							reject(error);
+						}
+					}),
 				onRowUpdate: (newData, oldData) =>
 					new Promise(async (resolve, reject) => {
 						try {
