@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from 'material-table';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 import Firestore from "../api/FirestoreDb";
 	
 class Books extends Component {
@@ -19,25 +21,32 @@ class Books extends Component {
     };
   }
   async componentDidMount() {
-    try {
-	  const queryPublisher = await Firestore.getEditorials();
-	  let publishers = [];
-	  queryPublisher.forEach(function(doc) {
-		publishers.push(doc.data());
-	  });
-	  this.setState({ publishers: [...publishers] });
+	this.getPublishers();
+  }
 
-	  this.state.currentPublisher = publishers[0];
-
-      const queryBooks = await Firestore.getBooksFromPublisher(this.state.currentPublisher);
-      let books = [];
-      queryBooks.forEach(function(book) {
-        books.push(book.data());
-      });
-      this.setState({ books: [...books] });
-    } catch (e) {
-      console.log(e);
-    }
+  async getPublishers() {
+	  try {
+		const queryPublisher = await Firestore.getEditorials();
+		let publishers = [];
+		queryPublisher.forEach(function(doc) {
+		  publishers.push(doc.data());
+		});
+		this.setState({ publishers: [...publishers] });
+	  } catch (e) {
+		console.log(e);
+	}
+  }
+  async getBooks(publisher) {
+	try {
+		const queryBooks = await Firestore.getBooksFromPublisher(publisher);
+		let books = [];
+		queryBooks.forEach(function(book) {
+		  books.push(book.data());
+		});
+		this.setState({ books: [...books] });
+	} catch (e) {
+		console.log(e);
+	}
   }
   async addBook(newBook) {
 	try {
@@ -59,6 +68,10 @@ class Books extends Component {
   render() {
     return (
       <div>
+		<div align="center">
+			
+		</div>
+		<br/>
 		<MaterialTable 
 			title="Books"	
 			columns={this.state.columns}
@@ -85,6 +98,18 @@ class Books extends Component {
                         books.splice(oldBook.tableData.id, 1);
 						this.setState({ books }, () => resolve());
 				})
+			}}
+		/>
+		<br/>
+		<Autocomplete
+			style={{ width: 300 }}
+			options={this.state.publishers}
+			getOptionLabel={publisher => publisher.name}
+			renderInput={params => (
+				<TextField {...params} variant="outlined" label="Publishers" fullWidth />
+			)}
+			onChange={(event, publisher) => {
+				this.getBooks(publisher)
 			}}
 		/>
       </div>
