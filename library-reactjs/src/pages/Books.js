@@ -41,7 +41,17 @@ class Books extends Component {
   }
   async addBook(newBook) {
 	try {
+		if(newBook.pages === "") {
+			newBook.pages = 0;
+		}
 		await Firestore.saveBookFromPublisher(this.state.currentPublisher, newBook);
+	  } catch (e) {
+		console.log(e);
+	  }
+  }
+  async deleteBook(newBook) {
+	try {
+		await Firestore.deleteBookFromPublisher(this.state.currentPublisher, newBook);
 	  } catch (e) {
 		console.log(e);
 	  }
@@ -63,14 +73,17 @@ class Books extends Component {
 				}),
 				onRowUpdate: (newBook, oldBook) =>
 					new Promise((resolve, reject) => {
+						this.addBook(newBook);
 						const books = this.state.books;
-                        const index = books.indexOf(oldBook);
-                        books[index] = newBook;                
+						books[oldBook.tableData.id] = newBook;
                         this.setState({ books }, () => resolve());
-						resolve();
 				}),
 				onRowDelete: oldBook =>
 					new Promise((resolve, reject) => {
+						this.deleteBook(oldBook);
+						let books = this.state.books;
+                        books.splice(oldBook.tableData.id, 1);
+						this.setState({ books }, () => resolve());
 				})
 			}}
 		/>

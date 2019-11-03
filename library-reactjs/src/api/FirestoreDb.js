@@ -30,17 +30,27 @@ class Firestore {
 			.get();
 	}
 	saveBookFromPublisher(publisher, newBook){
-		return this._db.collection("editorials")
+		return firebase.firestore()
+			.collection("editorials")
 			.doc(publisher.nit)
 			.collection("books")
 			.doc(newBook.ISBN)
 			.set(newBook);
 	}
 	getBooksFromPublisher(publisher) {
-		return this._db.collection("editorials")
+		return firebase.firestore()
+			.collection("editorials")
 			.doc(publisher.nit)
 			.collection("books")
 			.get();
+	}
+	deleteBookFromPublisher(publisher, book) {
+		return firebase.firestore()
+		.collection("editorials")
+		.doc(publisher.nit)
+		.collection("books")
+		.doc(book.ISBN)
+		.delete();
 	}
 	get db() {
 		return this._db;
