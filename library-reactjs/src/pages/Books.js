@@ -11,10 +11,10 @@ class Books extends Component {
 	  books: [],
 	  currentPublisher: {},
 	  columns: [
-		{ title: 'ISBN', field: 'ISBN' },
-		{ title: 'Name', field: 'name' },
+		{ title: 'ISBN', field: 'ISBN', sorting: false, editable: 'onAdd' },
+		{ title: 'Name', field: 'name',  },
 		{ title: 'Author', field: 'author' },
-		{ title: 'Pages', field: 'pages', type: 'numeric' },
+		{ title: 'Pages', field: 'pages', type: 'numeric', sorting: false },
 	  ]
     };
   }
@@ -41,7 +41,17 @@ class Books extends Component {
   }
   async addBook(newBook) {
 	try {
+		if(newBook.pages === "") {
+			newBook.pages = 0;
+		}
 		await Firestore.saveBookFromPublisher(this.state.currentPublisher, newBook);
+	  } catch (e) {
+		console.log(e);
+	  }
+  }
+  async deleteBook(newBook) {
+	try {
+		await Firestore.deleteBookFromPublisher(this.state.currentPublisher, newBook);
 	  } catch (e) {
 		console.log(e);
 	  }
@@ -56,21 +66,24 @@ class Books extends Component {
 			editable={{
 				onRowAdd: newBook =>
 					new Promise((resolve, reject) => {
+						this.addBook(newBook);
 						const books = this.state.books;
                         books.push(newBook);
 						this.setState({ books }, () => resolve());
-						this.addBook(newBook);
 				}),
 				onRowUpdate: (newBook, oldBook) =>
 					new Promise((resolve, reject) => {
+						this.addBook(newBook);
 						const books = this.state.books;
-                        const index = books.indexOf(oldBook);
-                        books[index] = newBook;                
+						books[oldBook.tableData.id] = newBook;
                         this.setState({ books }, () => resolve());
-						resolve();
 				}),
 				onRowDelete: oldBook =>
 					new Promise((resolve, reject) => {
+						this.deleteBook(oldBook);
+						let books = this.state.books;
+                        books.splice(oldBook.tableData.id, 1);
+						this.setState({ books }, () => resolve());
 				})
 			}}
 		/>
