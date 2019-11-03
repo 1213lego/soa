@@ -104,7 +104,7 @@ class AddEditorialDialog extends Component {
             <TextField
               label="Phone"
               name="phone"
-              type="text"
+              type="number"
               value={this.state.phone}
               onChange={this.handleChange}
               fullWidth

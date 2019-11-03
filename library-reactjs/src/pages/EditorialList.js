@@ -26,11 +26,11 @@ const styles = (theme) => ({
 	}
 });
 const columns = [
-	{ title: 'Nit', field: 'nit' },
+	{ title: 'Nit', field: 'nit', editable: 'never' },
 	{ title: 'Name', field: 'name' },
 	{ title: 'Country', field: 'country' },
-	{ title: 'Phone', field: 'phone' },
-	{ title: 'Foundation date', field: 'foundationDate' }
+	{ title: 'Phone', field: 'phone', type: 'numeric' },
+	{ title: 'Foundation date', field: 'foundationDate', type: 'date' }
 ];
 class EditorialList extends Component {
 	constructor(props) {
@@ -40,20 +40,39 @@ class EditorialList extends Component {
 			open: false
 		};
 		this.handleClick = this.handleClick.bind(this);
+		this.onDataChange = this.onDataChange.bind(this);
+		this.algo();
+	}
+	onDataChange(querySnapshot) {
+		let editorials = querySnapshot.docs.map((doc) => {
+			const data = doc.data();
+			data.foundationDate = data.foundationDate.toDate();
+			return data;
+		});
+		this.setState({ editorials: [ ...editorials ] });
+	}
+	async algo() {
+		const querySnapshot = await Firestore.db.collection('editorials').get();
+		querySnapshot.forEach(async (doc) => {
+			const queryResult = await doc.ref.collection('books').where('name', '==', '147').get();
+			queryResult.forEach((d) => {
+				console.log(d.data());
+			});
+		});
 	}
 	async componentDidMount() {
 		try {
 			const querySnapshot = await Firestore.getEditorials();
-			let editorials = querySnapshot.docs.map((doc) => {
-				const data = doc.data();
-				data.foundationDate = data.foundationDate.toDate().toDateString();
-				return data;
-			});
-			this.setState({ editorials: [ ...editorials ] });
+			this.onDataChange(querySnapshot);
+			this.unsubscribeRef = Firestore.db.collection('editorials').onSnapshot(this.onDataChange);
 		} catch (e) {
 			console.log(e);
 		}
 	}
+	componentWillUnmount() {
+		this.unsubscribeRef();
+	}
+
 	handleClick() {
 		this.setState({
 			open: !this.state.open
@@ -63,11 +82,12 @@ class EditorialList extends Component {
 		const { classes } = this.props;
 		return (
 			<div>
-				<CustomMaterialTable 
-				columns={columns} 
-				data={this.state.editorials} 
-				title="Publishers detatils" 
-
+				<CustomMaterialTable
+					columns={columns}
+					data={this.state.editorials}
+					title="Publishers detatils"
+					deleteRow={Firestore.deleteEditorial}
+					updateRow={Firestore.saveEditorial}
 				/>
 				<AddEditorialDialog open={this.state.open} onClose={this.handleClick} />
 				<Tooltip title="Add" aria-label="add">
