@@ -37,16 +37,18 @@ class Books extends Component {
 	}
   }
   async getBooks(publisher) {
-	try {
-		const queryBooks = await Firestore.getBooksFromPublisher(publisher);
-		let books = [];
-		queryBooks.forEach(function(book) {
-		  books.push(book.data());
-		});
-		this.setState({ books: [...books] });
-	} catch (e) {
-		console.log(e);
+	if(this.unsubscribeRef) {
+		this.unsubscribeRef();
 	}
+
+	this.unsubscribeRef = Firestore.db
+	.collection('editorials')
+	.doc(publisher.nit)
+	.collection('books')
+	.onSnapshot(querySnapshot => {
+		let books = querySnapshot.docs.map((doc) => doc.data());
+		this.setState({ books: [...books] });
+	})
   }
   async addBook(newBook) {
 	try {
@@ -109,7 +111,8 @@ class Books extends Component {
 				<TextField {...params} variant="outlined" label="Publishers" fullWidth />
 			)}
 			onChange={(event, publisher) => {
-				this.getBooks(publisher)
+				this.setState({ currentPublisher: publisher });
+				this.getBooks(publisher);
 			}}
 		/>
       </div>
