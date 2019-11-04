@@ -23,7 +23,6 @@ class Books extends Component {
   async componentDidMount() {
 	this.getPublishers();
   }
-
   async getPublishers() {
 	  try {
 		const queryPublisher = await Firestore.getEditorials();
@@ -52,7 +51,9 @@ class Books extends Component {
   }
 
   componentWillUnmount() {
-	this.unsubscribeRef();
+	if(this.unsubscribeRef) {
+		this.unsubscribeRef();
+	}
   }
   
   async addBook(newBook) {

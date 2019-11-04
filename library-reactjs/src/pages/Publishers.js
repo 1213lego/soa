@@ -70,7 +70,9 @@ class EditorialList extends Component {
 		}
 	}
 	componentWillUnmount() {
-		this.unsubscribeRef();
+		if(this.unsubscribeRef) {
+			this.unsubscribeRef();
+		}
 	}
 
 	handleClick() {
