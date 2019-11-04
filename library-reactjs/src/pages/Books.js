@@ -50,6 +50,11 @@ class Books extends Component {
 		this.setState({ books: [...books] });
 	})
   }
+
+  componentWillUnmount() {
+	this.unsubscribeRef();
+  }
+  
   async addBook(newBook) {
 	try {
 		if(newBook.pages === "") {
