@@ -19,8 +19,16 @@ class Firestore {
 			.doc(editorial.nit)
 			.set(editorial);
 	}
-	deleteEditorial(editorial){
-		return firebase.firestore()
+	async deleteEditorial(editorial){
+		const querySnapshotBooks = await firebase.firestore()
+		.collection("editorials")
+		.doc(editorial.nit)
+		.collection("books")
+		.get();
+		if(querySnapshotBooks.docs.length > 0){
+			throw new Error('No se puede eliminar');
+		}
+		return await firebase.firestore()
 		.collection("editorials")
 		.doc(editorial.nit)
 		.delete();

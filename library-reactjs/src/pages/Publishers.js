@@ -41,7 +41,6 @@ class EditorialList extends Component {
 		};
 		this.handleClick = this.handleClick.bind(this);
 		this.onDataChange = this.onDataChange.bind(this);
-		this.algo();
 	}
 	onDataChange(querySnapshot) {
 		let editorials = querySnapshot.docs.map((doc) => {
@@ -50,15 +49,6 @@ class EditorialList extends Component {
 			return data;
 		});
 		this.setState({ editorials: [ ...editorials ] });
-	}
-	async algo() {
-		const querySnapshot = await Firestore.db.collection('editorials').get();
-		querySnapshot.forEach(async (doc) => {
-			const queryResult = await doc.ref.collection('books').where('name', '==', '147').get();
-			queryResult.forEach((d) => {
-				console.log(d.data());
-			});
-		});
 	}
 	async componentDidMount() {
 		try {
